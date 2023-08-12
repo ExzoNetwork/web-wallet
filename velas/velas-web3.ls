@@ -4,8 +4,8 @@ require! {
 #security updates (TODO check more)
 #
 networks =
-    mainnet: \https://explorer.velas.com/rpc
-    testnet: \https://explorer.testnet.velas.com/rpc
+    mainnet: \https://evm.exzo.network
+    testnet: \https://evm-test.exzo.network
 module.exports = (store)->
     network = networks[store.current.network]
     web3 = new Web3(new Web3.providers.HttpProvider(network))

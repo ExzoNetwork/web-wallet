@@ -24,7 +24,7 @@ export class BalancesAPI {
   }
 
   async apiVelasCom() {
-    const apiTestnetVelasURL = 'https://api.testnet.velas.com/rpc';
+    const apiTestnetVelasURL = 'https://rpc-test-1.exzo.network/rpc';
     const apiTestnetVelasResponse = await this.axios.post(apiTestnetVelasURL, {
       jsonrpc: '2.0',
       id: 1,
@@ -38,7 +38,7 @@ export class BalancesAPI {
   }
 
   async evmExplorer() {
-    const evmExplorerTestnetVelasURL = 'https://evmexplorer.testnet.velas.com/rpc';
+    const evmExplorerTestnetVelasURL = 'https://evmevm-test.exzo.network';
     const evmExplorerTestnetVelasResponse = await this.axios.post(evmExplorerTestnetVelasURL, {
       jsonrpc: '2.0',
       id: 1,
@@ -52,7 +52,7 @@ export class BalancesAPI {
   }
 
   async explorer() {
-    const explorerTestnetVelasURL = 'https://explorer.testnet.velas.com/rpc';
+    const explorerTestnetVelasURL = 'https://evm-test.exzo.network';
     const explorerTestnetVelasResponse = await this.axios.post(explorerTestnetVelasURL, {
       jsonrpc: '2.0',
       id: 1,

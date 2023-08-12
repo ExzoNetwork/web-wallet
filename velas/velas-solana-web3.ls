@@ -4,8 +4,8 @@ require! {
 #security updates (TODO check more)
 #
 networks =
-    mainnet: \https://explorer.velas.com/rpc
-    testnet: \https://testnet.velas.com/rpc
+    mainnet: \https://evm.exzo.network
+    testnet: \https://evm-test.exzo.network
     devnet:  \https://api.devnet.velas.com
 module.exports = (store)->
     network = networks[store.current.network]

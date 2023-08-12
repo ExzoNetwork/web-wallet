@@ -36,8 +36,8 @@ module.exports = (store)->
     ForeignBridgeErcToErcAddress = addresses[network].ForeignBridgeErcToErcAddress if addresses[network]?ForeignBridgeErcToErcAddress?
     web3Solana = velas-solana-web3 store
     networks =
-        mainnet: \https://api.velas.com
-        testnet: \https://api.testnet.velas.com/rpc
+        mainnet: \https://rpc-main-1.exzo.network
+        testnet: \https://rpc-test-1.exzo.network/rpc
         devnet: \https://api.devnet.velas.com
     api =
         Staking      : web3.eth.contract(abis.Staking).at(staking-address) if staking-address?

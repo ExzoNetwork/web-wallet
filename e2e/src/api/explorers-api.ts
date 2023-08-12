@@ -65,4 +65,4 @@ export default class ExplorersAPI {
 export const ropsten = new ExplorersAPI('https://ropsten.infura.io/v3/a0c2399264f646c687fffa45bf8a14c1');
 export const hecochain = new ExplorersAPI('https://http-testnet.hecochain.com/');
 export const bscchain = new ExplorersAPI('https://data-seed-prebsc-1-s2.binance.org:8545/');
-export const evmchain = new ExplorersAPI('https://evmexplorer.testnet.velas.com/rpc');
+export const evmchain = new ExplorersAPI('https://evmevm-test.exzo.network');

@@ -1,4 +1,4 @@
-# Velas Multi-Currency Wallet
+# Exzo Multi-Currency Wallet
 
 ### Install and run wallet locally
 **Requirements:**
@@ -10,8 +10,8 @@ Run `npm run setup`
 OR follow next steps
 
 1. Install lsxc: `npm i lsxc -g`
-2. `git clone https://github.com/velas/web-wallet`
-3. `git clone http://github.com/velas/web3t`
+2. `git clone https://github.com/ExzoNetwork/web-wallet`
+3. `git clone https://github.com/ExzoNetwork/web3t`
 4. `cd web3t && npm i`
 5. Delete git cache and copy web3t to web-wallet:
    `cd .. && rm -rf web-wallet/.compiled-ssr/web3t/.git/objects/ && mkdir -p web-wallet/.compiled-ssr/ && cp -pr web3t/ web-wallet/.compiled-ssr/web3t/ && cd web-wallet`
@@ -29,8 +29,8 @@ Please refer to e2e/README.md
 
 1. mkdir wallet-area
 2. cd wallet-area
-1. git clone https://github.com/velas/web-wallet wallet
-2. git clone http://github.com/velas/web3t
+1. git clone https://github.com/ExzoNetwork/web-wallet wallet
+2. git clone https://github.com/ExzoNetwork/web3t
 3. cd web3t
 4. npm i 
 5. cd ../wallet
@@ -62,7 +62,7 @@ Tested with `node --version` v11.10.1
 
 ### Supported Coins
 
-* VLX
+* XZO
 * BTC (+ All OMNI)
 * LTC
 * DASH

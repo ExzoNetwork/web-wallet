@@ -211,7 +211,7 @@ module.exports = ({ web3t, wallet, store, id, on-change })->
     is-not-bridge = ->
         { token } = store.current.send.wallet.coin  
         { chosen-network } = store.current.send
-        chosen-network.refer-to in <[ vlx_evm vlx2 vlx_native ]> and token in <[ vlx_evm vlx2 vlx_native ]> 
+        chosen-network.refer-to in <[ xzo_evm xzo2 xzo_native ]> and token in <[ xzo_evm xzo2 xzo_native ]> 
     wallets = store.current.account.wallets |> map (-> [it.coin.token, it]) |> pairs-to-obj 
     available-networks = 
         wallet.network.networks 

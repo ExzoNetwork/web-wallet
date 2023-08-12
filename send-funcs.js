@@ -640,11 +640,11 @@
         switch (false) {
           case !(
             referTo != null &&
-            referTo !== 'vlx_native' &&
+            referTo !== 'xzo_native' &&
             receiver.startsWith('V')
           ):
             return toEthAddress(receiver);
-          case !(coin.token !== 'vlx_native' && receiver.startsWith('V')):
+          case !(coin.token !== 'xzo_native' && receiver.startsWith('V')):
             return toEthAddress(receiver);
           default:
             return receiver;
@@ -762,7 +762,7 @@
         },
         function (err, to) {
           var _coin, resolved;
-          _coin = send.coin.token === 'vlx2' ? 'vlx' : send.coin.token;
+          _coin = send.coin.token === 'xzo2' ? 'xzo' : send.coin.token;
           if (err != null && err.indexOf('Invalid checksum')) {
             err = 'Address is not valid ' + _coin + ' address';
           }
@@ -941,7 +941,7 @@
         minPerTx,
         maxPerTxRaw,
         maxPerTx;
-      if (!(token === 'usdc' && chosenNetwork.id === 'vlx_usdc')) {
+      if (!(token === 'usdc' && chosenNetwork.id === 'xzo_usdc')) {
         return cb(null);
       }
       web3 = velasWeb3(store);
@@ -1063,7 +1063,7 @@
         maxPerTx,
         err,
         data;
-      if (!(token === 'vlx_usdc' && chosenNetwork.id === 'usdc')) {
+      if (!(token === 'xzo_usdc' && chosenNetwork.id === 'usdc')) {
         return cb(null);
       }
       web3 = velasWeb3(store);
@@ -1140,7 +1140,7 @@
         maxPerTxRaw,
         maxPerTx,
         data;
-      if (!(token === 'vlx_busd' && chosenNetwork.id === 'busd')) {
+      if (!(token === 'xzo_busd' && chosenNetwork.id === 'busd')) {
         return cb(null);
       }
       web3 = velasWeb3(store);
@@ -1203,7 +1203,7 @@
         minPerTx,
         maxPerTxRaw,
         maxPerTx;
-      if (!(token === 'busd' && chosenNetwork.id === 'vlx_busd')) {
+      if (!(token === 'busd' && chosenNetwork.id === 'xzo_busd')) {
         return cb(null);
       }
       wallets = store.current.account.wallets;
@@ -1473,7 +1473,7 @@
         minPerTx,
         maxPerTxRaw,
         maxPerTx;
-      if (!(token === 'usdt_erc20' && chosenNetwork.id === 'vlx_usdt')) {
+      if (!(token === 'usdt_erc20' && chosenNetwork.id === 'xzo_usdt')) {
         return cb(null);
       }
       web3 = velasWeb3(store);
@@ -1583,7 +1583,7 @@
         maxPerTxRaw,
         maxPerTx,
         data;
-      if (!(token === 'vlx_usdt' && chosenNetwork.id === 'usdt_erc20')) {
+      if (!(token === 'xzo_usdt' && chosenNetwork.id === 'usdt_erc20')) {
         return cb(null);
       }
       web3 = velasWeb3(store);
@@ -1646,8 +1646,8 @@
       chosenNetwork = store.current.send.chosenNetwork;
       token = store.current.send.coin.token;
       if (
-        ((ref$ = chosenNetwork.id) === 'vlx_evm' || ref$ === 'vlx2') &&
-        (token === 'vlx_evm' || token === 'vlx2')
+        ((ref$ = chosenNetwork.id) === 'xzo_evm' || ref$ === 'xzo2') &&
+        (token === 'xzo_evm' || token === 'xzo2')
       ) {
         store.current.send.contractAddress = null;
         return cb(null);
@@ -1662,22 +1662,22 @@
       };
       func = (function () {
         switch (false) {
-          case !(token === 'usdt_erc20' && chosenNetwork.id === 'vlx_usdt'):
+          case !(token === 'usdt_erc20' && chosenNetwork.id === 'xzo_usdt'):
             /* Swap from USDT ETHEREUM to USDT VELAS  */
             return eth_usdtUsdt_velasSwap;
-          case !(token === 'vlx_usdt' && chosenNetwork.id === 'usdt_erc20'):
+          case !(token === 'xzo_usdt' && chosenNetwork.id === 'usdt_erc20'):
             /* Swap from USDT VELAS to USDT ETHEREUM */
             return usdt_velasEth_usdtSwap;
-          case !(token === 'busd' && chosenNetwork.id === 'vlx_busd'):
+          case !(token === 'busd' && chosenNetwork.id === 'xzo_busd'):
             /* Swap from BUSD to BUSD VELAS */
             return busd_to_busd_velas_swap;
-          case !(token === 'vlx_busd' && chosenNetwork.id === 'busd'):
+          case !(token === 'xzo_busd' && chosenNetwork.id === 'busd'):
             /* Swap from BUSD VELAS to BUSD */
             return busd_velas_to_busd_swap;
-          case !(token === 'usdc' && chosenNetwork.id === 'vlx_usdc'):
+          case !(token === 'usdc' && chosenNetwork.id === 'xzo_usdc'):
             /* Swap from USDC to USDC VELAS */
             return usdc_to_usdc_velas_swap;
-          case !(token === 'vlx_usdc' && chosenNetwork.id === 'usdc'):
+          case !(token === 'xzo_usdc' && chosenNetwork.id === 'usdc'):
             /* Swap from USDC VELAS to USDC */
             return usdc_velas_to_usdc_swap;
           default:
@@ -1733,7 +1733,7 @@
         }
         /* DONE */
         /* Swap from VELAS EVM to HECO */
-        if (token === 'vlx_evm' && chosenNetwork.id === 'vlx_huobi') {
+        if (token === 'xzo_evm' && chosenNetwork.id === 'xzo_huobi') {
           wallets = store.current.account.wallets;
           chosenNetworkWallet = find(function (it) {
             return it.coin.token === chosenNetwork.id;
@@ -1784,7 +1784,7 @@
         }
         /* DONE! */
         /* Swap from HECO to VELAS EVM */
-        if (token === 'vlx_huobi' && chosenNetwork.id === 'vlx_evm') {
+        if (token === 'xzo_huobi' && chosenNetwork.id === 'xzo_evm') {
           value = store.current.send.amountSend;
           value = times(value, Math.pow(10, 18));
           (ref4$ = wallet.network),
@@ -1855,7 +1855,7 @@
         }
         /* DONE! */
         /* Swap from VELAS EVM to HECO */
-        if (token === 'vlx_evm' && chosenNetwork.id === 'bsc_vlx') {
+        if (token === 'xzo_evm' && chosenNetwork.id === 'bsc_xzo') {
           wallets = store.current.account.wallets;
           chosenNetworkWallet = find(function (it) {
             return it.coin.token === chosenNetwork.id;
@@ -1924,7 +1924,7 @@
           store.current.send.contractAddress = BSC_SWAP__HOME_BRIDGE;
         }
         /* Swap from BSC VELAS to VELAS EVM */
-        if (token === 'bsc_vlx' && chosenNetwork.id === 'vlx_evm') {
+        if (token === 'bsc_xzo' && chosenNetwork.id === 'xzo_evm') {
           value = store.current.send.amountSend;
           value = times(value, Math.pow(10, 18));
           (ref12$ = wallet.network),
@@ -1982,7 +1982,7 @@
         }
         /* DONE! */
         /* Swap from ETH to ETHEREUM (VELAS) */
-        if (token === 'eth' && chosenNetwork.id === 'vlx_eth') {
+        if (token === 'eth' && chosenNetwork.id === 'xzo_eth') {
           wallets = store.current.account.wallets;
           chosenNetworkWallet = find(function (it) {
             return it.coin.token === chosenNetwork.id;
@@ -2020,7 +2020,7 @@
         }
         /* DONE! */
         /* Swap from ETHEREUM (VELAS) to ETH  */
-        if (token === 'vlx_eth' && chosenNetwork.id === 'eth') {
+        if (token === 'xzo_eth' && chosenNetwork.id === 'eth') {
           value = store.current.send.amountSend;
           value = times(value, Math.pow(10, 18));
           network = wallet.network;
@@ -2063,8 +2063,8 @@
         /* DONE */
         /* Swap from VLX ERC20 to COIN VLX */
         if (
-          token === 'vlx_erc20' &&
-          ((ref16$ = chosenNetwork.id) === 'vlx_evm' || ref16$ === 'vlx2')
+          token === 'xzo_erc20' &&
+          ((ref16$ = chosenNetwork.id) === 'xzo_evm' || ref16$ === 'xzo2')
         ) {
           value = store.current.send.amountSend;
           value2 = toHex(times(value, Math.pow(10, 18))).toString(16);
@@ -2114,8 +2114,8 @@
         /* DONE */
         /* Swap from COIN VLX to VLX ERC20 */
         if (
-          (token === 'vlx_evm' || token === 'vlx2') &&
-          chosenNetwork.id === 'vlx_erc20'
+          (token === 'xzo_evm' || token === 'xzo2') &&
+          chosenNetwork.id === 'xzo_erc20'
         ) {
           wallets = store.current.account.wallets;
           chosenNetworkWallet = find(function (it) {
@@ -2146,13 +2146,13 @@
         }
         /* DONE */
         /* Swap into native */
-        if (chosenNetwork.id === 'vlx_native') {
+        if (chosenNetwork.id === 'xzo_native') {
           referTo = chosenNetwork != null ? chosenNetwork.referTo : void 8;
           $recipient = '';
           try {
             recipient = (function () {
               switch (false) {
-                case !(referTo !== 'vlx_native' && send.to.startsWith('V')):
+                case !(referTo !== 'xzo_native' && send.to.startsWith('V')):
                   return toEthAddress(send.to);
                 default:
                   return send.to;
@@ -2552,7 +2552,7 @@
         return it.coin.token === token;
       });
       evm_wallet = wallets.find(function (it) {
-        return it.coin.token === 'vlx_evm';
+        return it.coin.token === 'xzo_evm';
       });
       if (wallet == null) {
         return mode;
@@ -2668,22 +2668,22 @@
       token = store.current.send.coin.token;
       if (
         chosenNetwork == null ||
-        chosenNetwork.referTo === 'vlx_native' ||
-        (token === 'vlx_native' &&
-          ((ref2$ = chosenNetwork.referTo) === 'vlx' ||
-            ref2$ === 'vlx2' ||
-            ref2$ === 'vlx_evm')) ||
-        ((token === 'vlx' || token === 'vlx_evm') &&
-          ((ref2$ = chosenNetwork.referTo) === 'vlx_native' ||
-            ref2$ === 'vlx2')) ||
-        ((token === 'vlx2' || token === 'vlx_native' || token === 'vlx_evm') &&
-          ((ref2$ = chosenNetwork.referTo) === 'vlx_native' ||
-            ref2$ === 'vlx2' ||
-            ref2$ === 'vlx_evm')) ||
-        (token === 'vlx_native' &&
-          ((ref2$ = chosenNetwork.referTo) === 'vlx' ||
-            ref2$ === 'vlx2' ||
-            ref2$ === 'vlx_evm'))
+        chosenNetwork.referTo === 'xzo_native' ||
+        (token === 'xzo_native' &&
+          ((ref2$ = chosenNetwork.referTo) === 'xzo' ||
+            ref2$ === 'xzo2' ||
+            ref2$ === 'xzo_evm')) ||
+        ((token === 'xzo' || token === 'xzo_evm') &&
+          ((ref2$ = chosenNetwork.referTo) === 'xzo_native' ||
+            ref2$ === 'xzo2')) ||
+        ((token === 'xzo2' || token === 'xzo_native' || token === 'xzo_evm') &&
+          ((ref2$ = chosenNetwork.referTo) === 'xzo_native' ||
+            ref2$ === 'xzo2' ||
+            ref2$ === 'xzo_evm')) ||
+        (token === 'xzo_native' &&
+          ((ref2$ = chosenNetwork.referTo) === 'xzo' ||
+            ref2$ === 'xzo2' ||
+            ref2$ === 'xzo_evm'))
       ) {
         store.current.send.homeFeePercent = 0;
         return cb(null);
@@ -2709,25 +2709,25 @@
         (FOREIGN_BRIDGE = ref4$.FOREIGN_BRIDGE);
       addr = (function () {
         switch (false) {
-          case !(token === 'vlx_evm' && chosenNetwork.referTo === 'vlx_huobi'):
+          case !(token === 'xzo_evm' && chosenNetwork.referTo === 'xzo_huobi'):
             return HECO_SWAP__HOME_BRIDGE;
-          case !(token === 'vlx_evm' && chosenNetwork.referTo === 'bsc_vlx'):
+          case !(token === 'xzo_evm' && chosenNetwork.referTo === 'bsc_xzo'):
             return BSC_SWAP__HOME_BRIDGE;
-          case !(token === 'usdc' && chosenNetwork.referTo === 'vlx_usdc'):
+          case !(token === 'usdc' && chosenNetwork.referTo === 'xzo_usdc'):
             return FOREIGN_BRIDGE;
-          case !(token === 'vlx_eth' && chosenNetwork.referTo === 'eth'):
+          case !(token === 'xzo_eth' && chosenNetwork.referTo === 'eth'):
             return FOREIGN_BRIDGE;
           case !(
-            token === 'usdt_erc20' && chosenNetwork.referTo === 'vlx_usdt'
+            token === 'usdt_erc20' && chosenNetwork.referTo === 'xzo_usdt'
           ):
             return FOREIGN_BRIDGE;
-          case !(token === 'vlx_erc20' && chosenNetwork.referTo === 'vlx_evm'):
+          case !(token === 'xzo_erc20' && chosenNetwork.referTo === 'xzo_evm'):
             return FOREIGN_BRIDGE;
-          case !(token === 'bsc_vlx' && chosenNetwork.referTo === 'vlx_evm'):
+          case !(token === 'bsc_xzo' && chosenNetwork.referTo === 'xzo_evm'):
             return FOREIGN_BRIDGE;
-          case !(token === 'vlx_huobi' && chosenNetwork.referTo === 'vlx_evm'):
+          case !(token === 'xzo_huobi' && chosenNetwork.referTo === 'xzo_evm'):
             return FOREIGN_BRIDGE;
-          case !(token === 'busd' && chosenNetwork.referTo === 'vlx_busd'):
+          case !(token === 'busd' && chosenNetwork.referTo === 'xzo_busd'):
             return FOREIGN_BRIDGE;
           default:
             return HOME_BRIDGE;
@@ -2848,12 +2848,12 @@
           addr = (function () {
             switch (false) {
               case !(
-                token === 'usdt_erc20' && chosenNetwork.referTo === 'vlx_usdt'
+                token === 'usdt_erc20' && chosenNetwork.referTo === 'xzo_usdt'
               ):
                 return HOME_BRIDGE;
-              case !(token === 'usdc' && chosenNetwork.referTo === 'vlx_usdc'):
+              case !(token === 'usdc' && chosenNetwork.referTo === 'xzo_usdc'):
                 return HOME_BRIDGE;
-              case !(token === 'busd' && chosenNetwork.referTo === 'vlx_busd'):
+              case !(token === 'busd' && chosenNetwork.referTo === 'xzo_busd'):
                 return HOME_BRIDGE;
             }
           })();

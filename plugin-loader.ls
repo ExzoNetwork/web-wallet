@@ -6,21 +6,21 @@ require! {
 }
 gobyte = require \../web3t/plugins/gobyte-coin.js
 export common = (store)->
-    vlx2 = require \../web3t/plugins/vlx2-coin.js
+    xzo2 = require \../web3t/plugins/xzo2-coin.js
     btc  = require \../web3t/plugins/btc-coin.js
-    vlx_native  = require \../web3t/plugins/sol-coin.js
+    xzo_native  = require \../web3t/plugins/sol-coin.js
     eth  = require \../web3t/plugins/eth-coin.js
-    vlx_evm = require \../web3t/plugins/vlx-coin.js
-    coins = [ vlx_native, vlx_evm, vlx2, btc, eth ]
+    xzo_evm = require \../web3t/plugins/xzo-coin.js
+    coins = [ xzo_native, xzo_evm, xzo2, btc, eth ]
     if store.url-params.gbx?
         coins.push gobyte
     coins
-export base-array = <[ vlx_native vlx_evm vlx2 btc eth ]>
+export base-array = <[ xzo_native xzo_evm xzo2 btc eth ]>
 legacy-tokens = 
     * require \../web3t/plugins/eth-legacy-coin.js
     * require \../web3t/plugins/usdt_erc20_legacy-coin.json
-    * require \../web3t/plugins/vlx2-coin.js 
-legacy-arr = <[ vlx2 vlx_evm_legacy usdt_erc20_legacy eth_legacy ]>
+    * require \../web3t/plugins/xzo2-coin.js 
+legacy-arr = <[ xzo2 xzo_evm_legacy usdt_erc20_legacy eth_legacy ]>
 legacy-is-hidden = (name)->
     name = name ? ""
     res = (local-storage.get-item "plugin-" + name)

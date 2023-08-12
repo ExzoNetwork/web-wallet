@@ -98,7 +98,7 @@ order-withdraw-process = (store, web3t)->
         data = Timelock.requestUnstake.get-data(lockedPoolAddress, amount)
         to = lockup-address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     exit = ->
         console.log "exit request unstake"
         return alert store, lang.actionProhibited, cb if +store.lockups.orderedWithdrawAmount is 0
@@ -108,7 +108,7 @@ order-withdraw-process = (store, web3t)->
         to = store.lockups.currentTimelock.address
         #to = store.lockups.chosen-lockup.lockedPool
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     change-max = (it)->
         store.lockups.withdrawAmount = it.target.value
     epoch-next = store.dashboard.epoch-next ? 'loading...'
@@ -169,7 +169,7 @@ fast-withdraw-process = (store, web3t)->
         data = Timelock.unstake.get-data(lockedPoolAddress, amount)
         to = lockup-address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     change-max = (it)->
         store.lockups.withdrawAmount = it.target.value
     .pug.section

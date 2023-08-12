@@ -243,7 +243,7 @@ highlight = (store, AccountIndex)->
     <- set-timeout _, 6500
     store.staking.accounts[AccountIndex].highlight = no
 query-accounts-web3t = (store, web3t, on-progress, on-finish) ->
-    native-wallet = store.current.account.wallets |> find(-> it.coin.token is "vlx_native")
+    native-wallet = store.current.account.wallets |> find(-> it.coin.token is "xzo_native")
     staker = native-wallet.publicKey
     validatorsBackend = native-wallet.network.api.validatorsBackend + \/v1/staking-accounts + \?staker= + staker
     err, data <- get validatorsBackend .end
@@ -342,7 +342,7 @@ check-tx-confirmation = ({start, network, tx}, cb)->
     ->
         if Date.now! > (start + 60000)
             return cb "Transaction approve timeout has expired. Try to repeat later."
-        err, more-info <- get-transaction-info { token: "vlx_native", network, tx }
+        err, more-info <- get-transaction-info { token: "xzo_native", network, tx }
         if more-info?status is \confirmed or more-info?info?status is "0x1"
             cb null, more-info
 check-tx = ({start, network, tx}, cb)->
@@ -360,7 +360,7 @@ creation-account-subscribe = ({ store, web3t, signature, timeout, acc_type, acti
             store.staking.creating-staking-account = no
             return cb "An error occurred during stake account creation."
         store.staking.getAccountsFromCashe = yes
-        wallet = store.current.account.wallets |> find -> it.coin.token is \vlx_native
+        wallet = store.current.account.wallets |> find -> it.coin.token is \xzo_native
         if not wallet?
             store.staking.creating-staking-account = no
             return cb "Exzo Native wallet not found!"

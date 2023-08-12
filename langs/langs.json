@@ -3770,7 +3770,7 @@
       "hỗ trợ",
       "सहयोग"
     ],
-    "tooltip_vlx_huobi": [
+    "tooltip_xzo_huobi": [
       "Is used for receiving or swapping to the Heco network.",
       "Is used for receiving or swapping to the Heco network.",
       "Is used for receiving or swapping to the Heco network.",
@@ -3786,7 +3786,7 @@
       "Is used for receiving or swapping to the Heco network.",
       "Is used for receiving or swapping to the Heco network."
     ],
-    "tooltip_vlx_usdv": [
+    "tooltip_xzo_usdv": [
       "Used for interaction with Velas dApps ecosystem",
       "Used for interaction with Velas dApps ecosystem",
       "Used for interaction with Velas dApps ecosystem",
@@ -3802,7 +3802,7 @@
       "Used for interaction with Velas dApps ecosystem",
       "Used for interaction with Velas dApps ecosystem"
     ],
-    "tooltip_bsc_vlx": [
+    "tooltip_bsc_xzo": [
       "Is used for receiving or swapping to the BSC network.",
       "Is used for receiving or swapping to the BSC network.",
       "Is used for receiving or swapping to the BSC network.",
@@ -3818,7 +3818,7 @@
       "Is used for receiving or swapping to the BSC network.",
       "Is used for receiving or swapping to the BSC network."
     ],
-    "tooltip_vlx_erc20": [
+    "tooltip_xzo_erc20": [
       "Is used for receiving or swapping to the Ethereum network.",
       "Is used for receiving or swapping to the Ethereum network.",
       "Is used for receiving or swapping to the Ethereum network.",
@@ -3834,7 +3834,7 @@
       "Is used for receiving or swapping to the Ethereum network.",
       "Is used for receiving or swapping to the Ethereum network."
     ],
-    "tooltip_vlx2": [
+    "tooltip_xzo2": [
       "Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with V.",
       "Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with V.",
       "Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with V.",
@@ -3850,7 +3850,7 @@
       "Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with V.",
       "Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with V."
     ],
-    "tooltip_vlx_evm": [
+    "tooltip_xzo_evm": [
       "Used for interaction with EVM-compatible dApps and exchanges, could be added to MetaMask",
       "Used for interaction with EVM-compatible dApps and exchanges, could be added to MetaMask",
       "Used for interaction with EVM-compatible dApps and exchanges, could be added to MetaMask",
@@ -3866,7 +3866,7 @@
       "Used for interaction with EVM-compatible dApps and exchanges, could be added to MetaMask",
       "Used for interaction with EVM-compatible dApps and exchanges, could be added to MetaMask"
     ],
-    "tooltip_vlx_native": [
+    "tooltip_xzo_native": [
       "Is used within the Velas Network and is also required for account swapping between Native, EVM, Legacy, and staking",
       "Is used within the Velas Network and is also required for account swapping between Native, EVM, Legacy, and staking",
       "Is used within the Velas Network and is also required for account swapping between Native, EVM, Legacy, and staking",
@@ -3882,7 +3882,7 @@
       "Is used within the Velas Network and is also required for account swapping between Native, EVM, Legacy, and staking",
       "Is used within the Velas Network and is also required for account swapping between Native, EVM, Legacy, and staking"
     ],
-    "tooltip_vlx_legacy": [
+    "tooltip_xzo_legacy": [
       " Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with \"V.\"",
       " Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with \"V.\"",
       " Is used for interacting with old exchanges and those exchanges that have not switched to Exzo EVM or Native yet. It uses an address that starts with \"V.\"",

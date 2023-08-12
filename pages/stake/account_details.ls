@@ -19,7 +19,7 @@ require! {
     \safe-buffer : { Buffer }
     \../../copied-inform.ls
     \../../round5.ls
-    \../../../web3t/addresses.js : { ethToVlx, vlxToEth }
+    \../../../web3t/addresses.js : { ethToVlx, xzoToEth }
     \../switch-account.ls
     \../../round-human.ls
     \../../round-number.ls
@@ -767,7 +767,7 @@ staking-content = (store, web3t)->
     } = account
     up = (str) -> (str || '').trim!.toUpperCase!
 
-    err, accountAddress <- web3t.vlx_native.getAddress!
+    err, accountAddress <- web3t.xzo_native.getAddress!
     can-withdraw = up(withdrawer) === up(accountAddress)
     can-delegate = up(staker) === up(accountAddress)
     exit-from-stake-account = !can-withdraw and !can-delegate
@@ -793,7 +793,7 @@ staking-content = (store, web3t)->
         myStake >= 10000
     wallet =
         store.current.account.wallets
-            |> find -> it.coin.token is \vlx_native
+            |> find -> it.coin.token is \xzo_native
     velas-node-applied-template =
         pairs
             |> velas-node-template
@@ -830,7 +830,7 @@ staking-content = (store, web3t)->
     get-balance = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx2
+                |> find -> it.coin.token is \xzo2
         wallet.balance
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
@@ -912,7 +912,7 @@ staking-content = (store, web3t)->
         return if !newAuthorizedPubkey
         store.staking.setting-new-staking-authority = yes
         { custodian, pubKey, withdrawer } = store.staking.chosenAccount
-        wallet = store.current.account.wallets.find(-> it.coin.token is \vlx_native)
+        wallet = store.current.account.wallets.find(-> it.coin.token is \xzo_native)
         return alert store, 'VLX Native wallet was not found' if not wallet?
         params = {
             stakePubkey: pubKey,
@@ -1297,7 +1297,7 @@ account-details.init = ({ store, web3t }, cb)!->
         store.staking.chosenAccount.active_stake = stakeActivation.active
         store.staking.chosenAccount.inactive_stake = stakeActivation.inactive
     return alert store, err, cb if err?
-    wallet = store.current.account.wallets.find(-> it.coin.token is \vlx_native)
+    wallet = store.current.account.wallets.find(-> it.coin.token is \xzo_native)
     return alert store, 'VLX Native wallet was not found', cb if not wallet?
     web3t.velas.NativeStaking.setAccountPublicKey(wallet.publicKey)
     web3t.velas.NativeStaking.setAccountSecretKey(wallet.secretKey)

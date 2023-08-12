@@ -24,10 +24,10 @@ test.describe('Balance', () => {
       if (amountOfTokens === null) continue;
 
       switch (currency) {
-        case 'token-vlx2':
+        case 'token-xzo2':
           assert.equal(amountOfTokens, '80.999895');
           break;
-        case 'token-vlx_native':
+        case 'token-xzo_native':
           (async () => {
             assert.equal(amountOfTokens, String(VLXNativeBalanceOnBlockchain));
             
@@ -38,7 +38,7 @@ test.describe('Balance', () => {
             // });
             // await velasNative.waitForConfirmedTransaction(tx);
             // await wallets.refreshBalances();
-            // const amountOfTokensAfterUpdate = helpers.toFixedNumber(Number((await wallets.getWalletsBalances())['token-vlx_native']), 6);
+            // const amountOfTokensAfterUpdate = helpers.toFixedNumber(Number((await wallets.getWalletsBalances())['token-xzo_native']), 6);
             // assert.equal(amountOfTokensAfterUpdate, helpers.toFixedNumber((VLXNativeBalanceOnBlockchain + balanceUpdateAmount), 6), 'Exzo Native wallet balance was not updated after funding it');
           })();
           break;
@@ -51,7 +51,7 @@ test.describe('Balance', () => {
             log.warn('Bitcoin balance check skipped because of 3rd party service is down');
           }
           break;
-        case 'token-vlx_evm':
+        case 'token-xzo_evm':
           assert.equal(amountOfTokens, '1801.000622564');
           break;
       }

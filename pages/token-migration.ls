@@ -411,14 +411,14 @@ token-migration = (store, web3t)->
         return cb "You coins can't be transferred by automatic script please contact support in https://t.me/velasmigration for additional verification." if trials <= 0
         address = 
             store.current.account.wallets 
-                |> find (-> it.coin.token is \vlx2) 
+                |> find (-> it.coin.token is \xzo2) 
                 |> (.address)
         err <- get "https://mainnet-v2.velas.com/migration/try-migrate/#{address}" .end
         <- set-timeout _, 5000
         <- web3t.refresh
         amount2 = 
             store.current.account.wallets 
-                |> find (-> it.coin.token is \vlx2) 
+                |> find (-> it.coin.token is \xzo2) 
                 |> (.balance)
         return cb null if amount isnt amount2
         trials-next = trials - 1
@@ -428,7 +428,7 @@ token-migration = (store, web3t)->
         #return if store.current.token-migration is 'Loading...'
         amount = 
             store.current.account.wallets 
-                |> find (-> it.coin.token is \vlx) 
+                |> find (-> it.coin.token is \xzo) 
                 |> (.balance)
         amount2 = 
             | store.url-params.internal? => 1 
@@ -436,11 +436,11 @@ token-migration = (store, web3t)->
         #amount2 = 1
         to = store.current.token-migration
         store.current.token-migration = null
-        err <- web3t.vlx.send-transaction { to, amount: amount2 }
+        err <- web3t.xzo.send-transaction { to, amount: amount2 }
         return alert "#{err}" if err?
         amount2 = 
             store.current.account.wallets 
-                |> find (-> it.coin.token is \vlx2) 
+                |> find (-> it.coin.token is \xzo2) 
                 |> (.balance)
         #err <- try-migrate 10, amount2
         return alert "#{err}" if err?

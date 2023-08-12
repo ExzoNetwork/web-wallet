@@ -294,7 +294,7 @@ store =
         image: ""
         type: ''
     contract-address: ''
-    contract-vlxaddress: ''
+    contract-xzoaddress: ''
     transactions:
         all: []
         applied: []
@@ -359,7 +359,7 @@ store =
         langs-open-side: no
         langs-open-start: no
         add-coin: no
-        add-vlxcoin: no
+        add-xzocoin: no
         token-migration: null
         choose-language: yes
         banner: no

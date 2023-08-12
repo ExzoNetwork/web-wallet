@@ -82,7 +82,7 @@ pools-content = (store, web3t)->
             #return cb err if err?
             data = Timelock.changeDefaultPool.get-data item.address
             to = contract-address
-            err <- web3t.vlx2.send-transaction { to, data, amount: 0 }
+            err <- web3t.xzo2.send-transaction { to, data, amount: 0 }
             store.lockups.success-cb!            
             #err <- lockups.init { store, web3t }
             #return cb err if err?
@@ -98,12 +98,12 @@ pools-content = (store, web3t)->
                 | reward > 75 => \orange
                 | reward > 40 => "rgb(165, 174, 81)"
                 | _ => "rgb(38, 219, 85)"
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
         wallet =
             address: ethToVlx item.address
-            network: vlx2.network
-            coin: vlx2.coin
+            network: xzo2.network
+            coin: xzo2.coin
         mystake-class = if +my-stake > 0 then "with-stake" else ""
         pointer-class = if store.lockups.lockupStakingAddress? and (store.lockups.lockupStakingAddress is item.address) then "stake-pointer" else ""
         button-label = if not lockup-action-choose then \Select else \Choose

@@ -450,7 +450,7 @@ custom-token = ({ store, web3t })->
     base-plugins = common
     all-tokens = ((web3t-tokens ? []) ++ (custom-tokens ? [])) ++ base-plugins
     { symbol, symbol-display, icon, contract-address, decimals, edit-symbol, network, switch-network, errors, selected-network } = store.custom-token
-    WALLETS_FOR_NETWORKS = <[ vlx_eth vlx_erc20 bsc_vlx vlx_huobi ]>
+    WALLETS_FOR_NETWORKS = <[ xzo_eth xzo_erc20 bsc_xzo xzo_huobi ]>
     wallets = all-tokens
         |> filter (?token in WALLETS_FOR_NETWORKS) 
         |> filter (-> it?[store.current.network]?disabled isnt yes) 

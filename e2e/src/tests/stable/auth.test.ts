@@ -30,7 +30,7 @@ test.describe.parallel('Auth', () => {
     test('custom seed phrase', async ({ auth, wallets }) => {
       await auth.loginByRestoringSeed(data.wallets.login.seed);
 
-      await wallets.selectWallet('token-vlx_native');
+      await wallets.selectWallet('token-xzo_native');
       assert.equal(await wallets.getWalletAddress(), accountAddress24Words, 'Account address on UI does not equal expected');
     });
 
@@ -41,7 +41,7 @@ test.describe.parallel('Auth', () => {
       await auth.pinForNewAcc.fillAndConfirm('111222');
       await auth.wordByWordSeedInputForm.fill(data.wallets.login.seedArr, { fast: true });
 
-      await wallets.selectWallet('token-vlx_native');
+      await wallets.selectWallet('token-xzo_native');
       assert.equal(await wallets.getWalletAddress(), accountAddress24Words, 'Account address on UI does not equal expected');
     });
 
@@ -56,7 +56,7 @@ test.describe.parallel('Auth', () => {
       seed12Words.length = 12;
       await auth.wordByWordSeedInputForm.fill(seed12Words);
 
-      await wallets.selectWallet('token-vlx_native');
+      await wallets.selectWallet('token-xzo_native');
       assert.equal(await wallets.getWalletAddress(), accountAddress12Words, 'Account address on UI does not equal expected');
     });
 
@@ -86,7 +86,7 @@ test.describe.parallel('Auth', () => {
     test('Log in with pin', async ({ auth, wallets }) => {
       await auth.pinForLoggedOutAcc.typeAndConfirm('111222');
 
-      await wallets.selectWallet('token-vlx_native');
+      await wallets.selectWallet('token-xzo_native');
       assert.equal(await wallets.getWalletAddress(), accountAddress24Words, 'Account address on UI does not equal expected');
     });
   });

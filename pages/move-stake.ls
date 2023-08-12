@@ -5,7 +5,7 @@ require! {
     \../components/button.ls
     \./confirmation.ls : { alert }
     \../staking/can-make-staking.ls
-    \../../web3t/addresses.js : { vlxToEth, ethToVlx }
+    \../../web3t/addresses.js : { xzoToEth, ethToVlx }
     \../get-lang.ls
     \../math.ls : { div, times, plus, minus }
     \../api.ls : { is-valid-address }
@@ -22,7 +22,7 @@ require! {
         overflow: hidden
 try-parse-address = (address, cb)->
     try 
-        cb null, vlxToEth(address)
+        cb null, xzoToEth(address)
     catch err
         cb err
 module.exports = (store, web3t)->
@@ -34,7 +34,7 @@ module.exports = (store, web3t)->
     lang = get-lang store
     store.staking.error = store.staking.error ? ""     
     cb = console.log
-    wallets = store.current.account.wallets |> filter (it) -> it.coin.token is \vlx2 
+    wallets = store.current.account.wallets |> filter (it) -> it.coin.token is \xzo2 
     return cb "VLX Wallet not found" if wallets.length is 0
     wallet = wallets.0   
     move-stake = ->
@@ -70,7 +70,7 @@ module.exports = (store, web3t)->
         amount = stake `times`(10^18)
         data = web3t.velas.Staking.move-stake.get-data pool-address, new-pool-address, amount
         to = web3t.velas.Staking.address
-        err <- web3t.vlx2.send-transaction { to, data, amount: 0 }
+        err <- web3t.xzo2.send-transaction { to, data, amount: 0 }
     change-stake = (it)->
         amount = it.target.value    
         decimalsConfig = wallet.network.decimals

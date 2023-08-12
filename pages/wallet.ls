@@ -257,7 +257,7 @@ module.exports = (store, web3t, wallets, wallet)-->
     #    err <- load-terms
     #    address =
     #        store.current.account.wallets
-    #            |> find (-> it.coin.token is \vlx2)
+    #            |> find (-> it.coin.token is \xzo2)
     #            |> (.address)
     #    return alert store, "addres #{address} is wrong", cb if typeof! address isnt \String
     #    err, data <- get "https://mainnet-v2.velas.com/migration/topup-velas-address/#{address}" .end
@@ -312,12 +312,12 @@ module.exports = (store, web3t, wallets, wallet)-->
                             .pug expand
                 button { store, on-click=send-click, text: \send , icon: \send , type: \secondary, makeDisabled=send-swap-disabled }
                 button { store, on-click=receive-click, text: \receive , icon: \get, type : \primary }
-                if token in <[ vlx vlx_native vlx2 vlx_evm vlx_erc20 vlx_bep20 ]> then
+                if token in <[ xzo xzo_native xzo2 xzo_evm xzo_erc20 xzo_bep20 ]> then
                     button { store, on-click=swap-click, text: \swap , icon: \swap, id: "wallet-swap", makeDisabled=send-swap-disabled, classes="wallet-swap" }
         if no
             .wallet-middle.pug(style=border)
                 address-holder { store, wallet, type: \bg }
-                if token not in <[ btc vlx vlx_native vlx2 eth vlx_evm  ]>
+                if token not in <[ btc xzo xzo_native xzo2 eth xzo_evm  ]>
                     .pug.uninstall(on-click=uninstall style=wallet-style) #{label-uninstall}
             .wallet-middle.title-balance.pug(style=border)
                 .name.pug(class="#{placeholder}" title="#{usd-rate}") $#{ round-human(usd-rate)}

@@ -714,7 +714,7 @@ staking-content = (store, web3t)->
     get-balance = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx_native
+                |> find -> it.coin.token is \xzo_native
         wallet.balance
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
@@ -741,7 +741,7 @@ staking-content = (store, web3t)->
     your-balance = " #{round-human get-balance!} "
     your-staking-amount = store.staking.stakeAmountTotal `div` (10^18)
     your-staking = " #{round-human your-staking-amount}"
-    vlx-token = "VLX"
+    xzo-token = "VLX"
     isSpinned = if ((store.staking.all-pools-loaded is no or !store.staking.all-pools-loaded?) and store.staking.pools-are-loading is yes) then "spin disabled" else ""
     build-staker = (store, web3t)-> (item)->
         checked = item.checked
@@ -776,13 +776,13 @@ staking-content = (store, web3t)->
         delinquent-class =
             | isDelinquent => "delinquent"
             | _ => ""
-        vlx_native =
-            store.current.account.wallets |> find (.coin.token is \vlx_native)
-        return null if not vlx_native?
+        xzo_native =
+            store.current.account.wallets |> find (.coin.token is \xzo_native)
+        return null if not xzo_native?
         wallet =
             address: item.address
-            network: vlx_native.network
-            coin: vlx_native.coin
+            network: xzo_native.network
+            coin: xzo_native.coin
         vote-power =
             | item.vote-power? => "#{item.vote-power}%"
             | _ => "..."
@@ -838,7 +838,7 @@ staking-content = (store, web3t)->
                 .title.pug
                     h2.pug #{lang.balance}
                 .description.pug
-                    span.pug(id="vlx-native-balance") #{your-balance} VLX
+                    span.pug(id="xzo-native-balance") #{your-balance} VLX
             stake-accounts {store, web3t}
             .form-group.pug(id="pools")
                 alert-txn { store }
@@ -881,7 +881,7 @@ staking-content = (store, web3t)->
 validators = ({ store, web3t })->
     lang = get-lang store
     { go-back } = history-funcs store, web3t
-    wallet = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
+    wallet = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     return cb null if not wallet?
     goto-search = ->
         navigate store, web3t, \search
@@ -931,7 +931,7 @@ stringify = (value) ->
     else
         '..'
 validators.init = ({ store, web3t }, cb)!->
-    err <- calc-certain-wallet(store, 'vlx_native')
+    err <- calc-certain-wallet(store, 'xzo_native')
     #return cb null if store.staking.pools-are-loading is yes
     if store.staking.fetchAccounts is no then
         store.staking.fetchAccounts = yes
@@ -959,7 +959,7 @@ validators.init = ({ store, web3t }, cb)!->
     store.staking.splitting-staking-account = no
     store.staking.creating-staking-account = no
     store.staking.subscribedAccounts = {}
-    wallet = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
+    wallet = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     try
         publicKey = new velasWeb3.PublicKey(wallet.publicKey)
         callback = (res)->
@@ -1023,5 +1023,5 @@ validators.init = ({ store, web3t }, cb)!->
     filter-pools(pools)
     store.staking.poolsFiltered = store.staking.pools
     store.staking.getAccountsFromCashe = no
-    #err <- calc-certain-wallet(store, "vlx_native")
+    #err <- calc-certain-wallet(store, "xzo_native")
 module.exports = validators

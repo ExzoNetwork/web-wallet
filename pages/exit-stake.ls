@@ -109,14 +109,14 @@ order-withdraw-process = (store, web3t)->
         data = web3t.velas.Staking.order-withdraw.get-data(pool-address, amount)
         to = web3t.velas.Staking.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     exit = ->
         return alert store, lang.actionProhibited, cb if +store.staking.orderedWithdrawAmount is 0
         pool-address = store.staking.chosen-pool.address
         data = web3t.velas.Staking.claimOrderedWithdraw.get-data(pool-address)
         to = web3t.velas.Staking.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     change-max = (it)->
         store.staking.withdrawAmount = it.target.value
     epoch-next = store.dashboard.epoch-next ? 'loading...'
@@ -167,7 +167,7 @@ fast-withdraw-process = (store, web3t)->
         data = web3t.velas.Staking.withdraw.get-data(pool-address, amount)
         to = web3t.velas.Staking.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     change-max = (it)->
         store.staking.withdrawAmount = it.target.value
     .pug.section

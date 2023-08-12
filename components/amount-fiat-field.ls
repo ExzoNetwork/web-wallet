@@ -10,7 +10,7 @@ require! {
     \./react-currency-input-field : { default: CurrencyInput }
 }
 DECIMAL_SEPARATOR = '.'
-module.exports = ({ store, value, on-change, placeholder, id, show-details, title, token="vlx2", disabled=no })->
+module.exports = ({ store, value, on-change, placeholder, id, show-details, title, token="xzo2", disabled=no })->
     # Styles ##################
     style = get-primary-info store
     amount-style=

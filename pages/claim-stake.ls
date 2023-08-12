@@ -459,7 +459,7 @@ module.exports = (store, web3t)->
         data = web3t.velas.Staking.claimReward.get-data(epochs, store.staking.chosen-pool.address)
         to = web3t.velas.Staking.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
     bg=
         background-image: if store.staking.reward-loading is yes then 'none' else ' '
     .pug.section-reward.reward(style=bg)
@@ -472,14 +472,14 @@ module.exports = (store, web3t)->
                     .pug.balance
                         span.pug #{lang.available-reward}:
                         span.color.pug #{store.staking.reward}
-                        img.label-coin.pug(src="#{icons.vlx-icon}")
+                        img.label-coin.pug(src="#{icons.xzo-icon}")
                         span.color.pug  VLX
                     .pug.staking-reward
                         store.staking.rewards |> map build-claim-reward store, web3t
                     .pug.balance
                         span.pug #{lang.claim-reward}:
                         span.color.pug #{store.staking.reward-claim}
-                        img.label-coin.pug(src="#{icons.vlx-icon}")
+                        img.label-coin.pug(src="#{icons.xzo-icon}")
                         span.color.pug  VLX
                     button { store, on-click: claim , icon : \reward , text : \claimReward , type : \secondary }
             else if store.staking.reward-loading is yes

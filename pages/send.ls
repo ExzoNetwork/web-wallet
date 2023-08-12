@@ -546,7 +546,7 @@ send = ({ store, web3t })->
     is-not-bridge = ->
         { token } = store.current.send.wallet.coin
         { chosen-network } = store.current.send
-        chosen-network.refer-to in <[ vlx_evm vlx2 vlx_native ]> and token in <[ vlx_evm vlx2 vlx_native ]>
+        chosen-network.refer-to in <[ xzo_evm xzo2 xzo_native ]> and token in <[ xzo_evm xzo2 xzo_native ]>
     is-swap-pair = ({from, to})->
         { chosen-network, coin, wallet } = store.current.send
         token = coin.token
@@ -663,7 +663,7 @@ send = ({ store, web3t })->
                     form-group \contract-data, 'Data', icon-style, ->
                         .pug.smart-contract(style=input-style) #{show-data!}
                 if down(wallet.network?group) in <[ bitcoin ]>
-                or wallet.coin.token in <[ vlx_native ltc ]>
+                or wallet.coin.token in <[ xzo_native ltc ]>
                     trx-fee { store, web3t, wallet, fee-token }
                 else
                     trx-custom-gas-price { store, web3t, wallet, fee-token }
@@ -726,7 +726,7 @@ module.exports.init = ({ store, web3t }, cb)->
         store.current.send.contract-address = null
     is-swap-contract = contracts.is-swap-contract(store, send.to)
 #    if is-swap-contract then
-#        contract-address = if wallet.coin.token is \vlx2 then web3t.velas.HomeBridgeNativeToErc.address else web3t.velas.ForeignBridgeNativeToErc.address
+#        contract-address = if wallet.coin.token is \xzo2 then web3t.velas.HomeBridgeNativeToErc.address else web3t.velas.ForeignBridgeNativeToErc.address
 #        store.current.send.to = contract-address
 #        network-type = store.current.network
 #        networks = wallet.coin["#{network-type}s"]

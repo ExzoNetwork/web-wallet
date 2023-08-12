@@ -254,18 +254,18 @@ add-by-address = (store, web3t)->
         input.search.pug(placeholder="0x...." value="#{store.contract-address}" on-change=coin-contract style=input-style)
         button.pug(on-click=add style=button-style)
             icon \Plus, 20
-add-by-vlxaddress = (store, web3t)->
+add-by-xzoaddress = (store, web3t)->
     coin-contract = (e)->
-        store.contract-vlxaddress = e.target.value
+        store.contract-xzoaddress = e.target.value
     not-found = ->
-        store.contract-vlxaddress = "Not Found"
+        store.contract-xzoaddress = "Not Found"
         <- set-timeout _, 1000
-        store.contract-vlxaddress = ""
+        store.contract-xzoaddress = ""
     add = ->
-        err, data <- get "https://registry.web3.space/token/#{store.contract-vlxaddress}" .end
+        err, data <- get "https://registry.web3.space/token/#{store.contract-xzoaddress}" .end
         return not-found! if err? or not data.body?token?
         <- web3t.install-quick data.body
-        store.current.add-vlxcoin = no
+        store.current.add-xzocoin = no
     style = get-primary-info store
     button-style =
         border: "1px solid #{style.app.text}"
@@ -279,8 +279,8 @@ add-by-vlxaddress = (store, web3t)->
     background =
         background: style.app.input
     .item.pug(style=background)
-        img.pug(src="#{icons.vlx-icon}" style=erc-bg)
-        input.search.pug(placeholder="V...." value="#{store.contract-vlxaddress}" on-change=coin-contract style=input-style)
+        img.pug(src="#{icons.xzo-icon}" style=erc-bg)
+        input.search.pug(placeholder="V...." value="#{store.contract-xzoaddress}" on-change=coin-contract style=input-style)
         button.pug(on-click=add style=button-style)
             icon \Plus, 20
 module.exports = ({ store, web3t } )->

@@ -377,7 +377,7 @@ module.exports = (store, web3t, wallets, wallets-groups, wallets-group)-->
                   store.tooltipCoordinates = { x: event.pageX, y: event.pageY }
                   store.tooltipMessage = lang["tooltip_#{token}"]
 
-            tokenHasTooltip = token in <[ vlx_native vlx_evm vlx2 bsc_vlx vlx_erc20 vlx_huobi vlx_usdv ]>
+            tokenHasTooltip = token in <[ xzo_native xzo_evm xzo2 bsc_xzo xzo_erc20 xzo_huobi xzo_usdv ]>
 
             /* Render */
             .wallet.pug.wallet-item(class="#{big} #{disabled-class}" key="#{token}" style=border-style id="token-#{token}")

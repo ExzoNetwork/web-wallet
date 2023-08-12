@@ -12,10 +12,10 @@ test.describe('Bridge test 2:', () => {
 
   test('check balances are not zero', async ({ wallets }) => {
     const tokens : Currency[] = [
-      'token-bsc_vlx', 'token-vlx_huobi', 'token-bnb', 'token-busd', 
+      'token-bsc_xzo', 'token-xzo_huobi', 'token-bnb', 'token-busd', 
       'token-eth', 'token-huobi', 'token-usdc', 'token-usdt_erc20', 
-      'token-vlx_busd', 'token-vlx_erc20', 'token-vlx_eth', 'token-vlx_evm',
-      'token-vlx_usdc', 'token-vlx_usdt'
+      'token-xzo_busd', 'token-xzo_erc20', 'token-xzo_eth', 'token-xzo_evm',
+      'token-xzo_usdc', 'token-xzo_usdt'
     ]
 
     for(let token of tokens){
@@ -26,10 +26,10 @@ test.describe('Bridge test 2:', () => {
 
     for (let tokenName in balances) {
       const token = tokenName as Currency;
-      if (token === 'token-vlx_evm' && Number(balances[token]) < 0.000007){
+      if (token === 'token-xzo_evm' && Number(balances[token]) < 0.000007){
         throw new Error (`Balance of ${token} is ${balances[token]}, 0.000007 expected`)
       }
-      if (token !== 'token-vlx_evm' && tokens.includes(token as Currency) && Number(balances[token]) === 0){
+      if (token !== 'token-xzo_evm' && tokens.includes(token as Currency) && Number(balances[token]) === 0){
         throw new Error (`Balance of ${token} is zero`)
       }
     }

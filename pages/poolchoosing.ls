@@ -20,7 +20,7 @@ require! {
     \../copied-inform.ls
     \../copy.ls
     \../round5.ls
-    \../../web3t/addresses.js : { ethToVlx, vlxToEth }
+    \../../web3t/addresses.js : { ethToVlx, xzoToEth }
     \./switch-account.ls
     \../round-human.ls
     \./exit-stake.ls
@@ -626,7 +626,7 @@ staking-content = (store, web3t)->
     delegate = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx_native
+                |> find -> it.coin.token is \xzo_native
         return null if not wallet?
         #err, options <- get-options
         #return alert store, err, cb if err?
@@ -693,7 +693,7 @@ staking-content = (store, web3t)->
     get-balance = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx2
+                |> find -> it.coin.token is \xzo2
         wallet.balance
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
@@ -725,12 +725,12 @@ staking-content = (store, web3t)->
         #console.log { data }
         to = web3t.velas.ValidatorSet.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount }
+        err <- web3t.xzo2.send-transaction { to, data, amount }
         store.current.page = \staking
     your-balance = " #{store.staking.chosenAccount.balance} "
     your-staking-amount = store.staking.stakeAmountTotal `div` (10^18)
     your-staking = " #{round-human your-staking-amount}"
-    vlx-token = "VLX"
+    xzo-token = "VLX"
     isSpinned = if ((store.staking.all-pools-loaded is no or !store.staking.all-pools-loaded?) and store.staking.pools-are-loading is yes) then "spin disabled" else ""
     build-staker = (store, web3t)-> (item)->
         checked = item.checked
@@ -779,13 +779,13 @@ staking-content = (store, web3t)->
                 | reward > 75 => \orange
                 | reward > 40 => "rgb(165, 174, 81)"
                 | _ => "rgb(38, 219, 85)"
-        vlx_native =
-            store.current.account.wallets |> find (.coin.token is \vlx_native)
-        return if not vlx_native?
+        xzo_native =
+            store.current.account.wallets |> find (.coin.token is \xzo_native)
+        return if not xzo_native?
         wallet =
             address: item.address
-            network: vlx_native.network
-            coin: vlx_native.coin
+            network: xzo_native.network
+            coin: xzo_native.coin
         vote-power =
             | item.vote-power? => "#{item.vote-power}%"
             | _ => "..."

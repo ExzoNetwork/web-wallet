@@ -319,7 +319,7 @@ item = (store, web3t)-> (vote)->
         return cb err if err?
         to = web3t.velas.Development.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
     update-progress = ->
         newp = store.development.new-proposal
         newp.update-progress = progress
@@ -365,7 +365,7 @@ content = (store, web3t)->
         return cb err if err?
         to = web3t.velas.Development.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
         newp.opened = no
     cancel-new-vote = ->
         newp.description = ""

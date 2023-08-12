@@ -74,7 +74,7 @@ require! {
                 min-width: 250px
                 text-align: left
 DECIMAL_SEPARATOR = '.' 
-module.exports = ({ store, value, on-change, placeholder, id, show-details, token="vlx2", disabled=no })->
+module.exports = ({ store, value, on-change, placeholder, id, show-details, token="xzo2", disabled=no })->
     style = get-primary-info store
     usd = null
     eur = null
@@ -137,7 +137,7 @@ module.exports = ({ store, value, on-change, placeholder, id, show-details, toke
             | _ => parseNum(value)
         value = $value 
         on-change { target: { value } }
-    token = \vlx if token is \vlx2
+    token = \xzo if token is \xzo2
     is-custom = wallet?coin?custom is yes 
     token-label = 
         | is-custom is yes => wallet.coin.name 

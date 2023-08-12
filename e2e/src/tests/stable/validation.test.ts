@@ -4,7 +4,7 @@ test.describe.parallel('Validation', () => {
   test.beforeEach(async ({ auth, wallets }) => {
     await auth.goto();
     await auth.loginByRestoringSeed(data.wallets.txSender.seed);
-    await wallets.selectWallet('token-vlx_native');
+    await wallets.selectWallet('token-xzo_native');
   });
 
   test('VLX Native: Show Invalid Address error', async ({ wallets }) => {
@@ -17,7 +17,7 @@ test.describe.parallel('Validation', () => {
   });
 
   test('VLX Native: Show Not Enough Funds error', async ({ page, wallets }) => {
-    await wallets.selectWallet('token-vlx_native');
+    await wallets.selectWallet('token-xzo_native');
     await wallets.clickSendButton();
     await wallets.sendForm.recepientInput.fill('BfGhk12f68mBGz5hZqm4bDSDaTBFfNZmegppzVcVdGDW');
     await wallets.sendForm.amount.fill('99999999');

@@ -37,7 +37,7 @@ test.describe.parallel('Settings', () => {
     await wallets.balanceAmount.waitFor();
 
     await wallets.openMenu('wallets');
-    await wallets.selectWallet('token-vlx_native');
+    await wallets.selectWallet('token-xzo_native');
 
     assert.equal(await wallets.getWalletAddress(), 'BfGhk12f68mBGz5hZqm4bDSDaTBFfNZmegppzVcVdGDW', 'Account 2 address on UI does not equal expected');
   });

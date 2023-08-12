@@ -7,7 +7,7 @@ require! {
     \../../web3.ls
     \../../get-lang.ls
     \../../icons.ls
-    \../../../web3t/addresses.js : { ethToVlx, vlxToEth }
+    \../../../web3t/addresses.js : { ethToVlx, xzoToEth }
     \../../math.ls : { div, times, plus, minus }
     \prelude-ls : { map, split, filter, find, foldl, sort-by, unique, head, each }
     \../../staking/can-make-staking.ls
@@ -118,10 +118,10 @@ order-withdraw-process = (store, web3t)->
     get-balance = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx2
+                |> find -> it.coin.token is \xzo2
         wallet.balance
     your-balance = " #{round-human get-balance!} "
-    vlx-token = "VLX"
+    xzo-token = "VLX"
     current-contract = store.lockups.chosen-lockup
     lockedFunds = current-contract.lockedFunds
     lockedFundsRaw = parse-float current-contract.lockedFundsRaw `div` (10^18)
@@ -171,7 +171,7 @@ order-withdraw-process = (store, web3t)->
             data = Timelock.changeDefaultPool.get-data item.address
             to = contract-address
             current-contract = store.lockups.chosen-lockup
-            err <- web3t.vlx2.send-transaction { to, data, amount: 0 }
+            err <- web3t.xzo2.send-transaction { to, data, amount: 0 }
             store.lockups.success-cb! if store.lockups.success-cb?
             #err <- lockups.init { store, web3t }
             #return cb err if err?
@@ -187,12 +187,12 @@ order-withdraw-process = (store, web3t)->
                 | reward > 75 => \orange
                 | reward > 40 => "rgb(165, 174, 81)"
                 | _ => "rgb(38, 219, 85)"
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
         wallet =
             address: ethToVlx item.address
-            network: vlx2.network
-            coin: vlx2.coin
+            network: xzo2.network
+            coin: xzo2.coin
         vote-power =
             | item.vote-power? => "#{item.vote-power}%"
             | _ => "..."
@@ -231,15 +231,15 @@ order-withdraw-process = (store, web3t)->
         stake = store.lockups.add.add-validator-topup `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
         TimeLock = web3t.velas.Timelock.at(contract-address)
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
-        vlx-address = vlx2.address2
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
+        xzo-address = xzo2.address2
         err, lockedPool <- TimeLock.getDefaultPool!
         return cb err if err?
-        data = TimeLock.stakeAmount.get-data vlx-address, stake
+        data = TimeLock.stakeAmount.get-data xzo-address, stake
         to = TimeLock.address
         amount = store.lockups.add.add-validator-topup
-        err <- web3t.vlx2.send-transaction { to, amount } 
+        err <- web3t.xzo2.send-transaction { to, amount } 
         return cb err if err?
         return store.lockups.add.result = "#{err}" if err?
         #<- lockups.init { store, web3t }
@@ -256,20 +256,20 @@ order-withdraw-process = (store, web3t)->
         return alert store, "#{err}", cb if err? 
         contract-address = store.lockups.chosen-lockup.address
         TimeLock = web3t.velas.Timelock.at(contract-address)
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
-        vlx-address = vlx2.address2
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
+        xzo-address = xzo2.address2
         err, lockedPool <- TimeLock.getDefaultPool!
         return cb err if err?
         data = TimeLock.stake.get-data lockedPool, stake
         to = TimeLock.address
         amount = store.lockups.add.add-validator-stake
-        err <- web3t.vlx2.send-transaction { to, data, amount: 0 } 
+        err <- web3t.xzo2.send-transaction { to, data, amount: 0 } 
         return cb err if err?
 #        data = web3t.velas.Staking.stake.get-data store.staking.chosen-pool.address, stake
 #        to = web3t.velas.Staking.address
 #        amount = store.staking.add.add-validator-stake
-#        err <- web3t.vlx2.send-transaction { to, data, amount }
+#        err <- web3t.xzo2.send-transaction { to, data, amount }
         #return cb err if err?
         return store.lockups.add.result = "#{err}" if err?
         #<- lockups.init { store, web3t }
@@ -286,20 +286,20 @@ order-withdraw-process = (store, web3t)->
         stake = store.lockups.add.add-validator-stake `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
         TimeLock = web3t.velas.Timelock.at(contract-address)
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
-        vlx-address = vlx2.address2
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
+        xzo-address = xzo2.address2
         err, lockedPool <- TimeLock.getDefaultPool!
         return cb err if err?
-        data = TimeLock.stakeAmount.get-data vlx-address, stake
+        data = TimeLock.stakeAmount.get-data xzo-address, stake
         to = TimeLock.address
         amount = store.lockups.add.add-validator-stake
-        err <- web3t.vlx2.send-transaction { to, amount } 
+        err <- web3t.xzo2.send-transaction { to, amount } 
         return cb err if err?
 #        data = web3t.velas.Staking.stake.get-data store.staking.chosen-pool.address, stake
 #        to = web3t.velas.Staking.address
 #        amount = store.staking.add.add-validator-stake
-#        err <- web3t.vlx2.send-transaction { to, data, amount }
+#        err <- web3t.xzo2.send-transaction { to, data, amount }
         #return cb err if err?
         return store.lockups.add.result = "#{err}" if err?
         #<- lockups.init { store, web3t }
@@ -350,16 +350,16 @@ order-withdraw-process = (store, web3t)->
                             .pug.balance
                                 span.pug Your non-staked amount:
                                 span.pug.color #{lockedFunds}
-                                span.pug.color #{vlx-token}
-                            amount-field { store, value: store.lockups.add.add-validator-topup , on-change: change-topup , placeholder: \Topup, token: "vlx2", id:"choose-staker-vlx-input" }
+                                span.pug.color #{xzo-token}
+                            amount-field { store, value: store.lockups.add.add-validator-topup , on-change: change-topup , placeholder: \Topup, token: "xzo2", id:"choose-staker-xzo-input" }
                             .pug.balance
                                 span.pug.small-btns
                                     button.small.pug(style=button-primary3-style on-click=use-min-topup) #{lang.min}
                                     button.small.pug(style=button-primary3-style on-click=use-max-topup) #{lang.max}
                                 span.pug #{lang.balance}:
                                 span.pug.color #{your-balance}
-                                    img.label-coin.pug(src="#{icons.vlx-icon}")
-                                    span.pug.color #{vlx-token}
+                                    img.label-coin.pug(src="#{icons.xzo-icon}")
+                                    span.pug.color #{xzo-token}
                             button { store, on-click: topup-the-contract , type: \secondary , icon : \apply , text: \btnApply }
         if lockedFundsRaw > 0 and store.lockups.chosen-lockup.isForwardingEnabled is no
             .pug.section
@@ -371,16 +371,16 @@ order-withdraw-process = (store, web3t)->
                             .pug.balance
                                 span.pug #{lang.yourStaking}:
                                 span.pug.color #{round-human (store.lockups.stake-amount-total `div` (10^18))}
-                                span.pug.color #{vlx-token}
-                            amount-field { store, value: store.lockups.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, token: "vlx2", id:"choose-staker-vlx-input" }
+                                span.pug.color #{xzo-token}
+                            amount-field { store, value: store.lockups.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, token: "xzo2", id:"choose-staker-xzo-input" }
                             .pug.balance
                                 span.pug.small-btns
                                     button.small.pug(style=button-primary3-style on-click=use-min) #{lang.min}
                                     button.small.pug(style=button-primary3-style on-click=use-max) #{lang.max}
                                 span.pug Locked Amount:
                                 span.pug.color #{round-human store.lockups.chosen-lockup.locked-funds}
-                                    img.label-coin.pug(src="#{icons.vlx-icon}")
-                                    span.pug.color #{vlx-token}
+                                    img.label-coin.pug(src="#{icons.xzo-icon}")
+                                    span.pug.color #{xzo-token}
                             button { store, on-click: stake-func , type: \secondary , icon : \apply , text: \btnApply }    
         if store.lockups.chosen-lockup.isForwardingEnabled is yes    
             .pug.section
@@ -392,16 +392,16 @@ order-withdraw-process = (store, web3t)->
                             .pug.balance
                                 span.pug #{lang.yourStaking}:
                                 span.pug.color #{round-human (store.lockups.stake-amount-total `div` (10^18))}
-                                span.pug.color #{vlx-token}
-                            amount-field { store, value: store.lockups.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, token: "vlx2", id:"choose-staker-vlx-input" }
+                                span.pug.color #{xzo-token}
+                            amount-field { store, value: store.lockups.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, token: "xzo2", id:"choose-staker-xzo-input" }
                             .pug.balance
                                 span.pug.small-btns
                                     button.small.pug(style=button-primary3-style on-click=use-min) #{lang.min}
                                     button.small.pug(style=button-primary3-style on-click=use-max) #{lang.max}
                                 span.pug #{lang.balance}:
                                 span.pug.color #{round-human store.lockups.chosen-lockup.locked-funds}
-                                    img.label-coin.pug(src="#{icons.vlx-icon}")
-                                    span.pug.color #{vlx-token}
+                                    img.label-coin.pug(src="#{icons.xzo-icon}")
+                                    span.pug.color #{xzo-token}
                             button { store, on-click: stake-func , type: \secondary , icon : \apply , text: \btnApply }    
 not-available-right-now = (store)->
     lang = get-lang store

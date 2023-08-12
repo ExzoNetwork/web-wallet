@@ -3,27 +3,27 @@ import { log } from '../tools/logger';
 import { BaseScreen } from './base';
 
 export type Currency =
-  | 'token-vlx_native'
-  | 'token-vlx_evm'
-  | 'token-vlx2'
-  | 'token-vlx_usdc'
-  | 'token-vlx_usdt'
-  | 'token-vlx_eth'
-  | 'token-vlx_evm_legacy'
-  | 'token-vlx_busd'
+  | 'token-xzo_native'
+  | 'token-xzo_evm'
+  | 'token-xzo2'
+  | 'token-xzo_usdc'
+  | 'token-xzo_usdt'
+  | 'token-xzo_eth'
+  | 'token-xzo_evm_legacy'
+  | 'token-xzo_busd'
   | 'token-btc'
   | 'token-eth'
-  | 'token-vlx_erc20'
+  | 'token-xzo_erc20'
   | 'token-usdc'
   | 'token-usdt_erc20'
   | 'token-eth_legacy'
   | 'token-usdt_erc20_legacy'
   | 'token-ltc'
-  | 'token-vlx_huobi'
+  | 'token-xzo_huobi'
   | 'token-huobi'
   | 'token-bnb'
   | 'token-busd'
-  | 'token-bsc_vlx';
+  | 'token-bsc_xzo';
 
 export type Balances = Record<Currency, string | null>;
 
@@ -98,27 +98,27 @@ export class WalletsScreen extends BaseScreen {
     await this.waitForWalletsDataLoaded();
     const walletElements = await this.page.$$('.wallet-item');
     const balances: Balances = {
-      'token-vlx_native': null,
-      'token-vlx_evm': null,
-      'token-vlx2': null,
-      'token-vlx_usdc': null,
-      'token-vlx_usdt': null,
-      'token-vlx_eth': null,
-      'token-vlx_evm_legacy': null,
-      'token-vlx_busd': null,
+      'token-xzo_native': null,
+      'token-xzo_evm': null,
+      'token-xzo2': null,
+      'token-xzo_usdc': null,
+      'token-xzo_usdt': null,
+      'token-xzo_eth': null,
+      'token-xzo_evm_legacy': null,
+      'token-xzo_busd': null,
       'token-btc': null,
       'token-eth': null,
-      'token-vlx_erc20': null,
+      'token-xzo_erc20': null,
       'token-usdc': null,
       'token-usdt_erc20': null,
       'token-eth_legacy': null,
       'token-usdt_erc20_legacy': null,
       'token-ltc': null,
-      'token-vlx_huobi': null,
+      'token-xzo_huobi': null,
       'token-huobi': null,
       'token-bnb': null,
       'token-busd': null,
-      'token-bsc_vlx': null,
+      'token-bsc_xzo': null,
     };
 
     for (const walletElement of walletElements) {
@@ -178,11 +178,11 @@ export class WalletsScreen extends BaseScreen {
   }
 
   async waitForWalletsDataLoaded(): Promise<void> {
-    await this.page.waitForSelector('#token-vlx_native .top-left [class=" img"]', {
+    await this.page.waitForSelector('#token-xzo_native .top-left [class=" img"]', {
       state: 'visible',
       timeout: 40000,
     });
-    await this.page.waitForSelector('#token-vlx_evm .top-left [class=" img"]', {
+    await this.page.waitForSelector('#token-xzo_evm .top-left [class=" img"]', {
       state: 'visible',
       timeout: 40000,
     });
@@ -274,17 +274,17 @@ export class WalletsScreen extends BaseScreen {
     },
     getDestinationNetworkForTokenName: async (swapToToken: Currency): Promise<string> => {
       switch (swapToToken) {
-        case 'token-vlx2':
+        case 'token-xzo2':
           return 'Exzo Legacy';
-        case 'token-vlx_native':
+        case 'token-xzo_native':
           return 'Exzo Native';
-        case 'token-vlx_evm':
+        case 'token-xzo_evm':
           return 'Exzo EVM';
-        case 'token-bsc_vlx':
+        case 'token-bsc_xzo':
           return 'Binance';
-        case 'token-vlx_huobi':
+        case 'token-xzo_huobi':
           return 'Huobi ECO Chain';
-        case 'token-vlx_erc20':
+        case 'token-xzo_erc20':
           return 'Ethereum (VLX ERC20)';
         case 'token-usdt_erc20':
           return 'Ethereum (Tether USD ERC-20)';

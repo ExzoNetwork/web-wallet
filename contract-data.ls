@@ -37,7 +37,7 @@ module.exports = ({store})->
     * Swap from USDC to USDC VELAS
     */  
     usdc_to_usdc_velas_swap = (token, chosen-network, cb)->   
-        return cb null if not (token is \usdc and chosen-network.id is \vlx_usdc)
+        return cb null if not (token is \usdc and chosen-network.id is \xzo_usdc)
         web3 = velas-web3 store
         { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network  
         value = store.current.send.amountSend 
@@ -60,7 +60,7 @@ module.exports = ({store})->
     * Swap from USDC VELAS to USDC
     */     
     usdc_velas_to_usdc_swap = (token, chosen-network, cb)->     
-        return cb null if not (token is \vlx_usdc and chosen-network.id is \usdc)
+        return cb null if not (token is \xzo_usdc and chosen-network.id is \usdc)
         web3 = velas-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network
         return cb "HOME_BRIDGE is not defined" if not HOME_BRIDGE?
@@ -75,7 +75,7 @@ module.exports = ({store})->
         store.current.send.data = data  
         cb null, data
     busd_velas_to_busd_swap = (token, chosen-network, cb)->
-        return cb null if not (token is \vlx_busd and chosen-network.id is \busd)
+        return cb null if not (token is \xzo_busd and chosen-network.id is \busd)
         web3 = velas-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network  
         value = store.current.send.amountSend 
@@ -89,7 +89,7 @@ module.exports = ({store})->
         store.current.send.data = data
         cb null, data    
     busd_to_busd_velas_swap = (token, chosen-network, cb)->
-        return cb null if not (token is \busd and chosen-network.id is \vlx_busd) 
+        return cb null if not (token is \busd and chosen-network.id is \xzo_busd) 
         { wallets } = store.current.account
         chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
         return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet? 
@@ -113,7 +113,7 @@ module.exports = ({store})->
     * Swap from USDT ETHEREUM to USDT VELAS 
     */     
     eth_usdt-usdt_velas-swap = (token, chosen-network, cb)->     
-        return cb null if not (token is \usdt_erc20 and chosen-network.id is \vlx_usdt)
+        return cb null if not (token is \usdt_erc20 and chosen-network.id is \xzo_usdt)
         web3 = velas-web3 store
         { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
         return cb "FOREIGN_BRIDGE is not defined" if not FOREIGN_BRIDGE?
@@ -137,7 +137,7 @@ module.exports = ({store})->
     * Swap from USDT VELAS to USDT ETHEREUM
     */     
     usdt_velas-eth_usdt-swap = (token, chosen-network, cb)->     
-        return cb null if not (token is \vlx_usdt and chosen-network.id is \usdt_erc20)
+        return cb null if not (token is \xzo_usdt and chosen-network.id is \usdt_erc20)
         web3 = velas-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network  
         value = store.current.send.amountSend 
@@ -154,7 +154,7 @@ module.exports = ({store})->
             return cb null 
         chosen-network = store.current.send.chosen-network
         token = store.current.send.coin.token
-        if chosen-network.id in <[ vlx_evm vlx2 ]> and token in <[ vlx_evm vlx2 ]>   
+        if chosen-network.id in <[ xzo_evm xzo2 ]> and token in <[ xzo_evm xzo2 ]>   
             store.current.send.contractAddress = null 
             return cb null 
         wallet = store.current.send.wallet  
@@ -165,29 +165,29 @@ module.exports = ({store})->
         dummy = (a, b, cb)-> 
             cb null       
         func = 
-            | token is \usdt_erc20 and chosen-network.id is \vlx_usdt =>
+            | token is \usdt_erc20 and chosen-network.id is \xzo_usdt =>
                 /* Swap from USDT ETHEREUM to USDT VELAS  */ 
                 eth_usdt-usdt_velas-swap 
-            | token is \vlx_usdt and chosen-network.id is \usdt_erc20 =>
+            | token is \xzo_usdt and chosen-network.id is \usdt_erc20 =>
                 /* Swap from USDT VELAS to USDT ETHEREUM */ 
                 usdt_velas-eth_usdt-swap
-            | token is \busd and chosen-network.id is \vlx_busd =>
+            | token is \busd and chosen-network.id is \xzo_busd =>
                 /* Swap from BUSD to BUSD VELAS */ 
                 busd_to_busd_velas_swap  
-            | token is \vlx_busd and chosen-network.id is \busd =>
+            | token is \xzo_busd and chosen-network.id is \busd =>
                 /* Swap from BUSD VELAS to BUSD */
                 busd_velas_to_busd_swap
-            | token is \usdc and chosen-network.id is \vlx_usdc =>
+            | token is \usdc and chosen-network.id is \xzo_usdc =>
                 /* Swap from USDC to USDC VELAS */
                 usdc_to_usdc_velas_swap
-            | token is \vlx_usdc and chosen-network.id is \usdc =>
+            | token is \xzo_usdc and chosen-network.id is \usdc =>
                 /* Swap from USDC VELAS to USDC */
                 usdc_velas_to_usdc_swap
             | _ => dummy   
         err, data <- func(token, chosen-network)
         return cb err if err?
         /* Swap from VELAS EVM to HECO */
-        if token is \vlx_evm and chosen-network.id is \vlx_huobi then
+        if token is \xzo_evm and chosen-network.id is \xzo_huobi then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet?
@@ -200,7 +200,7 @@ module.exports = ({store})->
             store.current.send.contract-address = HECO_SWAP__HOME_BRIDGE  
             send.data = data 
         /* Swap from HECO to VELAS EVM */
-        if token is \vlx_huobi and chosen-network.id is \vlx_evm
+        if token is \xzo_huobi and chosen-network.id is \xzo_evm
             value = store.current.send.amountSend
             value = value `times` (10^18)
             { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
@@ -215,7 +215,7 @@ module.exports = ({store})->
             send.contract-address = FOREIGN_BRIDGE_TOKEN
             send.data = data
         /* Swap from VELAS EVM to HECO */
-        if token is \vlx_evm and chosen-network.id is \bsc_vlx then
+        if token is \xzo_evm and chosen-network.id is \bsc_xzo then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet?
@@ -234,7 +234,7 @@ module.exports = ({store})->
             send.data = data
             store.current.send.contract-address = BSC_SWAP__HOME_BRIDGE
         /* Swap from BSC VELAS to VELAS EVM */
-        if token is \bsc_vlx and chosen-network.id is \vlx_evm
+        if token is \bsc_xzo and chosen-network.id is \xzo_evm
             value = store.current.send.amountSend
             value = value `times` (10^18)
             { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
@@ -248,7 +248,7 @@ module.exports = ({store})->
             send.contract-address = FOREIGN_BRIDGE_TOKEN
             send.data = data
         /* Swap from ETH to ETHEREUM (VELAS) */ 
-        if token is \eth and chosen-network.id is \vlx_eth then
+        if token is \eth and chosen-network.id is \xzo_eth then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet? 
@@ -263,7 +263,7 @@ module.exports = ({store})->
             store.current.send.contract-address = HOME_BRIDGE
             send.data = data 
         /* Swap from ETHEREUM (VELAS) to ETH  */ 
-        if token is \vlx_eth and chosen-network.id is \eth then
+        if token is \xzo_eth and chosen-network.id is \eth then
             value = store.current.send.amountSend
             value = (value `times` (10^18))
             network = wallet.network
@@ -275,7 +275,7 @@ module.exports = ({store})->
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN
         /* Swap from VLX ERC20 to COIN VLX */    
-        if token is \vlx_erc20 and chosen-network.id in <[ vlx_evm vlx2 ]>
+        if token is \xzo_erc20 and chosen-network.id in <[ xzo_evm xzo2 ]>
             value = store.current.send.amountSend
             value2 = to-hex(value `times` (10^18)).toString(16)
             value = (value `times` (10^18))
@@ -291,7 +291,7 @@ module.exports = ({store})->
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN            
         /* Swap from COIN VLX to VLX ERC20 */
-        if (token is \vlx_evm or token is \vlx2) and chosen-network.id is \vlx_erc20 then
+        if (token is \xzo_evm or token is \xzo2) and chosen-network.id is \xzo_erc20 then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet? 
@@ -305,7 +305,7 @@ module.exports = ({store})->
             store.current.send.contract-address = HOME_BRIDGE 
             send.data = data  
         /* Swap from Legacy or EVM into native */   
-        if (token is \vlx_evm or token is \vlx2) and chosen-network.id is \vlx_native then
+        if (token is \xzo_evm or token is \xzo2) and chosen-network.id is \xzo_native then
             { EVM_TO_NATIVE_BRIDGE } = wallet.network
             return cb "EVM_TO_NATIVE_BRIDGE address is not defined" if not EVM_TO_NATIVE_BRIDGE?   
             $recipient = ""

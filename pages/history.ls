@@ -732,7 +732,7 @@ render-transaction = (store, web3t, tran)-->
     tooltip=
         background: "black"
     { token, tx, amount, fee, time, url, type, pending, from, to, recipient-type, description } = tran
-    console.log "tran" tran.action if token is \vlx_native3
+    console.log "tran" tran.action if token is \xzo_native3
     coin =
         coins |> find (.token is token)
     return null if not coin?

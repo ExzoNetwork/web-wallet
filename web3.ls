@@ -221,7 +221,7 @@ module.exports = (store, config)->
         cb null
     set-preference = (preference)->
         set = (key)->
-            return if keys not in <[ disablevlx1 ]>
+            return if keys not in <[ disablexzo1 ]>
             store.preference[key] = preference[key] ? store.preference[key]
         store.preference |> keys |> each set
     lock = ->

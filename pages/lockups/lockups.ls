@@ -95,12 +95,12 @@ lockups-content = (store, web3t)->
         contract-address = Timelock.address
         amount = maxWithdrawAllowed.to-fixed! `div` (10^18)
         return alert store, lang.actionProhibited, cb if +amount is 0 
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
-        vlx-address = vlx2.address2    
-        data = Timelock.withdraw.get-data(vlx-address, amount)     
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
+        xzo-address = xzo2.address2    
+        data = Timelock.withdraw.get-data(xzo-address, amount)     
         to = contract-address
-        err <- web3t.vlx2.send-transaction { to, data, amount: 0 }
+        err <- web3t.xzo2.send-transaction { to, data, amount: 0 }
     topup-the-contract = ->
         #err, options <- get-options
         #return alert store, err, cb if err?
@@ -110,15 +110,15 @@ lockups-content = (store, web3t)->
         stake = store.lockups.add.add-validator-stake `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
         TimeLock = web3t.velas.Timelock.at(contract-address)
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
-        vlx-address = vlx2.address2
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
+        xzo-address = xzo2.address2
         err, lockedPool <- TimeLock.getDefaultPool!
         return cb err if err?
-        data = TimeLock.stakeAmount.get-data vlx-address, stake
+        data = TimeLock.stakeAmount.get-data xzo-address, stake
         to = TimeLock.address
         amount = store.lockups.add.add-validator-stake
-        err <- web3t.vlx2.send-transaction { to, amount } 
+        err <- web3t.xzo2.send-transaction { to, amount } 
         return cb err if err?
         return store.lockups.add.result = "#{err}" if err?
         #<- lockups.init { store, web3t }
@@ -135,20 +135,20 @@ lockups-content = (store, web3t)->
         stake = store.lockups.add.add-validator-stake `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
         TimeLock = web3t.velas.Timelock.at(contract-address)
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
-        vlx-address = vlx2.address2
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
+        xzo-address = xzo2.address2
         err, lockedPool <- TimeLock.getDefaultPool!
         return cb err if err?
-        data = TimeLock.stake.get-data vlx-address, stake
+        data = TimeLock.stake.get-data xzo-address, stake
         to = TimeLock.address
         amount = store.lockups.add.add-validator-stake
-        err <- web3t.vlx2.send-transaction { to, data, amount } 
+        err <- web3t.xzo2.send-transaction { to, data, amount } 
         return cb err if err?
 #        data = web3t.velas.Staking.stake.get-data store.staking.chosen-pool.address, stake
 #        to = web3t.velas.Staking.address
 #        amount = store.staking.add.add-validator-stake
-#        err <- web3t.vlx2.send-transaction { to, data, amount }
+#        err <- web3t.xzo2.send-transaction { to, data, amount }
         #return cb err if err?
         return store.lockups.add.result = "#{err}" if err?
         #<- lockups.init { store, web3t }
@@ -194,9 +194,9 @@ lockups-content = (store, web3t)->
         #console.log { data }
         to = web3t.velas.ValidatorSet.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount }
+        err <- web3t.xzo2.send-transaction { to, data, amount }
         store.current.page = \staking
-    vlx-token = "VLX"
+    xzo-token = "VLX"
     hide-stake-place = ->
         store.lockups.lockupStakingAddress = null
         null
@@ -204,12 +204,12 @@ lockups-content = (store, web3t)->
         { address, lockedFunds, lockedPool, stake, lockedFundsReleaseTime, lockThreshold } = item
         stake = round-human(parse-float item.stake `div` (10^18))
         index = store.lockups.lockupContracts.index-of(item) + 1  
-        vlx2 =
-            store.current.account.wallets |> find (.coin.token is \vlx2)
+        xzo2 =
+            store.current.account.wallets |> find (.coin.token is \xzo2)
         wallet =
             address: ethToVlx item.address
-            network: vlx2.network
-            coin: vlx2.coin
+            network: xzo2.network
+            coin: xzo2.coin
         # Select contract from list
         choose = ->
             cb = console.log
@@ -291,7 +291,7 @@ lockups-content = (store, web3t)->
             get-balance = ->
                 wallet =
                     store.current.account.wallets
-                        |> find -> it.coin.token is \vlx2
+                        |> find -> it.coin.token is \xzo2
                 wallet.balance
             your-balance = " #{round-human get-balance!} "
             lang-stake = if store.lockups.stake-amount-total > 0 then lang.stakeMore else lang.stake
@@ -305,7 +305,7 @@ lockups-content = (store, web3t)->
                 func = if store.lockups.chosen-lockup.isForwardingEnabled then TimeLock.disableForwarding else  TimeLock.enableForwarding
                 data = func.get-data!
                 to = contract-address
-                err <- web3t.vlx2.send-transaction { to, data, amount: 0 }
+                err <- web3t.xzo2.send-transaction { to, data, amount: 0 }
                 return cb err if err?
                 #web3t.use networks-reverted[not value]
             isForwardingEnabled = store.lockups.chosen-lockup.isForwardingEnabled is yes
@@ -374,12 +374,12 @@ lockups-content = (store, web3t)->
                         amount = store.lockups.unstakeAmount `times` (10^18)
                         return alert store, "#{lang.max} #{max.to-fixed! `div` (10^18)}" if +amount > +store.lockups.stake-amount-total
                         return alert store, lang.actionProhibited, cb if +amount is 0 
-                        vlx2 =
-                            store.current.account.wallets |> find (.coin.token is \vlx2)
-                        vlx-address = vlx2.address2 
-                        data = Timelock.unstake.get-data(vlx-address, amount) 
+                        xzo2 =
+                            store.current.account.wallets |> find (.coin.token is \xzo2)
+                        xzo-address = xzo2.address2 
+                        data = Timelock.unstake.get-data(xzo-address, amount) 
                         to = pool-address
-                        err <- web3t.vlx2.send-transaction { to, data, amount:0, gas: 4600000, gas-price: 1000000 }
+                        err <- web3t.xzo2.send-transaction { to, data, amount:0, gas: 4600000, gas-price: 1000000 }
                         return cb err if err?
                     .pug.section
                         .title.pug
@@ -387,15 +387,15 @@ lockups-content = (store, web3t)->
                         .description.pug
                             .pug.left
                                 label.pug Unstake
-                                amount-field { store, value: store.lockups.unstakeAmount, on-change: change-unstake, placeholder: lang.unstake, token: "vlx2", id:"unstake-vlx-input" }
+                                amount-field { store, value: store.lockups.unstakeAmount, on-change: change-unstake, placeholder: lang.unstake, token: "xzo2", id:"unstake-xzo-input" }
                                 .pug.balance
                                     span.pug.small-btns
                                         button.small.pug(style=button-primary3-style on-click=use-min2) #{lang.min}
                                         button.small.pug(style=button-primary3-style on-click=use-max2) #{lang.max}
                                     span.pug #{lang.stake}:
                                     span.pug.color #{round-human (store.lockups.chosen-lockup.stake `div` (10^18))}
-                                        img.label-coin.pug(src="#{icons.vlx-icon}")
-                                        span.pug.color #{vlx-token}
+                                        img.label-coin.pug(src="#{icons.xzo-icon}")
+                                        span.pug.color #{xzo-token}
                                 button { store, on-click: unstake , type: \secondary , icon : \apply , text: \btnApply }
 lockups = ({ store, web3t })->
     .pug.lockups-content
@@ -457,8 +457,8 @@ lockups.init = ({ store, web3t }, cb)->
     store.lockups.lockup-was-choosed = no
     store.staking.pool-was-choosed = no
     store.lockups.chosen-lockup = null
-    vlx2 = store.current.account.wallets |> find (.coin.token is \vlx2)
-    err, lockups <- web3t.velas.Resolver.getLockups vlx2.address2  
+    xzo2 = store.current.account.wallets |> find (.coin.token is \xzo2)
+    err, lockups <- web3t.velas.Resolver.getLockups xzo2.address2  
     return cb err if err?
     store.lockups.lockupStaking = {}
     err, result <- fill-lockup-contracts {web3t, store}, lockups

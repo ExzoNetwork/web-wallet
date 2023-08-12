@@ -10,7 +10,7 @@ test.describe.parallel('Wallets screen', () => {
       // arrange
       await auth.loginByRestoringSeed(data.wallets.fundsReceiver.seed);
 
-      await wallets.selectWallet('token-vlx_native');
+      await wallets.selectWallet('token-xzo_native');
       await wallets.txHistory.txDetails.first().waitFor({ timeout: 35000 });
       const transactions = await wallets.txHistory.txDetails.elementHandles();
       assert.isAbove(transactions.length, 10, 'Amount of transactions in the list is less than 10');
@@ -51,16 +51,16 @@ test.describe.parallel('Wallets screen', () => {
 
     test('Add and hide EVM Legacy wallet', async ({ wallets }) => {
       await wallets.addWalletsPopup.open();
-      await wallets.addWalletsPopup.add('token-vlx_evm_legacy');
-      await wallets.selectWallet('token-vlx_evm_legacy');
-      assert.isTrue(await wallets.isWalletInWalletsList('token-vlx_evm_legacy'));
+      await wallets.addWalletsPopup.add('token-xzo_evm_legacy');
+      await wallets.selectWallet('token-xzo_evm_legacy');
+      assert.isTrue(await wallets.isWalletInWalletsList('token-xzo_evm_legacy'));
 
       await wallets.hideWallet();
-      assert.isFalse(await wallets.isWalletInWalletsList('token-vlx_evm_legacy'));
+      assert.isFalse(await wallets.isWalletInWalletsList('token-xzo_evm_legacy'));
     });
 
     test('Switch account', async ({ page, wallets }) => {
-      await wallets.selectWallet('token-vlx_native');
+      await wallets.selectWallet('token-xzo_native');
       await page.click('.switch-account');
       await page.click('" Account 2"');
       assert.equal(await wallets.getWalletAddress(), 'BfGhk12f68mBGz5hZqm4bDSDaTBFfNZmegppzVcVdGDW', 'Account 2 address on UI does not equal expected');
@@ -76,7 +76,7 @@ test.describe.parallel('Wallets screen', () => {
       // clear clipboard
       await page.evaluate(async () => await navigator.clipboard.writeText(''));
 
-      await wallets.selectWallet('token-vlx_native');
+      await wallets.selectWallet('token-xzo_native');
       await page.click('#wallets-receive');
       await page.waitForSelector('.ill-qr img');
       await wallets.qrCode.waitFor();

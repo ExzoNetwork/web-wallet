@@ -87,10 +87,10 @@ AddressUtil = (props) ->
         background: style.app.input,
         color: style.app.text
     }
-    [vlx-address, vlx-address-change] = react.use-state ""
+    [xzo-address, xzo-address-change] = react.use-state ""
     [eth-address, eth-address-change] = react.use-state ""
-    vlx-address-onhange = (event) ->
-        vlx-address-change event.target.value
+    xzo-address-onhange = (event) ->
+        xzo-address-change event.target.value
         try
             address = to-eth-address event.target.value
             eth-address-change address || ""
@@ -100,14 +100,14 @@ AddressUtil = (props) ->
         eth-address-change event.target.value
         try
             address = to-velas-address event.target.value
-            vlx-address-change address || ""
+            xzo-address-change address || ""
         catch e
-            vlx-address-change e.message
+            xzo-address-change e.message
     return (
         .pug
             .pug.form-group
                 label.pug Please paste your VLX Legacy address here.
-                input.pug(style=style placeholder="VLX Legacy address" on-change=vlx-address-onhange value=vlx-address)
+                input.pug(style=style placeholder="VLX Legacy address" on-change=xzo-address-onhange value=xzo-address)
             .pug.form-group
                 label.pug Please paste your EVM address here.
                 input.pug(style=style placeholder="EVM address" on-change=eth-address-onhange value=eth-address)

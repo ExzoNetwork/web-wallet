@@ -59,11 +59,11 @@ make-video-thumbnail = (file, cb) ->
     video.play!
 on-browse-files = ->
     (document.get-element-by-id 'browse-files-video').click!
-get-vlx-private-address = ({ store }, cb)->
+get-xzo-private-address = ({ store }, cb)->
     wallets = store?current?account?wallets ? []
     wallet =
-        wallets |> find (.coin?token is \vlx2)
-    return cb "wallet vlx not found" if not wallet?
+        wallets |> find (.coin?token is \xzo2)
+    return cb "wallet xzo not found" if not wallet?
     cb null, wallet.private-key
 upload-video-files-recursive = ({ store, web3t }, [file, ...files], cb)->
     return cb null if not file?
@@ -74,7 +74,7 @@ upload-video-files-recursive = ({ store, web3t }, [file, ...files], cb)->
     file-description.thumbnail = thumbnail
     # console.log data
     form-data = new Form-data
-    err, private-address <- get-vlx-private-address { store }
+    err, private-address <- get-xzo-private-address { store }
     return cb err if err?
     form-data.append \key, private-address.substr 2
     form-data.append \video, file

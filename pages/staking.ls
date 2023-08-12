@@ -915,7 +915,7 @@ staking-content = (store, web3t)->
         to = web3t.velas.Staking.address
         #console.log \to, { to, data, amount }
         amount = store.staking.add.add-validator-stake
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
         #return cb err if err?
         return store.staking.add.result = "#{err}" if err?
         #store.staking.add.result = "success"
@@ -970,7 +970,7 @@ staking-content = (store, web3t)->
     get-balance = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx2
+                |> find -> it.coin.token is \xzo2
         wallet.balance
     get-options = (cb)->
         err, data <- web3t.velas.Staking.candidateMinStake
@@ -997,12 +997,12 @@ staking-content = (store, web3t)->
         data = web3t.velas.ValidatorSet.emitInitiateChange.get-data!
         to = web3t.velas.ValidatorSet.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
+        err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
         store.current.page = \staking
     your-balance = " #{round-human get-balance!} "
     your-staking-amount = store.staking.stake-amount-total `div` (10^18)
     your-staking = " #{round-human your-staking-amount}"
-    vlx-token = "VLX"
+    xzo-token = "VLX"
     staker-status = if store.staking.is-active-staker then \Active else \Inactive
     check-uncheck = ->
         change = not store.staking.rewards.0.checked
@@ -1098,15 +1098,15 @@ staking-content = (store, web3t)->
                     .description.pug
                         .pug.left
                             label.pug #{lang.stake}
-                            amount-field { store, value: store.staking.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, show-details: yes, id:"vlx-stake-input", token:"vlx2" }
+                            amount-field { store, value: store.staking.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, show-details: yes, id:"xzo-stake-input", token:"xzo2" }
                             .pug.balance
                                 span.pug.small-btns
                                     button.small.pug(style=button-primary3-style on-click=use-min) Min
                                     button.small.pug(style=button-primary3-style on-click=use-max) Max
                                 span.pug #{lang.balance}:
                                 span.pug.color #{your-balance}
-                                    img.label-coin.pug(src="#{icons.vlx-icon}")
-                                    span.pug.color #{vlx-token}
+                                    img.label-coin.pug(src="#{icons.xzo-icon}")
+                                    span.pug.color #{xzo-token}
                         button { store, on-click: become-validator , icon: \apply , text : \btnApply , type : \secondary }
             if +store.staking.stake-amount-total > 0
                 .pug.section
@@ -1120,7 +1120,7 @@ staking-content = (store, web3t)->
                                         .value.pug
                                             .number.pug
                                                 span.pug #{your-staking}
-                                                span.pug #{vlx-token}
+                                                span.pug #{xzo-token}
                                         .header.pug
                                             | #{lang.staking}
                                 .col.col-4.pug
@@ -1152,15 +1152,15 @@ staking-content = (store, web3t)->
                                             li.pug(key="your-status2" ) #{lang.your-status2}
                             hr.pug
                             label.pug #{lang.stake-more}
-                            amount-field { store, value: store.staking.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, show-details: yes, id: "vlx-stake-input", token:"vlx2" }
+                            amount-field { store, value: store.staking.add.add-validator-stake , on-change: change-stake , placeholder: lang.stake, show-details: yes, id: "xzo-stake-input", token:"xzo2" }
                             .pug.balance
                                 span.pug.small-btns
                                     button.small.pug(style=button-primary3-style on-click=use-min) #{lang.min}
                                     button.small.pug(style=button-primary3-style on-click=use-max) #{lang.max}
                                 span.pug Your balance:
                                 span.pug.color #{your-balance}
-                                    img.label-coin.pug(src="#{icons.vlx-icon}")
-                                    span.pug.color #{vlx-token}
+                                    img.label-coin.pug(src="#{icons.xzo-icon}")
+                                    span.pug.color #{xzo-token}
                         button { store, on-click: become-validator , type : \secondary , text: \btnApply , icon : \apply }
             if window.location.href.index-of('emit') > -1
                 .pug.section

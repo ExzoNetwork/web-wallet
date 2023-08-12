@@ -12,13 +12,13 @@ test.describe.parallel('Transactions', () => {
   });
 
   test('Send VLX native', async ({ wallets }) => {
-    await wallets.addToken('token-vlx_native');
+    await wallets.addToken('token-xzo_native');
 
     const receiverInitialBalance = await velasNative.getBalance(data.wallets.fundsReceiver.address);
     const senderInitialBalance = await velasNative.getBalance(data.wallets.txSender.address);
     const transactionAmount = 0.0001;
 
-    await wallets.sendTx('token-vlx_native', 'FJWtmzRwURdnrgn5ZFWvYNfHvXMtHK1WS7VHpbnfG73s', transactionAmount);
+    await wallets.sendTx('token-xzo_native', 'FJWtmzRwURdnrgn5ZFWvYNfHvXMtHK1WS7VHpbnfG73s', transactionAmount);
 
     const txSignature = await wallets.getTxHashFromTxlink();
 

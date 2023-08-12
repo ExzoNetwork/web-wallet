@@ -231,9 +231,9 @@ staking2 = ({ store, web3t })->
         .container.pug
             Staking.pug(stakingStore=store.stakingStore lang=lang info=info)
 staking2.init = ({store, web3t}, cb)->
-    wallet_native = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
+    wallet_native = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     nativeData = wallet_native?network?api
-    wallet_evm = store.current.account.wallets |> find (-> it.coin.token is \vlx_evm)
+    wallet_evm = store.current.account.wallets |> find (-> it.coin.token is \xzo_evm)
     evmData = wallet_evm?network?api
     config = {
         API_HOST: nativeData.apiUrl,

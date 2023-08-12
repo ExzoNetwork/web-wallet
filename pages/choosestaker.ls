@@ -21,7 +21,7 @@ require! {
     \../copied-inform.ls
     \../copy.ls
     \../round5.ls
-    \../../web3t/addresses.js : { ethToVlx, vlxToEth }
+    \../../web3t/addresses.js : { ethToVlx, xzoToEth }
     \./switch-account.ls
     \../round-human.ls
     \./exit-stake.ls
@@ -613,7 +613,7 @@ staking-content = (store, web3t)->
     get-balance = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx_native
+                |> find -> it.coin.token is \xzo_native
         wallet.balance
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
@@ -640,7 +640,7 @@ staking-content = (store, web3t)->
     your-balance = " #{round-human get-balance!} "
     your-staking-amount = store.staking.stakeAmountTotal `div` (10^18)
     your-staking = " #{round-human your-staking-amount}"
-    vlx-token = "VLX"
+    xzo-token = "VLX"
     isSpinned = if ((store.staking.all-pools-loaded is no or !store.staking.all-pools-loaded?) and store.staking.pools-are-loading is yes) then "spin disabled" else ""
     build-staker = (store, web3t)-> (item)->
         checked = item.checked
@@ -670,13 +670,13 @@ staking-content = (store, web3t)->
                 | reward > 75 => \orange
                 | reward > 40 => "rgb(165, 174, 81)"
                 | _ => "rgb(38, 219, 85)"
-        vlx_native =
-            store.current.account.wallets |> find (.coin.token is \vlx_native)
-        return null if not vlx_native?
+        xzo_native =
+            store.current.account.wallets |> find (.coin.token is \xzo_native)
+        return null if not xzo_native?
         wallet =
             address: item.address
-            network: vlx_native.network
-            coin: vlx_native.coin
+            network: xzo_native.network
+            coin: xzo_native.coin
         vote-power =
             | item.vote-power? => "#{item.vote-power}%"
             | _ => "..."
@@ -758,7 +758,7 @@ staking-content = (store, web3t)->
 validators = ({ store, web3t })->
     lang = get-lang store
     { go-back } = history-funcs store, web3t
-    wallet = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
+    wallet = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     return cb null if not wallet?
     goto-search = ->
         navigate store, web3t, \search
@@ -831,7 +831,7 @@ validators.init = ({ store, web3t }, cb)!->
     rent = 2282880 if err?
     rent = rent `div` (10^9)
     store.staking.rent = rent   
-    wallet = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
+    wallet = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     return cb null if not wallet?
     web3t.velas.NativeStaking.setAccountPublicKey(wallet.publicKey)
     web3t.velas.NativeStaking.setAccountSecretKey(wallet.secretKey)

@@ -11,8 +11,8 @@ require! {
 
 nativeSubscriptions = {}
 subscribe-to-velas-account = (store, web3t)->
-    wallet-native = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
-    wallet-evm = store.current.account.wallets |> find (-> it.coin.token is \vlx_evm)
+    wallet-native = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
+    wallet-evm = store.current.account.wallets |> find (-> it.coin.token is \xzo_evm)
     save-key = "#{store.current.network}_#{wallet-native.publicKey}"
     currentNetwork = store.current.network
     return if nativeSubscriptions["#{save-key}"]?
@@ -24,7 +24,7 @@ subscribe-to-velas-account = (store, web3t)->
             lamports = updatedAccount.lamportsStr || updatedAccount.lamports
             return if not lamports?
             currentNetwork2 = store.current.network
-            wallet-native2 = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
+            wallet-native2 = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
             #
             #check if it is right wallet
             return if wallet-native.address isnt wallet-native2.address or currentNetwork isnt currentNetwork2
@@ -34,9 +34,9 @@ subscribe-to-velas-account = (store, web3t)->
             if usd-rate then
                 wallet-native2.balance-usd = wallet-native2.balance `times` usd-rate
             #
-            err, balance <- get-balance { wallet-evm.address, wallet-evm.network, token: 'vlx_evm', account: { wallet-evm.address, wallet-evm.private-key } }
+            err, balance <- get-balance { wallet-evm.address, wallet-evm.network, token: 'xzo_evm', account: { wallet-evm.address, wallet-evm.private-key } }
             if balance? and !isNaN(balance)
-                wallet-evm2 = store.current.account.wallets |> find (-> it.coin.token is \vlx_evm)
+                wallet-evm2 = store.current.account.wallets |> find (-> it.coin.token is \xzo_evm)
                 wallet-evm2.balance = balance
                 usd-rate = rates[wallet-evm2.coin.token]
                 if usd-rate then

@@ -82,7 +82,7 @@ trx-fee = ({ store, web3t, wallet, fee-token })->
     decimalsLimit = wallet?network?decimals ? 4
     { choose-cheap, choose-custom, choose-auto, has-send-error} = send-funcs store, web3t
     disabled-class = if has-send-error! then "disabled" else ""
-    custom-is-disabled = wallet.coin.token in <[ vlx_native ]>
+    custom-is-disabled = wallet.coin.token in <[ xzo_native ]>
     select-custom = ->
         return if has-send-error! or custom-is-disabled
         choose-custom send.amount-send-fee

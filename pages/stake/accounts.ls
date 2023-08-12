@@ -159,7 +159,7 @@ staking-accounts-content = (store, web3t)->
     get-balance = ->
         wallet =
             store.current.account.wallets
-                |> find -> it.coin.token is \vlx_native
+                |> find -> it.coin.token is \xzo_native
         wallet?balance ? 0
     get-options = (cb)->
         err, data <- web3t.velas.Staking.candidateMinStake
@@ -192,7 +192,7 @@ staking-accounts-content = (store, web3t)->
     perPage =  store.staking.accounts_per_page
     page = store.staking.current_accounts_page
     _index = 1 + ((page - 1) * perPage)
-    err, accountAddress <- web3t.vlx_native.getAddress!
+    err, accountAddress <- web3t.xzo_native.getAddress!
 
     build = (store, web3t)-> (item)->
         index = _index++
@@ -223,17 +223,17 @@ staking-accounts-content = (store, web3t)->
             | item.status is "inactive" and (not has-validator) => "Not Delegated"
             | item.status is "inactive" and has-validator => "Delegated (Inactive)"
             | _ => status
-        vlx =
-            store.current.account.wallets |> find (.coin.token is \vlx_native)
-        return null if not vlx?
+        xzo =
+            store.current.account.wallets |> find (.coin.token is \xzo_native)
+        return null if not xzo?
         wallet =
             address: item.address
-            network: vlx.network
-            coin: vlx.coin
+            network: xzo.network
+            coin: xzo.coin
         wallet-validator =
             address: validator
-            network: vlx.network
-            coin: vlx.coin
+            network: xzo.network
+            coin: xzo.coin
         # Select contract from list  
         undelegate = ->
             #err, options <- get-options

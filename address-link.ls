@@ -14,7 +14,7 @@ export get-address-link = (wallet, address-suffix)->
     res=
         | not wallet.network? => \about:blank
         | wallet.coin.token is \btc => "https://bitpay.com/insight/#/BTC/#{network}/address/#{address}"
-        | wallet.coin.token is \vlx_native =>
+        | wallet.coin.token is \xzo_native =>
             $cluster = if wallet?network?api?cluster? then "?cluster=#{wallet.network.api.cluster}" else ""   
             "#{wallet?network?api?url}/#{get-address-label(wallet)}/#{address}#{$cluster}"   
         | typeof! address is \String => "#{wallet?network?api?url}/#{get-address-label(wallet)}/#{address}"

@@ -12,7 +12,7 @@ export class StakingScreen extends BaseScreen {
     super(page);
   }
 
-  vlxNativeBalance = this.page.locator('#vlx-native-balance');
+  xzoNativeBalance = this.page.locator('#xzo-native-balance');
   loader = this.page.locator('.item.blink').first();
 
   async refresh() {
@@ -358,7 +358,7 @@ diff: ${diff || '<no diff>'}
   };
 
   async getVLXNativeBalance(): Promise<number> {
-    const textWithBalance = (await this.vlxNativeBalance.textContent())?.trim();
+    const textWithBalance = (await this.xzoNativeBalance.textContent())?.trim();
     const balance = textWithBalance?.split(' ')[0];
     return Number(balance?.replace(/[^0-9.]/g, ''));
   }

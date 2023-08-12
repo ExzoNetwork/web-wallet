@@ -67,8 +67,8 @@ module.exports = (store, web3t)->
         chosen-network = store.current.send.chosen-network
         referTo = chosen-network?referTo
         recipient =
-            | (referTo? and referTo isnt \vlx_native) and (receiver.starts-with \V) => to-eth-address(receiver)
-            | (coin.token isnt \vlx_native and receiver.starts-with \V)  => to-eth-address(receiver)
+            | (referTo? and referTo isnt \xzo_native) and (receiver.starts-with \V) => to-eth-address(receiver)
+            | (coin.token isnt \xzo_native and receiver.starts-with \V)  => to-eth-address(receiver)
             | _ => receiver
         $gas-price =
             | send.gas-price-type is \custom => send.gas-price-custom-amount `times` (10^9)
@@ -136,7 +136,7 @@ module.exports = (store, web3t)->
         | _ => wallet.coin.image
     perform-send-safe = (cb)->
         err, to <- resolve-address { store, address: send.to, coin: send.coin, network: send.network }
-        _coin = if send.coin.token is \vlx2 then \vlx else send.coin.token
+        _coin = if send.coin.token is \xzo2 then \xzo else send.coin.token
         err = "Address is not valid #{_coin} address" if err? and err.index-of "Invalid checksum"
         resolved =
             | err? => send.to
@@ -190,7 +190,7 @@ module.exports = (store, web3t)->
     * Swap from USDC to USDC VELAS
     */
     usdc_to_usdc_velas_swap = (token, chosen-network, cb)->
-        return cb null if not (token is \usdc and chosen-network.id is \vlx_usdc)
+        return cb null if not (token is \usdc and chosen-network.id is \xzo_usdc)
         web3 = velas-web3 store
         { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
         value = store.current.send.amountSend
@@ -235,7 +235,7 @@ module.exports = (store, web3t)->
     * Swap from USDC VELAS to USDC
     */
     usdc_velas_to_usdc_swap = (token, chosen-network, cb)->
-        return cb null if not (token is \vlx_usdc and chosen-network.id is \usdc)
+        return cb null if not (token is \xzo_usdc and chosen-network.id is \usdc)
         web3 = velas-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network
         return cb "HOME_BRIDGE is not defined" if not HOME_BRIDGE?
@@ -264,7 +264,7 @@ module.exports = (store, web3t)->
         cb null, data
     /* DONE! */
     busd_velas_to_busd_swap = (token, chosen-network, cb)->
-        return cb null if not (token is \vlx_busd and chosen-network.id is \busd)
+        return cb null if not (token is \xzo_busd and chosen-network.id is \busd)
         web3 = velas-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network
         value = store.current.send.amountSend
@@ -288,7 +288,7 @@ module.exports = (store, web3t)->
         cb null, data
     /* DONE! */
     busd_to_busd_velas_swap = (token, chosen-network, cb)->
-        return cb null if not (token is \busd and chosen-network.id is \vlx_busd)
+        return cb null if not (token is \busd and chosen-network.id is \xzo_busd)
         { wallets } = store.current.account
         chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
         return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet?
@@ -378,7 +378,7 @@ module.exports = (store, web3t)->
     * Swap from USDT ETHEREUM to USDT VELAS
     */
     eth_usdt-usdt_velas-swap = (token, chosen-network, cb)->
-        return cb null if not (token is \usdt_erc20 and chosen-network.id is \vlx_usdt)
+        return cb null if not (token is \usdt_erc20 and chosen-network.id is \xzo_usdt)
         web3 = velas-web3 store
         { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
         return cb "FOREIGN_BRIDGE is not defined" if not FOREIGN_BRIDGE?
@@ -417,7 +417,7 @@ module.exports = (store, web3t)->
     * Swap from USDT VELAS to USDT ETHEREUM
     */
     usdt_velas-eth_usdt-swap = (token, chosen-network, cb)->
-        return cb null if not (token is \vlx_usdt and chosen-network.id is \usdt_erc20)
+        return cb null if not (token is \xzo_usdt and chosen-network.id is \usdt_erc20)
         web3 = velas-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network
         value = store.current.send.amountSend
@@ -443,7 +443,7 @@ module.exports = (store, web3t)->
         return cb null if not store.current.send.chosen-network?
         chosen-network = store.current.send.chosen-network
         token = store.current.send.coin.token
-        if chosen-network.id in <[ vlx_evm vlx2 ]> and token in <[ vlx_evm vlx2 ]>
+        if chosen-network.id in <[ xzo_evm xzo2 ]> and token in <[ xzo_evm xzo2 ]>
             store.current.send.contractAddress = null
             return cb null
         wallet = store.current.send.wallet
@@ -454,22 +454,22 @@ module.exports = (store, web3t)->
         dummy = (a, b, cb)->
             cb null
         func =
-            | token is \usdt_erc20 and chosen-network.id is \vlx_usdt =>
+            | token is \usdt_erc20 and chosen-network.id is \xzo_usdt =>
                 /* Swap from USDT ETHEREUM to USDT VELAS  */
                 eth_usdt-usdt_velas-swap
-            | token is \vlx_usdt and chosen-network.id is \usdt_erc20 =>
+            | token is \xzo_usdt and chosen-network.id is \usdt_erc20 =>
                 /* Swap from USDT VELAS to USDT ETHEREUM */
                 usdt_velas-eth_usdt-swap
-            | token is \busd and chosen-network.id is \vlx_busd =>
+            | token is \busd and chosen-network.id is \xzo_busd =>
                 /* Swap from BUSD to BUSD VELAS */
                 busd_to_busd_velas_swap
-            | token is \vlx_busd and chosen-network.id is \busd =>
+            | token is \xzo_busd and chosen-network.id is \busd =>
                 /* Swap from BUSD VELAS to BUSD */
                 busd_velas_to_busd_swap
-            | token is \usdc and chosen-network.id is \vlx_usdc =>
+            | token is \usdc and chosen-network.id is \xzo_usdc =>
                 /* Swap from USDC to USDC VELAS */
                 usdc_to_usdc_velas_swap
-            | token is \vlx_usdc and chosen-network.id is \usdc =>
+            | token is \xzo_usdc and chosen-network.id is \usdc =>
                 /* Swap from USDC VELAS to USDC */
                 usdc_velas_to_usdc_swap
             | _ => dummy
@@ -477,7 +477,7 @@ module.exports = (store, web3t)->
         return cb err if err?
         /* DONE */
         /* Swap from VELAS EVM to HECO */
-        if token is \vlx_evm and chosen-network.id is \vlx_huobi then
+        if token is \xzo_evm and chosen-network.id is \xzo_huobi then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet?
@@ -500,7 +500,7 @@ module.exports = (store, web3t)->
             store.current.send.contract-address = HECO_SWAP__HOME_BRIDGE
         /* DONE! */
         /* Swap from HECO to VELAS EVM */
-        if token is \vlx_huobi and chosen-network.id is \vlx_evm
+        if token is \xzo_huobi and chosen-network.id is \xzo_evm
             value = store.current.send.amountSend
             value = value `times` (10^18)
             { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
@@ -518,7 +518,7 @@ module.exports = (store, web3t)->
             maxPerTx = maxPerTxRaw `div` (10 ^ network.decimals)
             #homeFeeRaw = contract.getHomeFee!
             #homeFee = homeFeeRaw `div` (10 ^ network.decimals)
-            #console.log "vlx_huobi homeFee" homeFee
+            #console.log "xzo_huobi homeFee" homeFee
             #contract-home-fee = send.amountSend `times` homeFee
             if +send.amountSend < +(minPerTx) then
                 return cb "Min amount per transaction is #{minPerTx} VLX"
@@ -532,7 +532,7 @@ module.exports = (store, web3t)->
             send.contract-address = FOREIGN_BRIDGE_TOKEN
         /* DONE! */
         /* Swap from VELAS EVM to HECO */
-        if token is \vlx_evm and chosen-network.id is \bsc_vlx then
+        if token is \xzo_evm and chosen-network.id is \bsc_xzo then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet?
@@ -563,7 +563,7 @@ module.exports = (store, web3t)->
             send.data = data
             store.current.send.contract-address = BSC_SWAP__HOME_BRIDGE
         /* Swap from BSC VELAS to VELAS EVM */
-        if token is \bsc_vlx and chosen-network.id is \vlx_evm
+        if token is \bsc_xzo and chosen-network.id is \xzo_evm
             value = store.current.send.amountSend
             value = value `times` (10^18)
             { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
@@ -591,7 +591,7 @@ module.exports = (store, web3t)->
             send.contract-address = FOREIGN_BRIDGE_TOKEN
         /* DONE! */
         /* Swap from ETH to ETHEREUM (VELAS) */
-        if token is \eth and chosen-network.id is \vlx_eth then
+        if token is \eth and chosen-network.id is \xzo_eth then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet?
@@ -617,7 +617,7 @@ module.exports = (store, web3t)->
             send.data = data
         /* DONE! */
         /* Swap from ETHEREUM (VELAS) to ETH  */
-        if token is \vlx_eth and chosen-network.id is \eth then
+        if token is \xzo_eth and chosen-network.id is \eth then
             value = store.current.send.amountSend
             value = (value `times` (10^18))
             network = wallet.network
@@ -643,7 +643,7 @@ module.exports = (store, web3t)->
             send.contract-address = FOREIGN_BRIDGE_TOKEN
         /* DONE */
         /* Swap from VLX ERC20 to COIN VLX */
-        if token is \vlx_erc20 and chosen-network.id in <[ vlx_evm vlx2 ]>
+        if token is \xzo_erc20 and chosen-network.id in <[ xzo_evm xzo2 ]>
             value = store.current.send.amountSend
             value2 = to-hex(value `times` (10^18)).toString(16)
             value = (value `times` (10^18))
@@ -671,7 +671,7 @@ module.exports = (store, web3t)->
                 return cb "Max amount per transaction is #{maxPerTx} VLX"
         /* DONE */
         /* Swap from COIN VLX to VLX ERC20 */
-        if (token is \vlx_evm or token is \vlx2) and chosen-network.id is \vlx_erc20 then
+        if (token is \xzo_evm or token is \xzo2) and chosen-network.id is \xzo_erc20 then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
             return cb "[Swap error]: wallet #{chosen-network.id} is not found!" if not chosen-network-wallet?
@@ -694,12 +694,12 @@ module.exports = (store, web3t)->
             store.current.send.contract-address = HOME_BRIDGE
         /* DONE */
         /* Swap into native */
-        if chosen-network.id is \vlx_native then
+        if chosen-network.id is \xzo_native then
             referTo = chosen-network?referTo
             $recipient = ""
             try
                 recipient =
-                    | (referTo isnt \vlx_native) and send.to.starts-with \V => to-eth-address(send.to)
+                    | (referTo isnt \xzo_native) and send.to.starts-with \V => to-eth-address(send.to)
                     | _ => send.to
                 $recipient = bs58.decode recipient
                 hex = $recipient.toString('hex')
@@ -902,7 +902,7 @@ module.exports = (store, web3t)->
         mode = 'percent'
         wallets = window.store.current.account.wallets
         wallet = wallets.find (.coin.token is token)
-        evm_wallet = wallets.find (.coin.token is \vlx_evm)
+        evm_wallet = wallets.find (.coin.token is \xzo_evm)
         return mode if not wallet?
         return mode if not feeManagerContract?
 
@@ -929,11 +929,11 @@ module.exports = (store, web3t)->
         return cb null if not chosen-network?
         token = store.current.send.coin.token
         if not chosen-network?
-            or chosen-network.referTo in <[ vlx_native ]>
-            or token is \vlx_native and chosen-network.referTo in <[ vlx vlx2 vlx_evm ]>
-            or token in <[ vlx vlx_evm ]> and chosen-network.referTo in <[ vlx_native vlx2 ]>
-            or token in <[ vlx2 vlx_native vlx_evm ]> and chosen-network.referTo in <[ vlx_native vlx2 vlx_evm ]>
-            or token is \vlx_native and chosen-network.referTo in <[ vlx vlx2 vlx_evm ]>
+            or chosen-network.referTo in <[ xzo_native ]>
+            or token is \xzo_native and chosen-network.referTo in <[ xzo xzo2 xzo_evm ]>
+            or token in <[ xzo xzo_evm ]> and chosen-network.referTo in <[ xzo_native xzo2 ]>
+            or token in <[ xzo2 xzo_native xzo_evm ]> and chosen-network.referTo in <[ xzo_native xzo2 xzo_evm ]>
+            or token is \xzo_native and chosen-network.referTo in <[ xzo xzo2 xzo_evm ]>
                 store.current.send.homeFeePercent = 0
                 return cb null
         wallet = store.current.send.wallet
@@ -953,15 +953,15 @@ module.exports = (store, web3t)->
         web3.eth.provider-url = wallet.network.api.web3Provider
         { HOME_BRIDGE, HECO_SWAP__HOME_BRIDGE, BSC_SWAP__HOME_BRIDGE, FOREIGN_BRIDGE } = wallet.network
         addr =
-            | token is \vlx_evm and chosen-network.referTo is \vlx_huobi => HECO_SWAP__HOME_BRIDGE
-            | token is \vlx_evm and chosen-network.referTo is \bsc_vlx => BSC_SWAP__HOME_BRIDGE
-            | token is \usdc and chosen-network.referTo is \vlx_usdc => FOREIGN_BRIDGE
-            | token is \vlx_eth and chosen-network.referTo is \eth => FOREIGN_BRIDGE
-            | token is \usdt_erc20 and chosen-network.referTo is \vlx_usdt => FOREIGN_BRIDGE
-            | token is \vlx_erc20 and chosen-network.referTo is \vlx_evm => FOREIGN_BRIDGE
-            | token is \bsc_vlx and chosen-network.referTo is \vlx_evm => FOREIGN_BRIDGE
-            | token is \vlx_huobi and chosen-network.referTo is \vlx_evm => FOREIGN_BRIDGE
-            | token is \busd and chosen-network.referTo is \vlx_busd => FOREIGN_BRIDGE
+            | token is \xzo_evm and chosen-network.referTo is \xzo_huobi => HECO_SWAP__HOME_BRIDGE
+            | token is \xzo_evm and chosen-network.referTo is \bsc_xzo => BSC_SWAP__HOME_BRIDGE
+            | token is \usdc and chosen-network.referTo is \xzo_usdc => FOREIGN_BRIDGE
+            | token is \xzo_eth and chosen-network.referTo is \eth => FOREIGN_BRIDGE
+            | token is \usdt_erc20 and chosen-network.referTo is \xzo_usdt => FOREIGN_BRIDGE
+            | token is \xzo_erc20 and chosen-network.referTo is \xzo_evm => FOREIGN_BRIDGE
+            | token is \bsc_xzo and chosen-network.referTo is \xzo_evm => FOREIGN_BRIDGE
+            | token is \xzo_huobi and chosen-network.referTo is \xzo_evm => FOREIGN_BRIDGE
+            | token is \busd and chosen-network.referTo is \xzo_busd => FOREIGN_BRIDGE
             | _ => HOME_BRIDGE
         contract = web3.eth.contract(abi).at(addr)
         homeFeePercent = 0
@@ -1014,14 +1014,14 @@ module.exports = (store, web3t)->
         web3 = new Web3(new Web3.providers.HttpProvider(wallet-to?network?api?web3Provider))
         web3.eth.provider-url = wallet-to.network.api.web3Provider
         addr =
-            | token is \usdt_erc20 and chosen-network.referTo is \vlx_usdt => HOME_BRIDGE
-            #| token is \vlx_eth and chosen-network.referTo is \eth => HOME_BRIDGE
-            | token is \usdc and chosen-network.referTo is \vlx_usdc => HOME_BRIDGE
-            #| token is \vlx_eth and chosen-network.referTo is \eth => HOME_BRIDGE
-            #| token is \vlx_erc20 and chosen-network.referTo is \vlx_evm => HOME_BRIDGE
-            #| token is \bsc_vlx and chosen-network.referTo is \vlx_evm => BSC_SWAP__HOME_BRIDGE
-            #| token is \vlx_huobi and chosen-network.referTo is \vlx_evm => HECO_SWAP__HOME_BRIDGE
-            | token is \busd and chosen-network.referTo is \vlx_busd => HOME_BRIDGE
+            | token is \usdt_erc20 and chosen-network.referTo is \xzo_usdt => HOME_BRIDGE
+            #| token is \xzo_eth and chosen-network.referTo is \eth => HOME_BRIDGE
+            | token is \usdc and chosen-network.referTo is \xzo_usdc => HOME_BRIDGE
+            #| token is \xzo_eth and chosen-network.referTo is \eth => HOME_BRIDGE
+            #| token is \xzo_erc20 and chosen-network.referTo is \xzo_evm => HOME_BRIDGE
+            #| token is \bsc_xzo and chosen-network.referTo is \xzo_evm => BSC_SWAP__HOME_BRIDGE
+            #| token is \xzo_huobi and chosen-network.referTo is \xzo_evm => HECO_SWAP__HOME_BRIDGE
+            | token is \busd and chosen-network.referTo is \xzo_busd => HOME_BRIDGE
             #| _ => FOREIGN_BRIDGE
         contract = web3.eth.contract(abi).at(addr)
         { network } = wallet-to

@@ -22,7 +22,7 @@ module.exports = ({ store, web3t } )->
     lang = get-lang store
     has-pending =
         store.transactions.applied
-            |> filter (.token is \vlx2)
+            |> filter (.token is \xzo2)
             |> filter (.pending)
             |> (.length > 0)
     return null if not has-pending

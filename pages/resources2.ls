@@ -379,7 +379,7 @@ staking-content = (store, web3t)->
         to = web3t.velas.Staking.address
         #console.log \to, { to, data, amount }
         amount = store.staking.add.add-validator-stake
-        err <- web3t.vlx2.send-transaction { to, data, amount }
+        err <- web3t.xzo2.send-transaction { to, data, amount }
         #return cb err if err?
         return store.staking.add.result = "#{err}" if err?
         #store.staking.add.result = "success"
@@ -460,13 +460,13 @@ staking-content = (store, web3t)->
         data = web3t.velas.Staking.claimReward.get-data(epochs, staking-address)
         to = web3t.velas.Staking.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount }
+        err <- web3t.xzo2.send-transaction { to, data, amount }
     exit = ->
         staking-address = store.staking.keystore.staking.address
         data = web3t.velas.Staking.withdraw.get-data(staking-address, store.staking.add.add-validator-stake)
         to = web3t.velas.Staking.address
         amount = 0
-        err <- web3t.vlx2.send-transaction { to, data, amount }
+        err <- web3t.xzo2.send-transaction { to, data, amount }
     .pug.staking-content
         #placeholder store, web3t
         .form-group.pug

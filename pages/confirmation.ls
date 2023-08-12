@@ -320,9 +320,9 @@ confirmation-modal = (store)->
             if store.current.send.swap is yes
                 refer-to = store.current.send?chosen-network?refer-to
                 minutes =
-                    | refer-to in <[ eth vlx_erc20 ]> => 30
-                    | refer-to in <[ bsc_vlx busd ]> => 10
-                    | refer-to is \vlx_huobi => 10
+                    | refer-to in <[ eth xzo_erc20 ]> => 30
+                    | refer-to in <[ bsc_xzo busd ]> => 10
+                    | refer-to is \xzo_huobi => 10
                     | _ => 0
                 if minutes > 0
                     text = "Depending on the network congestions it may take a long time to finish swap. Average confirmation time is ~#{minutes} min."
@@ -443,7 +443,7 @@ prompt-modal = (store)->
                         | #{lang.cancel}
 prompt-modal2 = (store)->
     return null if typeof! store.current.prompt2 isnt \String
-    wallet = store.current.account.wallets |> find (-> it.coin.token is \vlx_native)
+    wallet = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     confirm = ->
         return if not store.current.prompt-answer? or store.current.prompt-answer is 0 or store.current.prompt-answer is ""
         store.current.prompt2 = yes
@@ -504,7 +504,7 @@ prompt-modal2 = (store)->
             .pug.header(style=style=confirmation-style)#{store.current.prompt2}
             .pug.text(style=style=confirmation-style)
             .pug(style=input-holder-style)
-                amount-field { store, value: "#{round5edit store.current.prompt-answer}", on-change: amount-change, placeholder="0", id="prompt-input", token: "vlx_native" }
+                amount-field { store, value: "#{round5edit store.current.prompt-answer}", on-change: amount-change, placeholder="0", id="prompt-input", token: "xzo_native" }
                 .pug.max-amount(style=max-amount-container)
                     button.pug.send-all(on-click=use-max-amount style=button-primary3-style type="button" id="send-max") #{lang.use-max}
             .pug.buttons
@@ -544,9 +544,9 @@ prompt-stake-authorize-modal = (store)->
         store.current.prompt-error = null
         if !input.length
             return store.current.prompt-error = 'Address is required'
-        vlxNativeWallet = store.current.account.wallets |> find (-> it.coin.token === 'vlx_native')
-        console.log 'vlxNativeWallet' vlxNativeWallet
-        network = vlxNativeWallet.network
+        xzoNativeWallet = store.current.account.wallets |> find (-> it.coin.token === 'xzo_native')
+        console.log 'xzoNativeWallet' xzoNativeWallet
+        network = xzoNativeWallet.network
         err, isValid <- is-valid-address { network, address: input }
         console.log('isValid', err, isValid, input)
         if err?
@@ -683,7 +683,7 @@ prompt-modal3 = (store)->
             .pug.header(style=style=confirmation-style)#{store.current.prompt3}
             .pug.text(style=style=confirmation-style)
             .pug(style=input-holder-style)
-                amount-field { store, token: "vlx_native", value: "#{round5edit store.current.prompt-answer}", on-change: amount-change, placeholder="0", id="prompt-input" }
+                amount-field { store, token: "xzo_native", value: "#{round5edit store.current.prompt-answer}", on-change: amount-change, placeholder="0", id="prompt-input" }
             .pug.buttons
                 button.pug.button(on-click=confirm style=button-style id="prompt-confirm")
                     span.apply.pug

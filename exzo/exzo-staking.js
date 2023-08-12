@@ -1,5 +1,5 @@
 //const exzoSolanaWeb3 = require("../../web3t/providers/solana/index.cjs");
-const exzoSolanaWeb3 = require("@exzo/web3");
+const exzoSolanaWeb3 = require("@velas/web3");
 let PublicKey, Connection, StakeProgram, Authorized, Lockup, STAKE_INSTRUCTION_LAYOUTS, TransactionInstruction;
 PublicKey = exzoSolanaWeb3.PublicKey;
 Connection = exzoSolanaWeb3.Connection;

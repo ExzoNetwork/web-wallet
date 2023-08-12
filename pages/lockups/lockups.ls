@@ -196,7 +196,7 @@ lockups-content = (store, web3t)->
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount }
         store.current.page = \staking
-    xzo-token = "VLX"
+    xzo-token = "XZO"
     hide-stake-place = ->
         store.lockups.lockupStakingAddress = null
         null
@@ -277,7 +277,7 @@ lockups-content = (store, web3t)->
                                         td.pug(width="40%" style=staker-pool-style) Address
                                         td.pug(width="20%" style=stats) Non-staked Amount
                                         td.pug(width="20%" style=stats) Staked Amount
-                                        td.pug(width="7%" style=stats) Threshold, VLX
+                                        td.pug(width="7%" style=stats) Threshold, XZO
                                         td.pug(width="10%" style=stats) Locked Until
                                         td.pug(width="9%" style=stats) Select
                                 tbody.pug
@@ -350,11 +350,11 @@ lockups-content = (store, web3t)->
                             .pug.left
                                 label.pug
                                 .pug.balance
-                                button { store, on-click: withdraw, classes: "width-auto" type: \secondary , icon : \apply , text: "Withdraw #{(store.lockups.chosen-lockup.maxWithdrawAllowed `div` (10^18))} VLX" }    
+                                button { store, on-click: withdraw, classes: "width-auto" type: \secondary , icon : \apply , text: "Withdraw #{(store.lockups.chosen-lockup.maxWithdrawAllowed `div` (10^18))} XZO" }    
                         else
                             .pug.balance
                                 span.pug You have no available 
-                                span.pug.color VLX 
+                                span.pug.color XZO 
                                 span.pug to withdraw
                 request-stake store, web3t
                 request-unstake store, web3t 

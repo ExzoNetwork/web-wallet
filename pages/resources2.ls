@@ -542,7 +542,7 @@ staking-content = (store, web3t)->
                         label.pug Your Mining Address
                         input.pug(type='text' value="#{pairs.mining.address}" readonly="readonly" style=input-style placeholder="mining address")
                     .pug.left
-                        label.pug Your Stake (VLX)
+                        label.pug Your Stake (XZO)
                         input.pug(type='text' value="#{store.staking.add.add-validator-stake}" on-change=change-stake style=input-style placeholder="stake")
                     button.pug(style=button-primary2-style on-click=become-validator)
                         span.pug
@@ -569,7 +569,7 @@ staking-content = (store, web3t)->
                         .pug
                             .pug.balance
                                 span.pug #{store.staking.reward}
-                                span.pug  VLX
+                                span.pug  XZO
                             button.pug(style=button-primary2-style on-click=claim)
                                 span.pug
                                     img.icon-svg.pug(src="#{icons.reward}")

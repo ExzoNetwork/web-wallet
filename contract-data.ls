@@ -274,7 +274,7 @@ module.exports = ({store})->
             data = contract.transferAndCall.get-data(FOREIGN_BRIDGE, value, send.to)
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN
-        /* Swap from VLX ERC20 to COIN VLX */    
+        /* Swap from XZO ERC20 to COIN XZO */    
         if token is \xzo_erc20 and chosen-network.id in <[ xzo_evm xzo2 ]>
             value = store.current.send.amountSend
             value2 = to-hex(value `times` (10^18)).toString(16)
@@ -290,7 +290,7 @@ module.exports = ({store})->
             data = contract.transferAndCall.get-data(FOREIGN_BRIDGE, value, sending-to)
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN            
-        /* Swap from COIN VLX to VLX ERC20 */
+        /* Swap from COIN XZO to XZO ERC20 */
         if (token is \xzo_evm or token is \xzo2) and chosen-network.id is \xzo_erc20 then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)

@@ -640,7 +640,7 @@ staking-content = (store, web3t)->
     your-balance = " #{round-human get-balance!} "
     your-staking-amount = store.staking.stakeAmountTotal `div` (10^18)
     your-staking = " #{round-human your-staking-amount}"
-    xzo-token = "VLX"
+    xzo-token = "XZO"
     isSpinned = if ((store.staking.all-pools-loaded is no or !store.staking.all-pools-loaded?) and store.staking.pools-are-loading is yes) then "spin disabled" else ""
     build-staker = (store, web3t)-> (item)->
         checked = item.checked
@@ -735,7 +735,7 @@ staking-content = (store, web3t)->
                 .title.pug
                     h2.pug #{lang.balance}
                 .description.pug
-                    span.pug #{your-balance} VLX
+                    span.pug #{your-balance} XZO
             stake-accounts {store, web3t}
             .form-group.pug(id="pools")
                 alert-txn { store }

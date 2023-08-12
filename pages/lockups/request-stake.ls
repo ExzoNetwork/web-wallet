@@ -121,7 +121,7 @@ order-withdraw-process = (store, web3t)->
                 |> find -> it.coin.token is \xzo2
         wallet.balance
     your-balance = " #{round-human get-balance!} "
-    xzo-token = "VLX"
+    xzo-token = "XZO"
     current-contract = store.lockups.chosen-lockup
     lockedFunds = current-contract.lockedFunds
     lockedFundsRaw = parse-float current-contract.lockedFundsRaw `div` (10^18)

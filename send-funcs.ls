@@ -37,7 +37,7 @@ abis =
     Staking      : require("../web3t/contracts/StakingAuRa.json").abi
     ValidatorSet : require("../web3t/contracts/ValidatorSetAuRa.json").abi
     BlockReward  : require("../web3t/contracts/BlockRewardAuRa.json").abi
-    Development  : require("../web3t/contracts/VelasDevelopment.json").abi
+    Development  : require("../web3t/contracts/ExzoDevelopment.json").abi
     Resolver     : require("../web3t/contracts/LockupResolver.json").abi
     Timelock     : require("../web3t/contracts/LockupTimelock.json").abi
     EvmToNativeBridge: require("../web3t/contracts/EvmToNativeBridge.json").abi
@@ -493,9 +493,9 @@ module.exports = (store, web3t)->
             maxPerTx = maxPerTxRaw `div` (10 ^ network.decimals)
             data = contract.relayTokens.get-data(receiver)
             if +send.amountSend < +(minPerTx) then
-                return cb "Min amount per transaction is #{minPerTx} VLX"
+                return cb "Min amount per transaction is #{minPerTx} XZO"
             if +send.amountSend > +maxPerTx then
-                return cb "Max amount per transaction is #{maxPerTx} VLX"
+                return cb "Max amount per transaction is #{maxPerTx} XZO"
             send.data = data
             store.current.send.contract-address = HECO_SWAP__HOME_BRIDGE
         /* DONE! */
@@ -521,9 +521,9 @@ module.exports = (store, web3t)->
             #console.log "xzo_huobi homeFee" homeFee
             #contract-home-fee = send.amountSend `times` homeFee
             if +send.amountSend < +(minPerTx) then
-                return cb "Min amount per transaction is #{minPerTx} VLX"
+                return cb "Min amount per transaction is #{minPerTx} XZO"
             if +send.amountSend > +maxPerTx then
-                return cb "Max amount per transaction is #{maxPerTx} VLX"
+                return cb "Max amount per transaction is #{maxPerTx} XZO"
             contract = web3.eth.contract(abis.ForeignBridgeNativeToErc).at(FOREIGN_BRIDGE_TOKEN)
             data =
                 | is-self-send is yes => contract.transfer.get-data(FOREIGN_BRIDGE, to-hex(value), send.to)
@@ -557,9 +557,9 @@ module.exports = (store, web3t)->
             data = contract.relayTokens.get-data(receiver)
             amount-to-send = send.amount-send-fee `plus` send.amount-send
             if +send.amountSend < +(minPerTx) then
-                return cb "Min amount per transaction is #{minPerTx} VLX"
+                return cb "Min amount per transaction is #{minPerTx} XZO"
             if +send.amountSend > +maxPerTx then
-                return cb "Max amount per transaction is #{maxPerTx} VLX"
+                return cb "Max amount per transaction is #{maxPerTx} XZO"
             send.data = data
             store.current.send.contract-address = BSC_SWAP__HOME_BRIDGE
         /* Swap from BSC VELAS to VELAS EVM */
@@ -580,9 +580,9 @@ module.exports = (store, web3t)->
             #homeFeeRaw = contract.getHomeFee!
             #homeFee = homeFeeRaw `div` (10 ^ network.decimals)
             if +send.amountSend < +(minPerTx) then
-                return cb "Min amount per transaction is #{minPerTx} VLX"
+                return cb "Min amount per transaction is #{minPerTx} XZO"
             if +send.amountSend > +maxPerTx then
-                return cb "Max amount per transaction is #{maxPerTx} VLX"
+                return cb "Max amount per transaction is #{maxPerTx} XZO"
             contract = web3.eth.contract(abis.ForeignBridgeNativeToErc).at(FOREIGN_BRIDGE_TOKEN)
             data =
                 | is-self-send is yes => contract.transfer.get-data(FOREIGN_BRIDGE, to-hex(value), send.to)
@@ -642,7 +642,7 @@ module.exports = (store, web3t)->
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN
         /* DONE */
-        /* Swap from VLX ERC20 to COIN VLX */
+        /* Swap from XZO ERC20 to COIN XZO */
         if token is \xzo_erc20 and chosen-network.id in <[ xzo_evm xzo2 ]>
             value = store.current.send.amountSend
             value2 = to-hex(value `times` (10^18)).toString(16)
@@ -666,11 +666,11 @@ module.exports = (store, web3t)->
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN
             if +send.amountSend < +(minPerTx) then
-                return cb "Min amount per transaction is #{minPerTx} VLX"
+                return cb "Min amount per transaction is #{minPerTx} XZO"
             if +send.amountSend > +maxPerTx then
-                return cb "Max amount per transaction is #{maxPerTx} VLX"
+                return cb "Max amount per transaction is #{maxPerTx} XZO"
         /* DONE */
-        /* Swap from COIN VLX to VLX ERC20 */
+        /* Swap from COIN XZO to XZO ERC20 */
         if (token is \xzo_evm or token is \xzo2) and chosen-network.id is \xzo_erc20 then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
@@ -687,9 +687,9 @@ module.exports = (store, web3t)->
             #data = web3t.velas.HomeBridgeNativeToErc.relayTokens.get-data(receiver)
             data = web3t.velas.HomeBridgeNativeToErc.relayTokens.get-data(receiver)
             if +send.amountSend < +(minPerTx) then
-                return cb "Min amount per transaction is #{minPerTx} VLX"
+                return cb "Min amount per transaction is #{minPerTx} XZO"
             if +send.amountSend > +maxPerTx then
-                return cb "Max amount per transaction is #{maxPerTx} VLX"
+                return cb "Max amount per transaction is #{maxPerTx} XZO"
             send.data = data
             store.current.send.contract-address = HOME_BRIDGE
         /* DONE */

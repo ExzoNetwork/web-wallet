@@ -18,19 +18,19 @@ test.describe('Custom swap from Velas network', () => {
     await Promise.all(transactionsInProgress);
   });
 
-  test('VLX EVM (Velas) > VLX ERC-20 (Ethereum)', async ({ wallets }) => {
+  test('XZO EVM (Velas) > XZO ERC-20 (Ethereum)', async ({ wallets }) => {
     await wallets.swapTokens('token-xzo_evm', 'token-xzo_erc20', minSwapAmount, {customAddress: data.wallets.customSwapToVelas.evmAddress});
     const txHash = await wallets.getTxHashFromTxlink();
     transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }));
   });
 
-  test('VLX EVM (Velas) > VLX BEP-20 (BSC)', async ({ wallets }) => {
+  test('XZO EVM (Velas) > XZO BEP-20 (BSC)', async ({ wallets }) => {
     await wallets.swapTokens('token-xzo_evm', 'token-bsc_xzo', minSwapAmount, {customAddress: data.wallets.customSwapToVelas.evmAddress});
     const txHash = await wallets.getTxHashFromTxlink();
     transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }));
   });
 
-  test('VLX EVM (Velas) > VLX HRC-20 (Heco)', async ({ wallets }) => {
+  test('XZO EVM (Velas) > XZO HRC-20 (Heco)', async ({ wallets }) => {
     await wallets.swapTokens('token-xzo_evm', 'token-xzo_huobi', minSwapAmount, {customAddress: data.wallets.customSwapToVelas.evmAddress});
     const txHash = await wallets.getTxHashFromTxlink();
     transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }));
@@ -91,7 +91,7 @@ test.describe('Custom swap to Velas network', () => {
   });
 
   // TODO: migrate from Ropsten
-  test.skip('VLX ERC-20 (Ethereum) > VLX EVM (Velas)', async ({ wallets }) => {
+  test.skip('XZO ERC-20 (Ethereum) > XZO EVM (Velas)', async ({ wallets }) => {
     await wallets.swapTokens('token-xzo_erc20', 'token-xzo_evm', minSwapAmount, {customAddress: data.wallets.customSwapFromVelas.evmAddress});
     const txHash = await wallets.getTxHashFromTxlink();
     transactionsInProgress.push(ropsten.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }));
@@ -104,7 +104,7 @@ test.describe('Custom swap to Velas network', () => {
     transactionsInProgress.push(ropsten.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }));
   });
 
-  test('VLX BEP-20 (BSC) > VLX EVM (Velas)', async ({ wallets }) => {
+  test('XZO BEP-20 (BSC) > XZO EVM (Velas)', async ({ wallets }) => {
     await wallets.swapTokens('token-bsc_xzo', 'token-xzo_evm', minSwapAmount, {customAddress: data.wallets.customSwapFromVelas.evmAddress});
     const txHash = await wallets.getTxHashFromTxlink();
     transactionsInProgress.push(bscchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }))
@@ -116,7 +116,7 @@ test.describe('Custom swap to Velas network', () => {
     transactionsInProgress.push(bscchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }));
   });
 
-  test('VLX HRC-20 (Heco) > VLX EVM (Velas)', async ({ wallets }) => {
+  test('XZO HRC-20 (Heco) > XZO EVM (Velas)', async ({ wallets }) => {
     await wallets.swapTokens('token-xzo_huobi', 'token-xzo_evm', minSwapAmount, {customAddress: data.wallets.customSwapFromVelas.evmAddress});
     const txHash = await wallets.getTxHashFromTxlink();
     transactionsInProgress.push(hecochain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: true }));  

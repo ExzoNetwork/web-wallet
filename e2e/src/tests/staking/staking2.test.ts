@@ -56,7 +56,7 @@ test.describe('Staking 2', () => {
       await staking2.validatorsList.sortBy('total staked');
       await staking2.validatorsList.totalStaked.first().waitFor();
       let totalStakes = await staking2.validatorsList.totalStaked.allInnerTexts();
-      totalStakes = totalStakes.map((totalStakeAmount: string) => totalStakeAmount.split(' VLX')[0]);
+      totalStakes = totalStakes.map((totalStakeAmount: string) => totalStakeAmount.split(' XZO')[0]);
       expect(totalStakes).toEqual([...totalStakes].sort((a, b) => Number(a) - Number(b)));
       */
     });
@@ -265,6 +265,6 @@ test.describe('Staking 2', () => {
     await staking2.stakeForm.typeAmount(13.13);
     await staking2.stakeForm.nextButton.click();
 
-    await expect(page.locator('"Convert 11.13 VLX EVM to VLX Native"')).toBeVisible();
+    await expect(page.locator('"Convert 11.13 XZO EVM to XZO Native"')).toBeVisible();
   });
 });

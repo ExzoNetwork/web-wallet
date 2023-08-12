@@ -123,7 +123,7 @@ export class Staking2Screen extends BaseScreen {
     getStakeValue: async (): Promise<string> => {
       const textContainingStakeValue = await this.page.locator('.info-block-column2 #value1').textContent();
       if (!textContainingStakeValue) throw new Error(`Cant get text containing stake value. It equals: ${textContainingStakeValue}`);
-      return textContainingStakeValue.split(' VLX')[0];
+      return textContainingStakeValue.split(' XZO')[0];
     },
 
     waitForStakeValueUpdate: async (params: { fromValue?: string, toValue?: string }, timeout = 35000): Promise<string> => {
@@ -163,7 +163,7 @@ export class Staking2Screen extends BaseScreen {
       }
 
       log.warn('IF YOU SEE THIS MESSAGE LOOKS LIKE SOME CASES WERE MISSED DURING THIS METHOD DEVELOPMENT. PLEASE FIX');
-      if (await this.validator.getStakeValue() === startStakeValue) throw new Error(`Stake amount was not updated during ${timeout / 1000} seconds and equals to ${startStakeValue} VLX.`);
+      if (await this.validator.getStakeValue() === startStakeValue) throw new Error(`Stake amount was not updated during ${timeout / 1000} seconds and equals to ${startStakeValue} XZO.`);
       return await this.validator.getStakeValue();
     },
 

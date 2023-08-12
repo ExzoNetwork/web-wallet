@@ -11,12 +11,12 @@ test.describe('Balance', () => {
     await wallets.waitForWalletsDataLoaded();
   });
 
-  test('Check VLX Legacy, VLX Native, Litecoin and Bitcoin balances', async ({ wallets }) => {
+  test('Check XZO Legacy, XZO Native, Litecoin and Bitcoin balances', async ({ wallets }) => {
     const balances = await wallets.getWalletsBalances();
     const walletsList = Object.keys(balances) as Currency[];
 
     for (const currency of walletsList) {
-      const VLXNativeBalanceOnBlockchain = (await velasNative.getBalance(data.wallets.withFunds.address)).VLX;
+      const VLXNativeBalanceOnBlockchain = (await velasNative.getBalance(data.wallets.withFunds.address)).XZO;
       const balanceUpdateAmount = 0.001;
       const amountOfTokens = balances[currency];
 

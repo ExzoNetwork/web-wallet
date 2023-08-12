@@ -913,7 +913,7 @@ staking-content = (store, web3t)->
         store.staking.setting-new-staking-authority = yes
         { custodian, pubKey, withdrawer } = store.staking.chosenAccount
         wallet = store.current.account.wallets.find(-> it.coin.token is \xzo_native)
-        return alert store, 'VLX Native wallet was not found' if not wallet?
+        return alert store, 'XZO Native wallet was not found' if not wallet?
         params = {
             stakePubkey: pubKey,
             authorizedPubkey: wallet.publicKey,
@@ -954,14 +954,14 @@ staking-content = (store, web3t)->
         balance = balanceRaw `div` (10^9)
         if +buffer.amount > +balance
             store.staking.splitting-staking-account = no
-            return alert store, lang.balanceIsNotEnoughToSpend + " #{buffer.amount} VLX"
+            return alert store, lang.balanceIsNotEnoughToSpend + " #{buffer.amount} XZO"
         if +min_stake > +balance
             threshold-amount = min_stake `plus` 0.00228288
             store.staking.splitting-staking-account = no
-            return alert store, lang.balanceIsNotEnoughToCreateStakingAccount + " (#{threshold-amount} VLX)"
+            return alert store, lang.balanceIsNotEnoughToCreateStakingAccount + " (#{threshold-amount} XZO)"
         if +(min_stake) > +buffer.amount
             store.staking.splitting-staking-account = no
-            return alert store, lang.minimalStakeMustBe + " #{min_stake} VLX"
+            return alert store, lang.minimalStakeMustBe + " #{min_stake} XZO"
         err <- as-callback web3t.velas.NativeStaking.getStakingAccounts(store.staking.parsedProgramAccounts)
         return cb err if err?
         store.staking.splitting-staking-account = yes
@@ -1040,7 +1040,7 @@ staking-content = (store, web3t)->
         | store.staking.myStakeMaxPart? =>
             myStakeMaxPartVLX = parse-float(store.staking.myStakeMaxPart) `div` (10^9)
             myStakeMaxPartVLX + 
-            " VLX"
+            " XZO"
         | _ => ""
     $status =
         | store.staking.chosenAccount.status is "inactive" and (not has-validator) => "Not Delegated"
@@ -1101,7 +1101,7 @@ staking-content = (store, web3t)->
                     h3.pug #{lang.rentExemptReserve}
                 .description.pug
                     span.pug
-                        | #{rent} VLX
+                        | #{rent} XZO
                     span.pug.usd-amount
                         | $#{usd-rent}
             .pug.section
@@ -1109,7 +1109,7 @@ staking-content = (store, web3t)->
                     h3.pug #{lang.balance}
                 .description.pug
                     span.pug
-                        | #{round-human(your-balance)} VLX
+                        | #{round-human(your-balance)} XZO
                     span.pug.usd-amount
                         | $#{round-human(usd-balance)}
             .pug
@@ -1145,7 +1145,7 @@ staking-content = (store, web3t)->
                     h3.pug #{lang.delegatedStake}
                 .description.pug
                     span.pug
-                        | #{round-human(delegated_stake)} VLX
+                        | #{round-human(delegated_stake)} XZO
                     span.pug.usd-amount
                         | $#{round-human(usd-delegated_stake)}
             .pug.section
@@ -1153,7 +1153,7 @@ staking-content = (store, web3t)->
                     h3.pug #{lang.activeStake}
                 .description.pug
                     span.pug
-                        | #{round-human(active_stake)} VLX
+                        | #{round-human(active_stake)} XZO
                     span.pug.usd-amount
                         | $#{round-human(usd-active_stake)}
                     if store.staking.myStakeMaxPart? and no
@@ -1168,7 +1168,7 @@ staking-content = (store, web3t)->
                     h3.pug #{inactiveStakeLabel}
                 .description.pug
                     span.pug
-                        | #{round-human(inactive_stake)} VLX
+                        | #{round-human(inactive_stake)} XZO
                     span.pug.usd-amount
                         | $#{round-human(usd-inactive_stake)}
                     if store.staking.chosenAccount.status is "activating"
@@ -1298,7 +1298,7 @@ account-details.init = ({ store, web3t }, cb)!->
         store.staking.chosenAccount.inactive_stake = stakeActivation.inactive
     return alert store, err, cb if err?
     wallet = store.current.account.wallets.find(-> it.coin.token is \xzo_native)
-    return alert store, 'VLX Native wallet was not found', cb if not wallet?
+    return alert store, 'XZO Native wallet was not found', cb if not wallet?
     web3t.velas.NativeStaking.setAccountPublicKey(wallet.publicKey)
     web3t.velas.NativeStaking.setAccountSecretKey(wallet.secretKey)
     cb null

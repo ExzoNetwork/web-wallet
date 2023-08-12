@@ -241,7 +241,7 @@ staking-accounts-content = (store, web3t)->
             #err <- can-make-staking store, web3t
             #return alert store, err, cb if err?
             undelegate-amount = item.balance
-            agree <- confirm store, lang.areYouSureToUndelegate + " #{undelegate-amount} VLX \nfrom #{item.validator} ?"
+            agree <- confirm store, lang.areYouSureToUndelegate + " #{undelegate-amount} XZO \nfrom #{item.validator} ?"
             return if agree is no 
             #
             err, result <- as-callback web3t.velas.NativeStaking.undelegate(item.address)
@@ -378,11 +378,11 @@ staking-accounts-content = (store, web3t)->
         if +min_stake  > +(amount)
             store.staking.creating-staking-account = no
             create-staking-account.InProcess = no
-            return alert store, lang.minimalStakeMustBe + " #{(min_stake)} VLX"
+            return alert store, lang.minimalStakeMustBe + " #{(min_stake)} XZO"
         if +main_balance < +amount
             store.staking.creating-staking-account = no
             create-staking-account.InProcess = no
-            return alert store, lang.balanceIsNotEnoughToSpend + " #{(amount)} VLX"
+            return alert store, lang.balanceIsNotEnoughToSpend + " #{(amount)} XZO"
         amount = buffer.amount * 10^9
         err, result <- as-callback web3t.velas.NativeStaking.createAccount(amount)
         if err?

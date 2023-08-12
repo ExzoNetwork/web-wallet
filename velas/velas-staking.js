@@ -140,7 +140,7 @@ class VelasStaking {
 
         for (var i in validators) {
             validators[i].key   = validators[i].votePubkey;
-            validators[i].stake = `${ Math.round((validators[i].activatedStake / this.sol) * 100) / 100} VLX`;
+            validators[i].stake = `${ Math.round((validators[i].activatedStake / this.sol) * 100) / 100} XZO`;
         };
 
         return validators;

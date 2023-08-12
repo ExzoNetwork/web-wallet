@@ -9,7 +9,7 @@ abis =
     Staking      : require("../../web3t/contracts/StakingAuRa.json").abi
     ValidatorSet : require("../../web3t/contracts/ValidatorSetAuRa.json").abi
     BlockReward  : require("../../web3t/contracts/BlockRewardAuRa.json").abi
-    Development  : require("../../web3t/contracts/VelasDevelopment.json").abi
+    Development  : require("../../web3t/contracts/ExzoDevelopment.json").abi
     Resolver     : require("../../web3t/contracts/LockupResolver.json").abi
     Timelock     : require("../../web3t/contracts/LockupTimelock.json").abi
     EvmToNativeBridge: require("../../web3t/contracts/EvmToNativeBridge.json").abi 

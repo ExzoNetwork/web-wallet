@@ -95,7 +95,7 @@
     Staking: require('../web3t/contracts/StakingAuRa.json').abi,
     ValidatorSet: require('../web3t/contracts/ValidatorSetAuRa.json').abi,
     BlockReward: require('../web3t/contracts/BlockRewardAuRa.json').abi,
-    Development: require('../web3t/contracts/VelasDevelopment.json').abi,
+    Development: require('../web3t/contracts/ExzoDevelopment.json').abi,
     Resolver: require('../web3t/contracts/LockupResolver.json').abi,
     Timelock: require('../web3t/contracts/LockupTimelock.json').abi,
     EvmToNativeBridge: require('../web3t/contracts/EvmToNativeBridge.json').abi,
@@ -1774,10 +1774,10 @@
           maxPerTx = div(maxPerTxRaw, Math.pow(10, network.decimals));
           data = contract.relayTokens.getData(receiver);
           if (+send.amountSend < +minPerTx) {
-            return cb('Min amount per transaction is ' + minPerTx + ' VLX');
+            return cb('Min amount per transaction is ' + minPerTx + ' XZO');
           }
           if (+send.amountSend > +maxPerTx) {
-            return cb('Max amount per transaction is ' + maxPerTx + ' VLX');
+            return cb('Max amount per transaction is ' + maxPerTx + ' XZO');
           }
           send.data = data;
           store.current.send.contractAddress = HECO_SWAP__HOME_BRIDGE;
@@ -1826,10 +1826,10 @@
           maxPerTxRaw = contract.maxAvailablePerTx();
           maxPerTx = div(maxPerTxRaw, Math.pow(10, network.decimals));
           if (+send.amountSend < +minPerTx) {
-            return cb('Min amount per transaction is ' + minPerTx + ' VLX');
+            return cb('Min amount per transaction is ' + minPerTx + ' XZO');
           }
           if (+send.amountSend > +maxPerTx) {
-            return cb('Max amount per transaction is ' + maxPerTx + ' VLX');
+            return cb('Max amount per transaction is ' + maxPerTx + ' XZO');
           }
           contract = web3.eth
             .contract(abis.ForeignBridgeNativeToErc)
@@ -1915,10 +1915,10 @@
           data = contract.relayTokens.getData(receiver);
           amountToSend = plus(send.amountSendFee, send.amountSend);
           if (+send.amountSend < +minPerTx) {
-            return cb('Min amount per transaction is ' + minPerTx + ' VLX');
+            return cb('Min amount per transaction is ' + minPerTx + ' XZO');
           }
           if (+send.amountSend > +maxPerTx) {
-            return cb('Max amount per transaction is ' + maxPerTx + ' VLX');
+            return cb('Max amount per transaction is ' + maxPerTx + ' XZO');
           }
           send.data = data;
           store.current.send.contractAddress = BSC_SWAP__HOME_BRIDGE;
@@ -1951,10 +1951,10 @@
               maxPerTxRaw = contractPrev.maxAvailablePerTx();
               maxPerTx = div(maxPerTxRaw, Math.pow(10, network.decimals));
               if (+send.amountSend < +minPerTx) {
-                return cb('Min amount per transaction is ' + minPerTx + ' VLX');
+                return cb('Min amount per transaction is ' + minPerTx + ' XZO');
               }
               if (+send.amountSend > +maxPerTx) {
-                return cb('Max amount per transaction is ' + maxPerTx + ' VLX');
+                return cb('Max amount per transaction is ' + maxPerTx + ' XZO');
               }
               contract = web3.eth
                 .contract(abis.ForeignBridgeNativeToErc)
@@ -2061,7 +2061,7 @@
           send.contractAddress = FOREIGN_BRIDGE_TOKEN;
         }
         /* DONE */
-        /* Swap from VLX ERC20 to COIN VLX */
+        /* Swap from XZO ERC20 to COIN XZO */
         if (
           token === 'xzo_erc20' &&
           ((ref16$ = chosenNetwork.id) === 'xzo_evm' || ref16$ === 'xzo2')
@@ -2105,14 +2105,14 @@
           send.data = data;
           send.contractAddress = FOREIGN_BRIDGE_TOKEN;
           if (+send.amountSend < +minPerTx) {
-            return cb('Min amount per transaction is ' + minPerTx + ' VLX');
+            return cb('Min amount per transaction is ' + minPerTx + ' XZO');
           }
           if (+send.amountSend > +maxPerTx) {
-            return cb('Max amount per transaction is ' + maxPerTx + ' VLX');
+            return cb('Max amount per transaction is ' + maxPerTx + ' XZO');
           }
         }
         /* DONE */
-        /* Swap from COIN VLX to VLX ERC20 */
+        /* Swap from COIN XZO to XZO ERC20 */
         if (
           (token === 'xzo_evm' || token === 'xzo2') &&
           chosenNetwork.id === 'xzo_erc20'
@@ -2136,10 +2136,10 @@
           data =
             web3t.velas.HomeBridgeNativeToErc.relayTokens.getData(receiver);
           if (+send.amountSend < +minPerTx) {
-            return cb('Min amount per transaction is ' + minPerTx + ' VLX');
+            return cb('Min amount per transaction is ' + minPerTx + ' XZO');
           }
           if (+send.amountSend > +maxPerTx) {
-            return cb('Max amount per transaction is ' + maxPerTx + ' VLX');
+            return cb('Max amount per transaction is ' + maxPerTx + ' XZO');
           }
           send.data = data;
           store.current.send.contractAddress = HOME_BRIDGE;

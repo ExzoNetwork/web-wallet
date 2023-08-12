@@ -11,7 +11,7 @@ test.describe.parallel('Transactions', () => {
     await wallets.waitForWalletsDataLoaded();
   });
 
-  test('Send VLX native', async ({ wallets }) => {
+  test('Send XZO native', async ({ wallets }) => {
     await wallets.addToken('token-xzo_native');
 
     const receiverInitialBalance = await velasNative.getBalance(data.wallets.fundsReceiver.address);
@@ -26,10 +26,10 @@ test.describe.parallel('Transactions', () => {
     assert.exists(tx);
 
     const receiverFinalBalance = await velasNative.getBalance(data.wallets.fundsReceiver.address);
-    assert.equal(helpers.toFixedNumber(receiverFinalBalance.VLX, 6), helpers.toFixedNumber((receiverInitialBalance.VLX + transactionAmount), 6));
+    assert.equal(helpers.toFixedNumber(receiverFinalBalance.XZO, 6), helpers.toFixedNumber((receiverInitialBalance.XZO + transactionAmount), 6));
 
     const senderFinalBalance = await velasNative.getBalance(data.wallets.txSender.address);
-    assert.isBelow(senderFinalBalance.VLX, senderInitialBalance.VLX - transactionAmount, 'Final sender balance is not below the initial sender balance');
+    assert.isBelow(senderFinalBalance.XZO, senderInitialBalance.XZO - transactionAmount, 'Final sender balance is not below the initial sender balance');
   });
 
   // TODO: network request error

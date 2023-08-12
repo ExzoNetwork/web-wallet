@@ -378,7 +378,7 @@ resources = ({ store, web3t })->
                         .pug.top
                             .price.pug(style=bg-cpu)
                             .price-month.pug
-                                | 300 VLX 
+                                | 300 XZO 
                                 span.per-price.pug
                                     | / PER MONTH
                         .entry-content.pug
@@ -407,7 +407,7 @@ resources = ({ store, web3t })->
                         .pug.top
                             .price.pug(style=bg-gpu)
                             .price-month.pug
-                                | 400 VLX 
+                                | 400 XZO 
                                 span.per-price.pug
                                     | / PER MONTH
                         .entry-content.pug
@@ -436,7 +436,7 @@ resources = ({ store, web3t })->
                         .pug.top
                             .price.pug(style=bg-spacing)
                             .price-month.pug
-                                | 500 VLX
+                                | 500 XZO
                                 span.per-price.pug
                                     | / PER MONTH
                         .entry-content.pug
@@ -464,7 +464,7 @@ resources = ({ store, web3t })->
             .table-deposit.pug(style=resource)
                 .row-deposit.pug
                     .content-deposit.pug 
-                        | Please deposit VLX on this address to buy all these 3 resources. Once you use RESOURCES via
+                        | Please deposit XZO on this address to buy all these 3 resources. Once you use RESOURCES via
                         span.pug [StorageDapp] 
                         | or 
                         span.pug [API] 
@@ -494,7 +494,7 @@ resources = ({ store, web3t })->
                     .cell-task.pug(data-title='Date Finished')
                         | 2020/03/24
                     .cell-task.pug(data-title='Budget Spent')
-                        | 200 VLX
+                        | 200 XZO
                 .row-task.pug(style=tr-even)
                     .cell-task.pug(data-title='Task Name')
                         | GPU Usage
@@ -503,7 +503,7 @@ resources = ({ store, web3t })->
                     .cell-task.pug(data-title='Date Finished')
                         | 2020/03/24
                     .cell-task.pug(data-title='Budget Spent')
-                        | 400 VLX
+                        | 400 XZO
                 .row-task.pug(style=tr-odd)
                     .cell-task.pug(data-title='Task Name')
                         | Disk Write
@@ -512,7 +512,7 @@ resources = ({ store, web3t })->
                     .cell-task.pug(data-title='Date Finished')
                         | 2020/03/24
                     .cell-task.pug(data-title='Budget Spent')
-                        | 500 VLX
+                        | 500 XZO
                 .row-task.pug(style=tr-even)
                     .cell-task.pug(data-title='Task Name')
                         | Disk Keep
@@ -521,5 +521,5 @@ resources = ({ store, web3t })->
                     .cell-task.pug(data-title='Date Finished')
                         | 2020/03/24
                     .cell-task.pug(data-title='Budget Spent')
-                        | 600 VLX
+                        | 600 XZO
 module.exports = resources

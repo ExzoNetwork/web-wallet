@@ -7,7 +7,7 @@ test.describe.parallel('Validation', () => {
     await wallets.selectWallet('token-xzo_native');
   });
 
-  test('VLX Native: Show Invalid Address error', async ({ wallets }) => {
+  test('XZO Native: Show Invalid Address error', async ({ wallets }) => {
     await wallets.clickSendButton();
     await wallets.sendForm.recepientInput.type('invalid');
     const error = wallets.getElementWhichTextContentContainsWords(['not', 'valid', 'address']);
@@ -16,7 +16,7 @@ test.describe.parallel('Validation', () => {
     await error.isHidden();
   });
 
-  test('VLX Native: Show Not Enough Funds error', async ({ page, wallets }) => {
+  test('XZO Native: Show Not Enough Funds error', async ({ page, wallets }) => {
     await wallets.selectWallet('token-xzo_native');
     await wallets.clickSendButton();
     await wallets.sendForm.recepientInput.fill('BfGhk12f68mBGz5hZqm4bDSDaTBFfNZmegppzVcVdGDW');

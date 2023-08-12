@@ -162,7 +162,7 @@ fast-withdraw-process = (store, web3t)->
         if (+my-stake - +store.staking.withdrawAmount) isnt 0 then
             # if after withdraw stake amount, pool FROM amount become LESS than 10k
             if (+my-stake - +store.staking.withdrawAmount) < 10000 then
-                return alert store, "The pool stake amount after withdraw #{store.staking.withdrawAmount} VLX must be at least 10000 VLX or no stake at all.", cb
+                return alert store, "The pool stake amount after withdraw #{store.staking.withdrawAmount} XZO must be at least 10000 XZO or no stake at all.", cb
         return alert store, lang.actionProhibited, cb if +amount is 0
         data = web3t.velas.Staking.withdraw.get-data(pool-address, amount)
         to = web3t.velas.Staking.address

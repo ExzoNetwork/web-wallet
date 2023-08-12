@@ -21,7 +21,7 @@ test.describe('Swap', () => {
   });
 
   test.describe('Inside Velas network: ', () => {
-    test('VLX Native (Velas) > VLX EVM (Velas) @smoke', async ({ wallets }) => {
+    test('XZO Native (Velas) > XZO EVM (Velas) @smoke', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_native', 'token-xzo_evm', '0.0001');
       await wallets.txListAfterSendOrSwap.linkToTxExecuted.waitFor({ timeout: 30000 });
       const txSignature = await wallets.getTxHashFromTxlink();
@@ -33,7 +33,7 @@ test.describe('Swap', () => {
       await page.locator('" Not Enough Funds"').waitFor();
     });
 
-    test('VLX Native (Velas) > VLX Legacy (Velas)', async ({ wallets }) => {
+    test('XZO Native (Velas) > XZO Legacy (Velas)', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_native', 'token-xzo2', '0.0001');
       await wallets.txListAfterSendOrSwap.linkToTxExecuted.waitFor({ timeout: 30000 });
       const txSignatureLink = await wallets.txListAfterSendOrSwap.linkToTxExecuted.getAttribute('href');
@@ -42,25 +42,25 @@ test.describe('Swap', () => {
       transactionsInProgress.push(velasNative.waitForConfirmedTransaction(txSignature));
     });
 
-    test('VLX EVM (Velas) > VLX Native (Velas) @smoke', async ({ wallets }) => {
+    test('XZO EVM (Velas) > XZO Native (Velas) @smoke', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_evm', 'token-xzo_native', '0.0001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
     });
 
-    test('VLX EVM (Velas) > VLX Legacy (Velas)', async ({ wallets }) => {
+    test('XZO EVM (Velas) > XZO Legacy (Velas)', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_evm', 'token-xzo2', '0.0001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
     });
 
-    test('VLX Legacy (Velas) > VLX Native (Velas)', async ({ wallets }) => {
+    test('XZO Legacy (Velas) > XZO Native (Velas)', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo2', 'token-xzo_native', '0.0001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
     });
 
-    test('VLX Legacy (Velas) > VLX EVM (Velas)', async ({ wallets }) => {
+    test('XZO Legacy (Velas) > XZO EVM (Velas)', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo2', 'token-xzo_evm', '0.0001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
@@ -68,20 +68,20 @@ test.describe('Swap', () => {
   });
 
   test.describe('From Velas network', async () => {
-    test('VLX EVM (Velas) > VLX ERC-20 (Ethereum) @smoke', async ({ wallets }) => {
+    test('XZO EVM (Velas) > XZO ERC-20 (Ethereum) @smoke', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_evm', 'token-xzo_erc20', '0.00000001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
     });
 
     // bsc is down too often; test may be unstable
-    test('VLX EVM (Velas) > VLX BEP-20 (BSC) @smoke', async ({ wallets }) => {
+    test('XZO EVM (Velas) > XZO BEP-20 (BSC) @smoke', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_evm', 'token-bsc_xzo', '0.00000001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
     });
 
-    test('VLX EVM (Velas) > VLX HRC-20 (Heco) @smoke', async ({ wallets }) => {
+    test('XZO EVM (Velas) > XZO HRC-20 (Heco) @smoke', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_evm', 'token-xzo_huobi', '0.00000001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(evmchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
@@ -115,7 +115,7 @@ test.describe('Swap', () => {
 
       await wallets.swapTokens('token-bsc_xzo', 'token-xzo_evm', '0.0000001', { confirm: false });
       await (page.locator('button :text("swap")')).click();
-      await page.locator('" Min amount per transaction is 1 VLX"').waitFor();
+      await page.locator('" Min amount per transaction is 1 XZO"').waitFor();
     });
 
     // to run this test bridge fee should be larger than min amount
@@ -148,7 +148,7 @@ test.describe('Swap', () => {
     });
 
     // BUG: 0 fee error
-    test('VLX ERC-20 (Ethereum) > VLX EVM (Velas)', async ({ wallets }) => {
+    test('XZO ERC-20 (Ethereum) > XZO EVM (Velas)', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_erc20', 'token-xzo_evm', '0.00000001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(ropsten.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));
@@ -162,7 +162,7 @@ test.describe('Swap', () => {
   });
 
   test.describe('From BSC network', async () => {
-    test('VLX BEP-20 (BSC) > VLX EVM (Velas) @smoke', async ({ wallets }) => {
+    test('XZO BEP-20 (BSC) > XZO EVM (Velas) @smoke', async ({ wallets }) => {
       await wallets.swapTokens('token-bsc_xzo', 'token-xzo_evm', '0.00000001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(bscchain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }))
@@ -176,7 +176,7 @@ test.describe('Swap', () => {
   });
 
   test.describe('From HECO network', async () => {
-    test('VLX HRC-20 (Heco) > VLX EVM (Velas) @smoke', async ({ wallets }) => {
+    test('XZO HRC-20 (Heco) > XZO EVM (Velas) @smoke', async ({ wallets }) => {
       await wallets.swapTokens('token-xzo_huobi', 'token-xzo_evm', '0.00000001');
       const txHash = await wallets.getTxHashFromTxlink();
       transactionsInProgress.push(hecochain.waitForTx({ txHash, testName: test.info().title, waitForConfirmation: !isSmokeRun }));

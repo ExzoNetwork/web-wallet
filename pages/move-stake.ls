@@ -35,7 +35,7 @@ module.exports = (store, web3t)->
     store.staking.error = store.staking.error ? ""     
     cb = console.log
     wallets = store.current.account.wallets |> filter (it) -> it.coin.token is \xzo2 
-    return cb "VLX Wallet not found" if wallets.length is 0
+    return cb "XZO Wallet not found" if wallets.length is 0
     wallet = wallets.0   
     move-stake = ->
         return if (store.staking.error? and ("#{store.staking.error}" .length > 0)) or store.staking.add.new-address is ""         
@@ -48,16 +48,16 @@ module.exports = (store, web3t)->
         new-pool-stake-rounded = +(new-pool-staked.to-fixed! `div` (10^18))
         # check if pool FROM has stake at least 10k and move-amount minus From stake is more or eq 10k 
         if +my-stake < 10000 then
-            return alert store, "Your stake must be more than 10000 VLX in order to move stake to another pool", cb
+            return alert store, "Your stake must be more than 10000 XZO in order to move stake to another pool", cb
         # If try to move NOT FULL stake
         if (+my-stake - +store.staking.add.move-stake) isnt 0 then
             # if after moving stake amount, pool FROM amount become LESS than 10k 
             if (+my-stake - +store.staking.add.move-stake) < 10000 then
                 max-move-amount = Math.max (+my-stake - +store.staking.add.move-stake), 0
-                return alert store, "The pool stake amount after moving #{store.staking.add.move-stake} VLX must be at least 10000 VLX or no stake at all.", cb             
+                return alert store, "The pool stake amount after moving #{store.staking.add.move-stake} XZO must be at least 10000 XZO or no stake at all.", cb             
         # check if new-pool has ZERO (<10k) STAKE & stake amount IS LESS than 10k 
         if +new-pool-stake-rounded < 10000 and +store.staking.add.move-stake < 10000 then
-            return alert store, "Move stake amount must be more or equal to 10000 VLX.", cb        
+            return alert store, "Move stake amount must be more or equal to 10000 XZO.", cb        
         err <- can-make-staking store, web3t
         return alert store, err, cb if err?
         stake = store.staking.add.move-stake

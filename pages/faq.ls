@@ -1102,7 +1102,7 @@ item = (store, web3t)->
                     if active-item2 is \active
                         ul.pug.answer
                             li.pug(key="str2" )
-                                span.pug To become a delegate in the staking pool, you must have a minimum amount of 10,000 VLX or to run your own masternode you must have a minimum amount of 1,000,000 VLX.
+                                span.pug To become a delegate in the staking pool, you must have a minimum amount of 10,000 XZO or to run your own masternode you must have a minimum amount of 1,000,000 XZO.
         .pug.section
             .source.pug
                 .pug.content-right
@@ -1329,31 +1329,31 @@ item2 = (store, web3t)->
                 .pug.content-right
                     .pug.header.question(on-click=activate-item class="#{active-item}")
                         img.pug.star(src="#{icons.star}")
-                        |How much VLX do you need to become a delegate?
+                        |How much XZO do you need to become a delegate?
                     if active-item is \active
                         ul.pug.answer
                             li.pug(key="answer1")
-                                span.pug A minimum of 10,000 VLX
+                                span.pug A minimum of 10,000 XZO
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question(on-click=activate-item2 class="#{active-item2}")
                         img.pug.star(src="#{icons.star}")
-                        |How much VLX do you need to run a node?
+                        |How much XZO do you need to run a node?
                     if active-item2 is \active
                         ul.pug.answer
                             li.pug(key="answer2")
-                                span.pug A minimum of 1,000,000 VLX
+                                span.pug A minimum of 1,000,000 XZO
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question(on-click=activate-item3 class="#{active-item3}")
                         img.pug.star(src="#{icons.star}")
-                        |How much VLX do you need to pool stake?
+                        |How much XZO do you need to pool stake?
                     if active-item3 is \active
                         ul.pug.answer
                             li.pug(key="answer3")
-                                span.pug On our Web Wallet 2.0, you will need a minimum of 10,000 VLX and/or if you have a smaller amount you can also pool stake with one of our exchange partners..
+                                span.pug On our Web Wallet 2.0, you will need a minimum of 10,000 XZO and/or if you have a smaller amount you can also pool stake with one of our exchange partners..
         .pug.section
             .source.pug
                 .pug.content-right

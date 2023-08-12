@@ -285,7 +285,7 @@ export class WalletsScreen extends BaseScreen {
         case 'token-xzo_huobi':
           return 'Huobi ECO Chain';
         case 'token-xzo_erc20':
-          return 'Ethereum (VLX ERC20)';
+          return 'Ethereum (XZO ERC20)';
         case 'token-usdt_erc20':
           return 'Ethereum (Tether USD ERC-20)';
         default:

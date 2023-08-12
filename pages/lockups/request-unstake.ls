@@ -144,13 +144,13 @@ order-withdraw-process = (store, web3t)->
                         if amount-requested then
                             .pug.note.balance 
                                 span.pug.color #{(store.lockups.orderedWithdrawAmount `div` (10^18) )} 
-                                span.pug.color VLX 
+                                span.pug.color XZO 
                                 span.pug were requested to unstake and will be available
                                 span.pug.color #{unstake-wait-time}
                         if unstake-is-allowed then
                             .pug.note.balance 
                                 span.pug.color #{(store.lockups.orderedWithdrawAmount `div` (10^18) )} 
-                                span.pug.color VLX 
+                                span.pug.color XZO 
                                 span.pug are available to unstake 
 fast-withdraw-process = (store, web3t)->
     lang = get-lang store

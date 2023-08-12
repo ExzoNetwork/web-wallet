@@ -473,14 +473,14 @@ module.exports = (store, web3t)->
                         span.pug #{lang.available-reward}:
                         span.color.pug #{store.staking.reward}
                         img.label-coin.pug(src="#{icons.xzo-icon}")
-                        span.color.pug  VLX
+                        span.color.pug  XZO
                     .pug.staking-reward
                         store.staking.rewards |> map build-claim-reward store, web3t
                     .pug.balance
                         span.pug #{lang.claim-reward}:
                         span.color.pug #{store.staking.reward-claim}
                         img.label-coin.pug(src="#{icons.xzo-icon}")
-                        span.color.pug  VLX
+                        span.color.pug  XZO
                     button { store, on-click: claim , icon : \reward , text : \claimReward , type : \secondary }
             else if store.staking.reward-loading is yes
                 .pug.placeholder Loading... Please wait

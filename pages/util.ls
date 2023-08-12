@@ -106,8 +106,8 @@ AddressUtil = (props) ->
     return (
         .pug
             .pug.form-group
-                label.pug Please paste your VLX Legacy address here.
-                input.pug(style=style placeholder="VLX Legacy address" on-change=xzo-address-onhange value=xzo-address)
+                label.pug Please paste your XZO Legacy address here.
+                input.pug(style=style placeholder="XZO Legacy address" on-change=xzo-address-onhange value=xzo-address)
             .pug.form-group
                 label.pug Please paste your EVM address here.
                 input.pug(style=style placeholder="EVM address" on-change=eth-address-onhange value=eth-address)

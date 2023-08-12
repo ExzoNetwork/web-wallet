@@ -50,7 +50,7 @@ test.describe('Staking', () => {
       } catch (e) {
         throw new Error(`Cannot get balance\n${e}`);
       }
-      const initialVLXNativeBalance = helpers.toFixedNumber(balance.VLX);
+      const initialVLXNativeBalance = helpers.toFixedNumber(balance.XZO);
 
       // act
       await staking.createStakingAccountButton.click();
@@ -67,12 +67,12 @@ test.describe('Staking', () => {
       if (!newlyAddedStakingAccountAddress) throw new Error('No new staking account appears in the list');
 
       // assert VLXNative balance decreases on staking amount
-      const finalVLXNativeBalance = helpers.toFixedNumber((await velasNative.getBalance(VLXNativeAddress)).VLX);
+      const finalVLXNativeBalance = helpers.toFixedNumber((await velasNative.getBalance(VLXNativeAddress)).XZO);
       assert.equal(finalVLXNativeBalance, initialVLXNativeBalance - stakingAmount);
 
       // check newly created staking account on blockchain
       await staking.makeSureStakingAccIsCreatedAndNotDelegated(newlyAddedStakingAccountAddress);
-      assert.equal(helpers.toFixedNumber((await velasNative.getBalance(newlyAddedStakingAccountAddress)).VLX), stakingAmount);
+      assert.equal(helpers.toFixedNumber((await velasNative.getBalance(newlyAddedStakingAccountAddress)).XZO), stakingAmount);
     });
 
     test('Delegate stake', async ({ page, staking, auth, wallets, dApps }) => {

@@ -730,7 +730,7 @@ staking-content = (store, web3t)->
     your-balance = " #{store.staking.chosenAccount.balance} "
     your-staking-amount = store.staking.stakeAmountTotal `div` (10^18)
     your-staking = " #{round-human your-staking-amount}"
-    xzo-token = "VLX"
+    xzo-token = "XZO"
     isSpinned = if ((store.staking.all-pools-loaded is no or !store.staking.all-pools-loaded?) and store.staking.pools-are-loading is yes) then "spin disabled" else ""
     build-staker = (store, web3t)-> (item)->
         checked = item.checked
@@ -761,7 +761,7 @@ staking-content = (store, web3t)->
             store.staking.error = ""
             delegate-amount = your-balance
             delegate-receiver = store.staking.chosen-pool.address
-            confirmText = "Please confirm that you would like to delegate #{delegate-amount} VLX to #{delegate-receiver}"
+            confirmText = "Please confirm that you would like to delegate #{delegate-amount} XZO to #{delegate-receiver}"
             agree <- confirm store, confirmText
             return if agree is no
             delegate!
@@ -871,7 +871,7 @@ staking-content = (store, web3t)->
                     .description.pug
                         .pug.left.float-left
                             span.pug #{lang.to_delegate}
-                            span.pug.color #{your-balance} VLX
+                            span.pug.color #{your-balance} XZO
                             span.pug #{lang.delegate_to}
                             .pug.chosen-pool(title="#{store.staking.chosen-pool.address}")
                                 span.pug

@@ -1,5 +1,5 @@
 doCache = no
-CACHE_NAME = 'velas-pwa-cache-v1'
+CACHE_NAME = 'exzo-pwa-cache-v1'
 cb = console.log
 as-callback = (p, cb)->
     p.then (res)->

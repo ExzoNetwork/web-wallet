@@ -99,7 +99,7 @@ AddressUtil = (props) ->
     eth-address-onhange = (event) ->
         eth-address-change event.target.value
         try
-            address = to-velas-address event.target.value
+            address = to-exzo-address event.target.value
             xzo-address-change address || ""
         catch e
             xzo-address-change e.message

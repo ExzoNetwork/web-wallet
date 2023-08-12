@@ -9,7 +9,7 @@ require! {
     \./icon.ls
     \prelude-ls : { map, split, filter }
     \../math.ls : { div, times, plus }
-    \../velas/velas-node-template.ls
+    \../exzo/exzo-node-template.ls
     \../../web3t/providers/deps.js : { hdkey, bip39 }
     \md5
     \../menu-funcs.ls
@@ -374,9 +374,9 @@ staking-content = (store, web3t)->
     become-validator = ->
         stake = store.staking.add.add-validator-stake `times` (10^18)
         #console.log stake, pairs.mining.address
-        #data = web3t.velas.Staking.stake.get-data pairs.staking.address, stake
-        data = web3t.velas.Staking.add-pool.get-data stake, pairs.mining.address
-        to = web3t.velas.Staking.address
+        #data = web3t.exzo.Staking.stake.get-data pairs.staking.address, stake
+        data = web3t.exzo.Staking.add-pool.get-data stake, pairs.mining.address
+        to = web3t.exzo.Staking.address
         #console.log \to, { to, data, amount }
         amount = store.staking.add.add-validator-stake
         err <- web3t.xzo2.send-transaction { to, data, amount }
@@ -388,13 +388,13 @@ staking-content = (store, web3t)->
         store.staking.add.add-validator = it.target.value
     change-stake = ->
         store.staking.add.add-validator-stake = it.target.value
-    velas-node-applied-template = 
+    exzo-node-applied-template = 
         pairs
-            |> velas-node-template 
+            |> exzo-node-template 
             |> split "\n"
-    velas-node-applied-template-line = 
+    exzo-node-applied-template-line = 
         pairs
-            |> velas-node-template
+            |> exzo-node-template
             |> btoa
             |> -> "echo '#{it}' | base64 --decode | sh"
     return null if not pairs.mining?
@@ -409,7 +409,7 @@ staking-content = (store, web3t)->
     account-right-proxy  = update-current account-right
     change-account-index-proxy = update-current change-account-index
     build-template-line = ->
-        index = velas-node-applied-template.index-of(it)
+        index = exzo-node-applied-template.index-of(it)
         line-style =
             padding: "10px" 
             width: \100%
@@ -434,7 +434,7 @@ staking-content = (store, web3t)->
     calc-reward-epoch = ([epoch, ...epochs], cb)->
         mining-address =  store.staking.keystore.mining.address
         return cb null, 0 if not epoch?
-        err, reward <- web3t.velas.BlockReward.getValidatorReward(epoch, mining-address)
+        err, reward <- web3t.exzo.BlockReward.getValidatorReward(epoch, mining-address)
         return cb err if err?
         err, rest <- calc-reward-epoch epochs
         return cb err if err?
@@ -444,7 +444,7 @@ staking-content = (store, web3t)->
         cb = alert
         mining-address =  store.staking.keystore.mining.address
         staking-address = store.staking.keystore.staking.address
-        err, epochs <- web3t.velas.BlockReward.epochsToClaimRewardFrom(staking-address, mining-address)
+        err, epochs <- web3t.exzo.BlockReward.epochsToClaimRewardFrom(staking-address, mining-address)
         return cb err if err?
         err, reward <- calc-reward-epoch epochs
         return cb err if err?
@@ -452,19 +452,19 @@ staking-content = (store, web3t)->
     claim = ->
         staking-address = store.staking.keystore.staking.address
         mining-address =  store.staking.keystore.mining.address
-        err, epochs <- web3t.velas.BlockReward.epochsPoolGotRewardFor(mining-address)
+        err, epochs <- web3t.exzo.BlockReward.epochsPoolGotRewardFor(mining-address)
         #console.log { epochs }
-        err, epochs <- web3t.velas.BlockReward.epochsToClaimRewardFrom(staking-address, mining-address)
+        err, epochs <- web3t.exzo.BlockReward.epochsToClaimRewardFrom(staking-address, mining-address)
         #console.log { epochs }
         return alert err if err?
-        data = web3t.velas.Staking.claimReward.get-data(epochs, staking-address)
-        to = web3t.velas.Staking.address
+        data = web3t.exzo.Staking.claimReward.get-data(epochs, staking-address)
+        to = web3t.exzo.Staking.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount }
     exit = ->
         staking-address = store.staking.keystore.staking.address
-        data = web3t.velas.Staking.withdraw.get-data(staking-address, store.staking.add.add-validator-stake)
-        to = web3t.velas.Staking.address
+        data = web3t.exzo.Staking.withdraw.get-data(staking-address, store.staking.add.add-validator-stake)
+        to = web3t.exzo.Staking.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount }
     .pug.staking-content
@@ -502,18 +502,18 @@ staking-content = (store, web3t)->
                                     section.pug.window
                                         section.pug.icons
                                             span.pug
-                                        CopyToClipboard.pug.copy(text="#{velas-node-applied-template}" on-copy=copied-inform(store) style=filter-icon)
+                                        CopyToClipboard.pug.copy(text="#{exzo-node-applied-template}" on-copy=copied-inform(store) style=filter-icon)
                                             copy store
-                                    velas-node-applied-template |> map build-template-line
+                                    exzo-node-applied-template |> map build-template-line
                             if active-string is \active
                                 .pug.code
                                     section.pug.window
                                         section.pug.icons
                                             span.pug
-                                        CopyToClipboard.pug.copy(text="#{velas-node-applied-template-line}" on-copy=copied-inform(store) style=filter-icon)
+                                        CopyToClipboard.pug.copy(text="#{exzo-node-applied-template-line}" on-copy=copied-inform(store) style=filter-icon)
                                             copy store
                                     .pug(style=line-style)
-                                        velas-node-applied-template-line
+                                        exzo-node-applied-template-line
                             if active-ssh is \active
                                 .pug.code
                                     section.pug.window
@@ -641,16 +641,16 @@ staking.init = ({ store, web3t }, cb)->
     store.staking.keystore = to-keystore store, no
     #exit for now
     #return cb null
-    err, data <- web3t.velas.Staking.candidateMinStake
+    err, data <- web3t.exzo.Staking.candidateMinStake
     return cb err if err?
     store.staking.add.add-validator-stake = data `div` (10^18)
-    err, data <- web3t.velas.ValidatorSet.getValidators
+    err, data <- web3t.exzo.ValidatorSet.getValidators
     return cb err if err?
     store.staking.validators.active = data
-    err, data <- web3t.velas.ValidatorSet.getPendingValidators
+    err, data <- web3t.exzo.ValidatorSet.getPendingValidators
     return cb err if err?
     store.staking.validators.pending = data
-    err, epoch <- web3t.velas.Staking.stakingEpoch
+    err, epoch <- web3t.exzo.Staking.stakingEpoch
     store.staking.epoch = epoch.to-fixed!
     cb null
 module.exports = staking

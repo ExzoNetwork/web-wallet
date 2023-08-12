@@ -11,7 +11,7 @@ require! {
     \./icon.ls
     \prelude-ls : { map, split, filter, find, foldl, sort-by, unique, head, each }
     \../math.ls : { div, times, plus, minus }
-    \../velas/velas-node-template.ls
+    \../exzo/exzo-node-template.ls
     \../../web3t/providers/deps.js : { hdkey, bip39 }
     \md5
     \../menu-funcs.ls
@@ -638,7 +638,7 @@ staking-content = (store, web3t)->
         #
         pay-account = store.staking.accounts |> find (-> it.address is account.address)
         return cb null if not pay-account
-        err, result <- as-callback web3t.velas.NativeStaking.delegate(pay-account.address, pool.address)
+        err, result <- as-callback web3t.exzo.NativeStaking.delegate(pay-account.address, pool.address)
         err-message = get-error-message(err, result)
         return alert store, err-message if err-message?
         store.staking.getAccountsFromCashe = no
@@ -655,13 +655,13 @@ staking-content = (store, web3t)->
             store.staking.add.add-validator-stake = value
         catch err
             console.log "[Change-stake]: #{err}"
-    velas-node-applied-template =
+    exzo-node-applied-template =
         pairs
-            |> velas-node-template
+            |> exzo-node-template
             |> split "\n"
-    velas-node-applied-template-line =
+    exzo-node-applied-template-line =
         pairs
-            |> velas-node-template
+            |> exzo-node-template
             |> btoa
             |> -> "echo '#{it}' | base64 --decode | sh"
     return null if not pairs.mining?
@@ -698,7 +698,7 @@ staking-content = (store, web3t)->
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
         return cb null if i-am-staker
-        err, data <- web3t.velas.Staking.candidateMinStake
+        err, data <- web3t.exzo.Staking.candidateMinStake
         return cb err if err?
         min =
             | +store.staking.stake-amount-total >= 10000 => 1
@@ -718,12 +718,12 @@ staking-content = (store, web3t)->
         #return alert store, err, cb if err?
         store.staking.add.add-validator-stake = Math.max (get-balance! `minus` 0.1), 0
     vote-for-change = ->
-        err, can <- web3t.velas.ValidatorSet.emitInitiateChangeCallable
+        err, can <- web3t.exzo.ValidatorSet.emitInitiateChangeCallable
         return alert store, err, cb if err?
         return alert store, lang.actionProhibited, cb if can isnt yes
-        data = web3t.velas.ValidatorSet.emitInitiateChange.get-data!
+        data = web3t.exzo.ValidatorSet.emitInitiateChange.get-data!
         #console.log { data }
-        to = web3t.velas.ValidatorSet.address
+        to = web3t.exzo.ValidatorSet.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount }
         store.current.page = \staking

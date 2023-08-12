@@ -97,24 +97,24 @@ order-withdraw-process = (store, web3t)->
     active-second = active-class \exit_wait
     active-third = active-class \exit_ordered
     order = ->
-        err, data <- web3t.velas.Staking.areStakeAndWithdrawAllowed!
+        err, data <- web3t.exzo.Staking.areStakeAndWithdrawAllowed!
         return cb err if err?
         return alert store, lang.exitNotAllowed, cb if data isnt yes
         staking-address = store.staking.keystore.staking.address
         pool-address = store.staking.chosen-pool.address
-        err, max <- web3t.velas.Staking.maxWithdrawOrderAllowed(pool-address, staking-address)
+        err, max <- web3t.exzo.Staking.maxWithdrawOrderAllowed(pool-address, staking-address)
         amount = store.staking.withdrawAmount `times` (10^18)
         return alert store, "#{lang.max} #{max.to-fixed! `div` (10^18)}" if +amount > +max.to-fixed!
         return alert store, lang.actionProhibited, cb if +amount is 0
-        data = web3t.velas.Staking.order-withdraw.get-data(pool-address, amount)
-        to = web3t.velas.Staking.address
+        data = web3t.exzo.Staking.order-withdraw.get-data(pool-address, amount)
+        to = web3t.exzo.Staking.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     exit = ->
         return alert store, lang.actionProhibited, cb if +store.staking.orderedWithdrawAmount is 0
         pool-address = store.staking.chosen-pool.address
-        data = web3t.velas.Staking.claimOrderedWithdraw.get-data(pool-address)
-        to = web3t.velas.Staking.address
+        data = web3t.exzo.Staking.claimOrderedWithdraw.get-data(pool-address)
+        to = web3t.exzo.Staking.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     change-max = (it)->
@@ -152,7 +152,7 @@ fast-withdraw-process = (store, web3t)->
         my-stake = if store.staking.chosen-pool.my-stake then store.staking.chosen-pool.my-stake `div` (10^18) else 0
         staking-address = store.staking.keystore.staking.address
         pool-address = store.staking.chosen-pool.address
-        err, max <- web3t.velas.Staking.maxWithdrawAllowed(pool-address, staking-address)
+        err, max <- web3t.exzo.Staking.maxWithdrawAllowed(pool-address, staking-address)
         if !my-stake
             my-stake = max
         amount = store.staking.withdrawAmount `times` (10^18)
@@ -164,8 +164,8 @@ fast-withdraw-process = (store, web3t)->
             if (+my-stake - +store.staking.withdrawAmount) < 10000 then
                 return alert store, "The pool stake amount after withdraw #{store.staking.withdrawAmount} XZO must be at least 10000 XZO or no stake at all.", cb
         return alert store, lang.actionProhibited, cb if +amount is 0
-        data = web3t.velas.Staking.withdraw.get-data(pool-address, amount)
-        to = web3t.velas.Staking.address
+        data = web3t.exzo.Staking.withdraw.get-data(pool-address, amount)
+        to = web3t.exzo.Staking.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
     change-max = (it)->
@@ -204,20 +204,20 @@ module.exports.init = ({ store, web3t}, cb)->
     return cb null if not store.staking?chosen-pool?
     pool-address = store.staking.chosen-pool.address
     #console.log \ext-stake, staking-address, pool-address
-    err, max <- web3t.velas.Staking.maxWithdrawAllowed(pool-address, staking-address)
+    err, max <- web3t.exzo.Staking.maxWithdrawAllowed(pool-address, staking-address)
     return cb err if err?
     store.staking.maxWithdrawAllowed = max.to-fixed! `div` (10^18)
     store.staking.withdrawAmount = store.staking.maxWithdrawAllowed if +store.staking.maxWithdrawAllowed > 0
-    err, max <- web3t.velas.Staking.maxWithdrawOrderAllowed(pool-address, staking-address)
+    err, max <- web3t.exzo.Staking.maxWithdrawOrderAllowed(pool-address, staking-address)
     return cb err if err?
     store.staking.maxWithdrawOrderAllowed = max.to-fixed! `div` (10^18)
     store.staking.withdrawAmount = store.staking.maxWithdrawOrderAllowed if +store.staking.maxWithdrawOrderAllowed > 0
-    err, amount <- web3t.velas.Staking.orderedWithdrawAmount store.staking.chosen-pool.address, staking-address
+    err, amount <- web3t.exzo.Staking.orderedWithdrawAmount store.staking.chosen-pool.address, staking-address
     return cb err if err?
     store.staking.orderedWithdrawAmount = amount.to-fixed!
-    err, last-epoch <- web3t.velas.Staking.orderWithdrawEpoch(store.staking.chosen-pool.address, staking-address)
+    err, last-epoch <- web3t.exzo.Staking.orderWithdrawEpoch(store.staking.chosen-pool.address, staking-address)
     return cb "#{err}" if err?
-    err, staking-epoch <- web3t.velas.Staking.stakingEpoch
+    err, staking-epoch <- web3t.exzo.Staking.stakingEpoch
     return cb "#{err}" if err?
     res = staking-epoch `minus` last-epoch
     store.staking.wait-for-epoch-change = if +res is 0 then yes else no

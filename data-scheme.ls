@@ -79,7 +79,7 @@ store =
     url-params: url-params
     url-hash-params: url-hash-params
     root: null
-    theme: localStorage.get-item('theme') ? \velas
+    theme: localStorage.get-item('theme') ? \exzo
     lang: localStorage.get-item('lang') ? \en
     langs: langs
     icons: \icons

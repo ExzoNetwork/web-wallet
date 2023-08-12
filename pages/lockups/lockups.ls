@@ -91,7 +91,7 @@ lockups-content = (store, web3t)->
     withdraw = ->
         {address, lockedPool, maxWithdrawAllowed} = store.lockups.chosen-lockup
         lockup-address = store.lockups.chosen-lockup.address
-        Timelock = web3t.velas.Timelock.at(lockup-address)
+        Timelock = web3t.exzo.Timelock.at(lockup-address)
         contract-address = Timelock.address
         amount = maxWithdrawAllowed.to-fixed! `div` (10^18)
         return alert store, lang.actionProhibited, cb if +amount is 0 
@@ -109,7 +109,7 @@ lockups-content = (store, web3t)->
         return alert store, "please enter correct amount, got #{type}", cb if type not in <[ String Number ]>
         stake = store.lockups.add.add-validator-stake `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
-        TimeLock = web3t.velas.Timelock.at(contract-address)
+        TimeLock = web3t.exzo.Timelock.at(contract-address)
         xzo2 =
             store.current.account.wallets |> find (.coin.token is \xzo2)
         xzo-address = xzo2.address2
@@ -134,7 +134,7 @@ lockups-content = (store, web3t)->
         return alert store, "please enter correct amount, got #{type}", cb if type not in <[ String Number ]>
         stake = store.lockups.add.add-validator-stake `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
-        TimeLock = web3t.velas.Timelock.at(contract-address)
+        TimeLock = web3t.exzo.Timelock.at(contract-address)
         xzo2 =
             store.current.account.wallets |> find (.coin.token is \xzo2)
         xzo-address = xzo2.address2
@@ -145,8 +145,8 @@ lockups-content = (store, web3t)->
         amount = store.lockups.add.add-validator-stake
         err <- web3t.xzo2.send-transaction { to, data, amount } 
         return cb err if err?
-#        data = web3t.velas.Staking.stake.get-data store.staking.chosen-pool.address, stake
-#        to = web3t.velas.Staking.address
+#        data = web3t.exzo.Staking.stake.get-data store.staking.chosen-pool.address, stake
+#        to = web3t.exzo.Staking.address
 #        amount = store.staking.add.add-validator-stake
 #        err <- web3t.xzo2.send-transaction { to, data, amount }
         #return cb err if err?
@@ -166,7 +166,7 @@ lockups-content = (store, web3t)->
     get-options = (cb)->
         #i-am-staker = i-stake-choosen-pool!
         #return cb null if i-am-staker
-        err, data <- web3t.velas.Staking.candidateMinStake
+        err, data <- web3t.exzo.Staking.candidateMinStake
         return cb err if err?
         min =
             | +store.lockups.stake-amount-total >= 10000 => 1
@@ -187,12 +187,12 @@ lockups-content = (store, web3t)->
         balance = store.lockups.chosen-lockup.locked-funds-raw `div` (10^18)
         store.lockups.add.add-validator-stake = Math.max (balance `minus` 0.1), 0
     vote-for-change = ->
-        err, can <- web3t.velas.ValidatorSet.emitInitiateChangeCallable
+        err, can <- web3t.exzo.ValidatorSet.emitInitiateChangeCallable
         return alert store, err, cb if err?
         return alert store, lang.actionProhibited, cb if can isnt yes
-        data = web3t.velas.ValidatorSet.emitInitiateChange.get-data!
+        data = web3t.exzo.ValidatorSet.emitInitiateChange.get-data!
         #console.log { data }
-        to = web3t.velas.ValidatorSet.address
+        to = web3t.exzo.ValidatorSet.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount }
         store.current.page = \staking
@@ -217,8 +217,8 @@ lockups-content = (store, web3t)->
             store.lockups.error = ""
             lockedPool = item.lockedPool
             contract = item.address
-            store.lockups.currentTimelock = web3t.velas.Timelock.at(contract)
-            err, amount <- web3t.velas.Staking.stakeAmount lockedPool, contract
+            store.lockups.currentTimelock = web3t.exzo.Timelock.at(contract)
+            err, amount <- web3t.exzo.Staking.stakeAmount lockedPool, contract
             store.lockups.stake-amount-total = amount.to-fixed! 
             store.lockups.chosen-lockup = item 
             err <- pools-list.init { store, web3t } 
@@ -301,7 +301,7 @@ lockups-content = (store, web3t)->
                 cb = console.log
                 value = it.target.value is \true
                 contract-address = store.lockups.chosen-lockup.address
-                TimeLock = web3t.velas.Timelock.at(contract-address)
+                TimeLock = web3t.exzo.Timelock.at(contract-address)
                 func = if store.lockups.chosen-lockup.isForwardingEnabled then TimeLock.disableForwarding else  TimeLock.enableForwarding
                 data = func.get-data!
                 to = contract-address
@@ -368,7 +368,7 @@ lockups-content = (store, web3t)->
                     unstake = ->
                         {address, lockedPool} = store.lockups.chosen-lockup
                         lockup-address = store.lockups.chosen-lockup.address
-                        Timelock = web3t.velas.Timelock.at(lockup-address)
+                        Timelock = web3t.exzo.Timelock.at(lockup-address)
                         contract-address = Timelock.address
                         pool-address = lockedPool                      
                         amount = store.lockups.unstakeAmount `times` (10^18)
@@ -408,7 +408,7 @@ stringify = (value) ->
 fill-lockup-contract = ({web3t, store},[contract, ...contracts], cb)->
     return cb null, [] if not contract? 
     item = {}
-    TimeLock = web3t.velas.Timelock.at(contract)
+    TimeLock = web3t.exzo.Timelock.at(contract)
     err, lockedFunds <- TimeLock.getNonStakedFunds!
     return cb err if err? 
     item.address = contract
@@ -418,7 +418,7 @@ fill-lockup-contract = ({web3t, store},[contract, ...contracts], cb)->
     err, lockedPool <- TimeLock.getDefaultPool!
     return cb err if err?
     item.lockedPool = lockedPool
-    err, amount <- web3t.velas.Staking.stakeAmount lockedPool, contract
+    err, amount <- web3t.exzo.Staking.stakeAmount lockedPool, contract
     return cb err if err?
     store.lockups.lockupStaking[lockedPool] = store.lockups.lockupStaking[lockedPool] ? []
     store.lockups.lockupStaking[lockedPool].push amount
@@ -458,7 +458,7 @@ lockups.init = ({ store, web3t }, cb)->
     store.staking.pool-was-choosed = no
     store.lockups.chosen-lockup = null
     xzo2 = store.current.account.wallets |> find (.coin.token is \xzo2)
-    err, lockups <- web3t.velas.Resolver.getLockups xzo2.address2  
+    err, lockups <- web3t.exzo.Resolver.getLockups xzo2.address2  
     return cb err if err?
     store.lockups.lockupStaking = {}
     err, result <- fill-lockup-contracts {web3t, store}, lockups

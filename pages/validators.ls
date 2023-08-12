@@ -38,7 +38,7 @@ require! {
     \../calc-certain-wallet.ls
     \../calc-wallet.ls
     \bs58 : { decode }
-    "../../web3t/providers/solana/index.cjs" : \velasWeb3
+    "../../web3t/providers/solana/index.cjs" : \exzoWeb3
 }
 .staking
     @import scheme
@@ -719,7 +719,7 @@ staking-content = (store, web3t)->
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
         return cb null if i-am-staker
-        err, data <- web3t.velas.Staking.candidateMinStake
+        err, data <- web3t.exzo.Staking.candidateMinStake
         return cb err if err?
         min =
             | +store.staking.stake-amount-total >= 10000 => 1
@@ -961,10 +961,10 @@ validators.init = ({ store, web3t }, cb)!->
     store.staking.subscribedAccounts = {}
     wallet = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     try
-        publicKey = new velasWeb3.PublicKey(wallet.publicKey)
+        publicKey = new exzoWeb3.PublicKey(wallet.publicKey)
         callback = (res)->
         commitment = 'finalized'
-        id = web3t.velas.NativeStaking.connection.onAccountChange(publicKey, callback, commitment)
+        id = web3t.exzo.NativeStaking.connection.onAccountChange(publicKey, callback, commitment)
         store.staking.webSocketAvailable = yes
     catch err
         console.log "ws onAccountChange err: " err
@@ -975,18 +975,18 @@ validators.init = ({ store, web3t }, cb)!->
             return cb null
     else
         store.staking.pools-network = store.current.network
-    err, epochInfo <- as-callback web3t.velas.NativeStaking.getCurrentEpochInfo()
+    err, epochInfo <- as-callback web3t.exzo.NativeStaking.getCurrentEpochInfo()
     console.error err if err?
     epoch = epochInfo?epoch
     store.staking.current-epoch = epoch
     store.staking.pools = []
-    err, rent <- as-callback web3t.velas.NativeStaking.connection.getMinimumBalanceForRentExemption(200)
+    err, rent <- as-callback web3t.exzo.NativeStaking.connection.getMinimumBalanceForRentExemption(200)
     rent = 2282880 if err?
     rent = rent `div` (10^9)
     store.staking.rent = rent   
     return cb null if not wallet?
-    web3t.velas.NativeStaking.setAccountPublicKey(wallet.publicKey)
-    web3t.velas.NativeStaking.setAccountSecretKey(wallet.secretKey)
+    web3t.exzo.NativeStaking.setAccountPublicKey(wallet.publicKey)
+    web3t.exzo.NativeStaking.setAccountSecretKey(wallet.secretKey)
     on-progress = ->
         #store.staking.accounts = convert-accounts-to-view-model [...it]
     err, result <- query-accounts store, web3t, on-progress

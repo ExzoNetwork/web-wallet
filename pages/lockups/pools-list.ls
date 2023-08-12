@@ -76,7 +76,7 @@ pools-content = (store, web3t)->
                 store.lockups.chosenLockup.chosen-lockup-action = 'choose'    
             store.lockups.error = ""
             lockup-address = store.lockups.chosen-lockup.address
-            Timelock = web3t.velas.Timelock.at(lockup-address)
+            Timelock = web3t.exzo.Timelock.at(lockup-address)
             contract-address = Timelock.address
             #err <- Timelock.changeDefaultPool item.address
             #return cb err if err?

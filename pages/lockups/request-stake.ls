@@ -164,7 +164,7 @@ order-withdraw-process = (store, web3t)->
                 store.lockups.chosen-lockup = current-contract    
             store.lockups.error = ""
             lockup-address = store.lockups.chosen-lockup.address
-            Timelock = web3t.velas.Timelock.at(lockup-address)
+            Timelock = web3t.exzo.Timelock.at(lockup-address)
             contract-address = Timelock.address
             #err <- Timelock.changeDefaultPool item.address
             #return cb err if err?
@@ -230,7 +230,7 @@ order-withdraw-process = (store, web3t)->
         return alert store, "please enter correct amount, got #{type}", cb if type not in <[ String Number ]>
         stake = store.lockups.add.add-validator-topup `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
-        TimeLock = web3t.velas.Timelock.at(contract-address)
+        TimeLock = web3t.exzo.Timelock.at(contract-address)
         xzo2 =
             store.current.account.wallets |> find (.coin.token is \xzo2)
         xzo-address = xzo2.address2
@@ -255,7 +255,7 @@ order-withdraw-process = (store, web3t)->
         err <- is-enough-to-stake(store.lockups.add.add-validator-stake, (store.lockups.chosen-lockup.locked-funds-raw `div` (10^18)))
         return alert store, "#{err}", cb if err? 
         contract-address = store.lockups.chosen-lockup.address
-        TimeLock = web3t.velas.Timelock.at(contract-address)
+        TimeLock = web3t.exzo.Timelock.at(contract-address)
         xzo2 =
             store.current.account.wallets |> find (.coin.token is \xzo2)
         xzo-address = xzo2.address2
@@ -266,8 +266,8 @@ order-withdraw-process = (store, web3t)->
         amount = store.lockups.add.add-validator-stake
         err <- web3t.xzo2.send-transaction { to, data, amount: 0 } 
         return cb err if err?
-#        data = web3t.velas.Staking.stake.get-data store.staking.chosen-pool.address, stake
-#        to = web3t.velas.Staking.address
+#        data = web3t.exzo.Staking.stake.get-data store.staking.chosen-pool.address, stake
+#        to = web3t.exzo.Staking.address
 #        amount = store.staking.add.add-validator-stake
 #        err <- web3t.xzo2.send-transaction { to, data, amount }
         #return cb err if err?
@@ -285,7 +285,7 @@ order-withdraw-process = (store, web3t)->
         return alert store, "#{err}", cb if err?
         stake = store.lockups.add.add-validator-stake `times` (10^18)
         contract-address = store.lockups.chosen-lockup.address
-        TimeLock = web3t.velas.Timelock.at(contract-address)
+        TimeLock = web3t.exzo.Timelock.at(contract-address)
         xzo2 =
             store.current.account.wallets |> find (.coin.token is \xzo2)
         xzo-address = xzo2.address2
@@ -296,8 +296,8 @@ order-withdraw-process = (store, web3t)->
         amount = store.lockups.add.add-validator-stake
         err <- web3t.xzo2.send-transaction { to, amount } 
         return cb err if err?
-#        data = web3t.velas.Staking.stake.get-data store.staking.chosen-pool.address, stake
-#        to = web3t.velas.Staking.address
+#        data = web3t.exzo.Staking.stake.get-data store.staking.chosen-pool.address, stake
+#        to = web3t.exzo.Staking.address
 #        amount = store.staking.add.add-validator-stake
 #        err <- web3t.xzo2.send-transaction { to, data, amount }
         #return cb err if err?

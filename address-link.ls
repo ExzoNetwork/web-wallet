@@ -1,6 +1,6 @@
 require! {
     \prelude-ls : { map, filter, obj-to-pairs }
-    \./velas/addresses.ls
+    \./exzo/addresses.ls
     \./contracts.ls    
 }
 get-address-label = (wallet)->

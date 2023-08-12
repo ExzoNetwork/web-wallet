@@ -3,7 +3,7 @@ require! {
     \./math.ls : { div, times, plus, minus }
     \./round-human.ls
     '../web3t/providers/superagent.js' : { get }
-    "../web3t/providers/solana/index.cjs" : \velasWeb3
+    "../web3t/providers/solana/index.cjs" : \exzoWeb3
     \./api.ls : { get-transaction-info }
 }
 down = (it)->
@@ -65,7 +65,7 @@ load-validators-from-cache = ({store, web3t}, cb)->
         if cachedNetwork is network then
             cache-result = store.staking.cachedValidators  
             return cb null, cache-result  
-    err, validators <- as-callback web3t.velas.NativeStaking.getStakingValidators()
+    err, validators <- as-callback web3t.exzo.NativeStaking.getStakingValidators()
     console.error "GetStakingValidators err: " err if err?
     return cb err if err?
     store.staking.cachedValidators = validators  
@@ -89,7 +89,7 @@ fill-delegators = (store, web3t)->
 fill-delegator = (store, web3t, acc)-->
     return if not acc?
     { voter, activationEpoch, deactivationEpoch } = acc
-    if (voter and (Number(deactivationEpoch) > Number(activationEpoch) or activationEpoch is web3t.velas.NativeStaking.max_epoch))
+    if (voter and (Number(deactivationEpoch) > Number(activationEpoch) or activationEpoch is web3t.exzo.NativeStaking.max_epoch))
         store.staking.delegators[down(voter)] = if store.staking.delegators[down(voter)]? then (store.staking.delegators[down(voter)] + 1) else 1
 # Accounts
 query-accounts = (store, web3t, on-progress, on-finish) ->
@@ -145,7 +145,7 @@ add-stake-account = (store, web3t, tx-info, config, on-progress, on-finish) ->
     custodian    = staker
     { activationEpoch, deactivationEpoch } = config
     balanceRaw = lamports `minus` '2282880'
-    pubKey = new velasWeb3.PublicKey(stakeAccount)
+    pubKey = new exzoWeb3.PublicKey(stakeAccount)
     account = {
         activationEpoch: activationEpoch
         address: stakeAccount
@@ -173,11 +173,11 @@ add-stake-account = (store, web3t, tx-info, config, on-progress, on-finish) ->
         highlight: yes
     }
     store.staking.parsedProgramAccounts.push(account)
-    err, accs <- as-callback web3t.velas.NativeStaking.getOwnStakingAccounts(store.staking.parsedProgramAccounts)
+    err, accs <- as-callback web3t.exzo.NativeStaking.getOwnStakingAccounts(store.staking.parsedProgramAccounts)
     if err?
         update-loader-var(store, config, no)
         return on-finish err
-    web3t.velas.NativeStaking.setAccounts(accs);
+    web3t.exzo.NativeStaking.setAccounts(accs);
     store.staking.accounts.push(account)
     update-loader-var(store, config, no)
     /* Subscribe to the changes of created stake account */
@@ -235,7 +235,7 @@ subscribe-to-stake-account = ({store, web3t, account, publicKey, find, cb})->
     commitment = 'confirmed'
     callback   = (updatedAccount)->
         updateStakeAccount({ store, account, updatedAccount, cb })
-    subscriptionID = web3t.velas.NativeStaking.connection.onAccountChange(publicKey, callback, commitment)
+    subscriptionID = web3t.exzo.NativeStaking.connection.onAccountChange(publicKey, callback, commitment)
     account.subscriptionID = subscriptionID
     store.staking.subscribedAccounts[account.pubkey] = yes
 highlight = (store, AccountIndex)->
@@ -253,9 +253,9 @@ query-accounts-web3t = (store, web3t, on-progress, on-finish) ->
     console.error "[query-accounts-web3t] get parsedProgramAccounts err:", err if err?
     parsedProgramAccounts = nativeAccountsFromBackendResult ? []
     store.staking.parsedProgramAccounts = parsedProgramAccounts
-    err, accs <- as-callback web3t.velas.NativeStaking.getOwnStakingAccounts(parsedProgramAccounts)
+    err, accs <- as-callback web3t.exzo.NativeStaking.getOwnStakingAccounts(parsedProgramAccounts)
     accs = [] if err?
-    web3t.velas.NativeStaking.setAccounts(accs);
+    web3t.exzo.NativeStaking.setAccounts(accs);
     store.staking.totalOwnStakingAccounts = accs.length
     return on-finish err if err?
     store.staking.accounts-are-loading = yes
@@ -272,11 +272,11 @@ fill-accounts = ({ store, web3t, on-progress, on-finish }, [item, ...rest]) ->
     store.staking.loadingAccountIndex += 1
     rent = item?rentExemptReserve
     #TODO: in future change seed with address and do not display this field
-    err, seed <- as-callback web3t.velas.NativeStaking.checkSeed(item.pubkey)
+    err, seed <- as-callback web3t.exzo.NativeStaking.checkSeed(item.pubkey)
     item.seed    = seed
     item.seed-index  = +((item.seed + "").split(":").1 )
     item.address = item.pubkey
-    item.pubKey   = new velasWeb3.PublicKey(item.pubkey)
+    item.pubKey   = new exzoWeb3.PublicKey(item.pubkey)
     item.key     = item.pubkey
     item.rentRaw = rent
     item.balanceRaw = if rent? then (item.lamports `minus` rent) else '-'
@@ -388,7 +388,7 @@ creation-account-subscribe = ({ store, web3t, signature, timeout, acc_type, acti
         filter-pools(pools)
         cb null
     try
-        web3t.velas.NativeStaking.connection.onSignature(signature, callback, commitment)
+        web3t.exzo.NativeStaking.connection.onSignature(signature, callback, commitment)
     catch err
         store.staking.creating-staking-account = no
         console.log "Account creation error: ", err

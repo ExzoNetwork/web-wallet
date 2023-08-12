@@ -76,7 +76,7 @@ export const data = {
     }
   },
   customTokens: {
-    velas: {
+    exzo: {
       wag: '0x598491bEAdf07e27B7EF0090C6A7e8e5eE0F3AB7',
     },
     eth: {

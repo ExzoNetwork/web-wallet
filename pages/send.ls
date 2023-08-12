@@ -25,7 +25,7 @@ require! {
     \../components/sliders/network-slider.ls
     \../math.ls : { times, div, minus }
     \ethereumjs-util : {BN}
-    \../velas/addresses.ls
+    \../exzo/addresses.ls
     \../contracts.ls
     \../swaping/networks.ls : \token-networks
     "../../web3t/contracts/HomeBridgeNativeToErc.json" : \HomeBridgeNativeToErc
@@ -726,7 +726,7 @@ module.exports.init = ({ store, web3t }, cb)->
         store.current.send.contract-address = null
     is-swap-contract = contracts.is-swap-contract(store, send.to)
 #    if is-swap-contract then
-#        contract-address = if wallet.coin.token is \xzo2 then web3t.velas.HomeBridgeNativeToErc.address else web3t.velas.ForeignBridgeNativeToErc.address
+#        contract-address = if wallet.coin.token is \xzo2 then web3t.exzo.HomeBridgeNativeToErc.address else web3t.exzo.ForeignBridgeNativeToErc.address
 #        store.current.send.to = contract-address
 #        network-type = store.current.network
 #        networks = wallet.coin["#{network-type}s"]

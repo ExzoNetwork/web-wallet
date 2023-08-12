@@ -30,7 +30,7 @@ require! {
     \bs58
     \assert
     \moment
-    \./velas/velas-web3.ls
+    \./exzo/exzo-web3.ls
     \./icons.ls
 }
 abis =
@@ -187,11 +187,11 @@ module.exports = (store, web3t)->
     is-self-send = up(wallet.address) is up(store.current.send.to)
     /* DONE! */
     /*
-    * Swap from USDC to USDC VELAS
+    * Swap from USDC to USDC exzo
     */
-    usdc_to_usdc_velas_swap = (token, chosen-network, cb)->
+    usdc_to_usdc_exzo_swap = (token, chosen-network, cb)->
         return cb null if not (token is \usdc and chosen-network.id is \xzo_usdc)
-        web3 = velas-web3 store
+        web3 = exzo-web3 store
         { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
         value = store.current.send.amountSend
         value = (value `times` (10^6))
@@ -232,11 +232,11 @@ module.exports = (store, web3t)->
         cb null, data
     /* DONE! */
     /*
-    * Swap from USDC VELAS to USDC
+    * Swap from USDC exzo to USDC
     */
-    usdc_velas_to_usdc_swap = (token, chosen-network, cb)->
+    usdc_exzo_to_usdc_swap = (token, chosen-network, cb)->
         return cb null if not (token is \xzo_usdc and chosen-network.id is \usdc)
-        web3 = velas-web3 store
+        web3 = exzo-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network
         return cb "HOME_BRIDGE is not defined" if not HOME_BRIDGE?
         return cb "HOME_BRIDGE_TOKEN is not defined" if not HOME_BRIDGE_TOKEN?
@@ -263,9 +263,9 @@ module.exports = (store, web3t)->
         store.current.send.data = data
         cb null, data
     /* DONE! */
-    busd_velas_to_busd_swap = (token, chosen-network, cb)->
+    busd_exzo_to_busd_swap = (token, chosen-network, cb)->
         return cb null if not (token is \xzo_busd and chosen-network.id is \busd)
-        web3 = velas-web3 store
+        web3 = exzo-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network
         value = store.current.send.amountSend
         value = (value `times` (10^18))
@@ -287,7 +287,7 @@ module.exports = (store, web3t)->
         store.current.send.data = data
         cb null, data
     /* DONE! */
-    busd_to_busd_velas_swap = (token, chosen-network, cb)->
+    busd_to_busd_exzo_swap = (token, chosen-network, cb)->
         return cb null if not (token is \busd and chosen-network.id is \xzo_busd)
         { wallets } = store.current.account
         chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
@@ -375,11 +375,11 @@ module.exports = (store, web3t)->
             return cb err, res
         check-approve.timer = set-interval check-tx-confirmation({start, token, network, tx}, timer-cb), 1000
     /*
-    * Swap from USDT ETHEREUM to USDT VELAS
+    * Swap from USDT ETHEREUM to USDT exzo
     */
-    eth_usdt-usdt_velas-swap = (token, chosen-network, cb)->
+    eth_usdt-usdt_exzo-swap = (token, chosen-network, cb)->
         return cb null if not (token is \usdt_erc20 and chosen-network.id is \xzo_usdt)
-        web3 = velas-web3 store
+        web3 = exzo-web3 store
         { FOREIGN_BRIDGE, FOREIGN_BRIDGE_TOKEN } = wallet.network
         return cb "FOREIGN_BRIDGE is not defined" if not FOREIGN_BRIDGE?
         return cb "FOREIGN_BRIDGE_TOKEN is not defined" if not FOREIGN_BRIDGE_TOKEN?
@@ -414,11 +414,11 @@ module.exports = (store, web3t)->
         return cb err if err?
         cb null, data
     /*
-    * Swap from USDT VELAS to USDT ETHEREUM
+    * Swap from USDT exzo to USDT ETHEREUM
     */
-    usdt_velas-eth_usdt-swap = (token, chosen-network, cb)->
+    usdt_exzo-eth_usdt-swap = (token, chosen-network, cb)->
         return cb null if not (token is \xzo_usdt and chosen-network.id is \usdt_erc20)
-        web3 = velas-web3 store
+        web3 = exzo-web3 store
         { HOME_BRIDGE, HOME_BRIDGE_TOKEN } = wallet.network
         value = store.current.send.amountSend
         value = (value `times` (10^6))
@@ -455,28 +455,28 @@ module.exports = (store, web3t)->
             cb null
         func =
             | token is \usdt_erc20 and chosen-network.id is \xzo_usdt =>
-                /* Swap from USDT ETHEREUM to USDT VELAS  */
-                eth_usdt-usdt_velas-swap
+                /* Swap from USDT ETHEREUM to USDT exzo  */
+                eth_usdt-usdt_exzo-swap
             | token is \xzo_usdt and chosen-network.id is \usdt_erc20 =>
-                /* Swap from USDT VELAS to USDT ETHEREUM */
-                usdt_velas-eth_usdt-swap
+                /* Swap from USDT exzo to USDT ETHEREUM */
+                usdt_exzo-eth_usdt-swap
             | token is \busd and chosen-network.id is \xzo_busd =>
-                /* Swap from BUSD to BUSD VELAS */
-                busd_to_busd_velas_swap
+                /* Swap from BUSD to BUSD exzo */
+                busd_to_busd_exzo_swap
             | token is \xzo_busd and chosen-network.id is \busd =>
-                /* Swap from BUSD VELAS to BUSD */
-                busd_velas_to_busd_swap
+                /* Swap from BUSD exzo to BUSD */
+                busd_exzo_to_busd_swap
             | token is \usdc and chosen-network.id is \xzo_usdc =>
-                /* Swap from USDC to USDC VELAS */
-                usdc_to_usdc_velas_swap
+                /* Swap from USDC to USDC exzo */
+                usdc_to_usdc_exzo_swap
             | token is \xzo_usdc and chosen-network.id is \usdc =>
-                /* Swap from USDC VELAS to USDC */
-                usdc_velas_to_usdc_swap
+                /* Swap from USDC exzo to USDC */
+                usdc_exzo_to_usdc_swap
             | _ => dummy
         err, data <- func(token, chosen-network)
         return cb err if err?
         /* DONE */
-        /* Swap from VELAS EVM to HECO */
+        /* Swap from exzo EVM to HECO */
         if token is \xzo_evm and chosen-network.id is \xzo_huobi then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
@@ -499,7 +499,7 @@ module.exports = (store, web3t)->
             send.data = data
             store.current.send.contract-address = HECO_SWAP__HOME_BRIDGE
         /* DONE! */
-        /* Swap from HECO to VELAS EVM */
+        /* Swap from HECO to exzo EVM */
         if token is \xzo_huobi and chosen-network.id is \xzo_evm
             value = store.current.send.amountSend
             value = value `times` (10^18)
@@ -531,7 +531,7 @@ module.exports = (store, web3t)->
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN
         /* DONE! */
-        /* Swap from VELAS EVM to HECO */
+        /* Swap from exzo EVM to HECO */
         if token is \xzo_evm and chosen-network.id is \bsc_xzo then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
@@ -562,7 +562,7 @@ module.exports = (store, web3t)->
                 return cb "Max amount per transaction is #{maxPerTx} XZO"
             send.data = data
             store.current.send.contract-address = BSC_SWAP__HOME_BRIDGE
-        /* Swap from BSC VELAS to VELAS EVM */
+        /* Swap from BSC exzo to exzo EVM */
         if token is \bsc_xzo and chosen-network.id is \xzo_evm
             value = store.current.send.amountSend
             value = value `times` (10^18)
@@ -590,7 +590,7 @@ module.exports = (store, web3t)->
             send.data = data
             send.contract-address = FOREIGN_BRIDGE_TOKEN
         /* DONE! */
-        /* Swap from ETH to ETHEREUM (VELAS) */
+        /* Swap from ETH to ETHEREUM (exzo) */
         if token is \eth and chosen-network.id is \xzo_eth then
             { wallets } = store.current.account
             chosen-network-wallet = wallets |> find (-> it.coin.token is chosen-network.id)
@@ -616,7 +616,7 @@ module.exports = (store, web3t)->
             #data = contract.relayTokens.get-data(receiver)
             send.data = data
         /* DONE! */
-        /* Swap from ETHEREUM (VELAS) to ETH  */
+        /* Swap from ETHEREUM (exzo) to ETH  */
         if token is \xzo_eth and chosen-network.id is \eth then
             value = store.current.send.amountSend
             value = (value `times` (10^18))
@@ -678,14 +678,14 @@ module.exports = (store, web3t)->
             { HOME_BRIDGE } = wallet.network
             receiver = store.current.send.to
             network = wallet.network
-            minPerTxRaw = web3t.velas.HomeBridgeNativeToErc.minPerTx!
+            minPerTxRaw = web3t.exzo.HomeBridgeNativeToErc.minPerTx!
             minPerTx = minPerTxRaw `div` (10 ^ network.decimals)
-            maxPerTxRaw = web3t.velas.HomeBridgeNativeToErc.maxAvailablePerTx!
+            maxPerTxRaw = web3t.exzo.HomeBridgeNativeToErc.maxAvailablePerTx!
             maxPerTx = maxPerTxRaw `div` (10 ^ network.decimals)
-            #homeFeeRaw = web3t.velas.HomeBridgeNativeToErc.getHomeFee!
+            #homeFeeRaw = web3t.exzo.HomeBridgeNativeToErc.getHomeFee!
             #homeFee = homeFeeRaw `div` (10 ^ network.decimals)
-            #data = web3t.velas.HomeBridgeNativeToErc.relayTokens.get-data(receiver)
-            data = web3t.velas.HomeBridgeNativeToErc.relayTokens.get-data(receiver)
+            #data = web3t.exzo.HomeBridgeNativeToErc.relayTokens.get-data(receiver)
+            data = web3t.exzo.HomeBridgeNativeToErc.relayTokens.get-data(receiver)
             if +send.amountSend < +(minPerTx) then
                 return cb "Min amount per transaction is #{minPerTx} XZO"
             if +send.amountSend > +maxPerTx then
@@ -706,8 +706,8 @@ module.exports = (store, web3t)->
             catch err
                 return cb "Please enter valid address"
             eth-address = \0x + hex
-            data = web3t.velas.EvmToNativeBridge.transferToNative.get-data(eth-address)
-            store.current.send.contract-address = web3t.velas.EvmToNativeBridge.address
+            data = web3t.exzo.EvmToNativeBridge.transferToNative.get-data(eth-address)
+            store.current.send.contract-address = web3t.exzo.EvmToNativeBridge.address
         #if not data? or data is "0x" then
             #return cb "Transaction data must be not empty"
         send.data = data

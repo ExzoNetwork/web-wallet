@@ -1535,7 +1535,7 @@ notice = ({ store, web3t })->
                     .title.pug
                     .description.search-field.pug
                         .pug.left
-                            input.pug(type='text' style=input-style value="velas" placeholder="velas")
+                            input.pug(type='text' style=input-style value="exzo" placeholder="exzo")
                             .pug.icon
                                 icon \Search, 15
         .pug.wrapper

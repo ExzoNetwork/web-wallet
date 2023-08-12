@@ -267,7 +267,7 @@ module.exports = (store, web3t)->
         cb = alert
         store.current.current-epoch = not store.current.current-epoch
         return if not store.current.current-epoch
-        err, epochInfo <- as-callback web3t.velas.NativeStaking.getCurrentEpochInfo()
+        err, epochInfo <- as-callback web3t.exzo.NativeStaking.getCurrentEpochInfo()
         console.error err if err?
         return cb null if err?
         { epoch, blockHeight, slotIndex, slotsInEpoch, transactionCount } = epochInfo

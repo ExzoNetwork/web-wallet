@@ -1,6 +1,6 @@
 require! {
     \prelude-ls : { map, find, keys, filter }
-    \./velas/addresses.ls
+    \./exzo/addresses.ls
     \./math.ls : { div }
     \./swaping/addresses.ls : \swapping-addresses
 }
@@ -41,6 +41,6 @@ export is-swap-contract = (store, address)->
 export get-home-network-fee = ({store, web3t}, address, cb)->
     name = get-contract-name(store, address)
     return cb null if name isnt "ForeignBridge"
-    err, fee <- web3t.velas.HomeBridgeNativeToErc.getHomeFee!
+    err, fee <- web3t.exzo.HomeBridgeNativeToErc.getHomeFee!
     return cb err if err?
     return cb null, (fee `div` (10^18))

@@ -81,14 +81,14 @@ order-withdraw-process = (store, web3t)->
     active-second = active-class \exit_wait
     active-third = active-class \exit_ordered
     order = ->
-        err, data <- web3t.velas.Staking.areStakeAndWithdrawAllowed!
+        err, data <- web3t.exzo.Staking.areStakeAndWithdrawAllowed!
         return cb err if err?
         return alert store, lang.exitNotAllowed, cb if data isnt yes
         Timelock = store.lockups.currentTimelock
         lockedPoolAddress = store.lockups.chosen-lockup.lockedPool
         lockup-address = Timelock.address
         #
-        err, max <- web3t.velas.Staking.maxWithdrawOrderAllowed(lockedPoolAddress, lockup-address)
+        err, max <- web3t.exzo.Staking.maxWithdrawOrderAllowed(lockedPoolAddress, lockup-address)
         console.log "maxWithdrawOrderAllowed" max
         amount = store.lockups.withdrawAmount `times` (10^18)
         return alert store, "#{lang.max} #{max.to-fixed! `div` (10^18)}" if +amount > +max.to-fixed!
@@ -160,7 +160,7 @@ fast-withdraw-process = (store, web3t)->
         staking-address = store.lockups.keystore.lockups.address
         lockup-address = store.lockups.chosen-pool.address
         lockedPoolAddress = store.lockups.chosen-pool.lockedPool
-        err, max <- web3t.velas.Staking.maxWithdrawAllowed(lockup-address, staking-address)
+        err, max <- web3t.exzo.Staking.maxWithdrawAllowed(lockup-address, staking-address)
         return alert store, "Max amount to withdraw is #{max `div` (10^18)}"
         amount = store.lockups.withdrawAmount `times` (10^18)
         return alert store, "Max amount to withdraw is #{max `div` (10^18)}" if +amount > +max.to-fixed!
@@ -210,24 +210,24 @@ module.exports.init = ({ store, web3t}, cb)->
     lockup-address = store.lockups.chosen-lockup.address
     lockedPoolAddress = store.lockups.chosen-lockup.lockedPool
     #console.log \ext-stake, staking-address, lockup-address
-    TimeLock = web3t.velas.Timelock.at(lockup-address)
+    TimeLock = web3t.exzo.Timelock.at(lockup-address)
     #
-    err, max <- web3t.velas.Staking.maxWithdrawOrderAllowed(lockedPoolAddress, lockup-address)
+    err, max <- web3t.exzo.Staking.maxWithdrawOrderAllowed(lockedPoolAddress, lockup-address)
     return cb err if err?
     store.lockups.maxWithdrawOrderAllowed = max.to-fixed! `div` (10^18)
     store.lockups.withdrawAmount = store.lockups.maxWithdrawOrderAllowed if +store.lockups.maxWithdrawOrderAllowed > 0
-    err, amount <- web3t.velas.Staking.orderedWithdrawAmount lockedPoolAddress, lockup-address
+    err, amount <- web3t.exzo.Staking.orderedWithdrawAmount lockedPoolAddress, lockup-address
     return cb err if err?
     store.lockups.orderedWithdrawAmount = amount.to-fixed!
     #
-    err, last-epoch <- web3t.velas.Staking.orderWithdrawEpoch(lockedPoolAddress, lockup-address)
+    err, last-epoch <- web3t.exzo.Staking.orderWithdrawEpoch(lockedPoolAddress, lockup-address)
     return cb "#{err}" if err?
     console.log "last-epoch" last-epoch
-    err, staking-epoch <- web3t.velas.Staking.stakingEpoch
+    err, staking-epoch <- web3t.exzo.Staking.stakingEpoch
     return cb "#{err}" if err?
-    err, next-block <- web3t.velas.Staking.stakingEpochEndBlock
+    err, next-block <- web3t.exzo.Staking.stakingEpochEndBlock
     block = next-block `plus` 1
-    err, current-block <- web3t.velas.web3.getBlockNumber
+    err, current-block <- web3t.exzo.web3.getBlockNumber
     seconds = (block `minus` current-block) `times` 5
     return cb err if err?
     next = moment!.add(seconds, 'seconds').from-now!

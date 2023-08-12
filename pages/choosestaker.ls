@@ -12,7 +12,7 @@ require! {
     \./icon.ls
     \prelude-ls : { map, split, filter, find, foldl, sort-by, unique, head, each, obj-to-pairs }
     \../math.ls : { div, times, plus, minus }
-    \../velas/velas-node-template.ls
+    \../exzo/exzo-node-template.ls
     \../../web3t/providers/deps.js : { hdkey, bip39 }
     \md5
     \../menu-funcs.ls
@@ -618,7 +618,7 @@ staking-content = (store, web3t)->
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
         return cb null if i-am-staker
-        err, data <- web3t.velas.Staking.candidateMinStake
+        err, data <- web3t.exzo.Staking.candidateMinStake
         return cb err if err?
         min =
             | +store.staking.stake-amount-total >= 10000 => 1
@@ -827,15 +827,15 @@ validators.init = ({ store, web3t }, cb)!->
     else
         store.staking.pools-network = store.current.network
     store.staking.pools = []
-    err, rent <- as-callback web3t.velas.NativeStaking.connection.getMinimumBalanceForRentExemption(200)
+    err, rent <- as-callback web3t.exzo.NativeStaking.connection.getMinimumBalanceForRentExemption(200)
     rent = 2282880 if err?
     rent = rent `div` (10^9)
     store.staking.rent = rent   
     wallet = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     return cb null if not wallet?
-    web3t.velas.NativeStaking.setAccountPublicKey(wallet.publicKey)
-    web3t.velas.NativeStaking.setAccountSecretKey(wallet.secretKey)
-    err, parsedProgramAccounts <- as-callback web3t.velas.NativeStaking.getParsedProgramAccounts()
+    web3t.exzo.NativeStaking.setAccountPublicKey(wallet.publicKey)
+    web3t.exzo.NativeStaking.setAccountSecretKey(wallet.secretKey)
+    err, parsedProgramAccounts <- as-callback web3t.exzo.NativeStaking.getParsedProgramAccounts()
     parsedProgramAccounts = [] if err?
     store.staking.parsedProgramAccounts = parsedProgramAccounts 
     # get validators array

@@ -69,25 +69,25 @@ fill-pools = ({ store, web3t, on-progress, on-finish }, [item, ...rest]) ->
         store.staking.all-pools-loaded = no
         store.staking.pools-are-loading = no
         return on-finish null, []
-    err, data <- web3t.velas.Staking.stakeAmountTotal item.address
+    err, data <- web3t.exzo.Staking.stakeAmountTotal item.address
     return on-finish err if err?
     item.stake = data
-    err, delegators <- web3t.velas.Staking.poolDelegators(item.address)
+    err, delegators <- web3t.exzo.Staking.poolDelegators(item.address)
     return on-finish err if err?
     item.stakers = delegators.length + 1
-    err, mining-address <- web3t.velas.ValidatorSet.miningByStakingAddress(item.address)
+    err, mining-address <- web3t.exzo.ValidatorSet.miningByStakingAddress(item.address)
     return on-finish err if err?
     item.mining-address = mining-address
-    err, validator-reward-percent <- web3t.velas.BlockReward.validatorRewardPercent item.address
+    err, validator-reward-percent <- web3t.exzo.BlockReward.validatorRewardPercent item.address
     return on-finish err if err?
     item.validator-reward-percent = validator-reward-percent `div` 10000
-    err, is-validator-banned <- web3t.velas.ValidatorSet.isValidatorBanned(mining-address)
+    err, is-validator-banned <- web3t.exzo.ValidatorSet.isValidatorBanned(mining-address)
     return on-finish err if err?
-    err, amount <- web3t.velas.Staking.stakeAmount item.address, staking-address
+    err, amount <- web3t.exzo.Staking.stakeAmount item.address, staking-address
     return on-finish err if err?
-    err, node-stake <- web3t.velas.Staking.stakeAmount item.address, item.address
+    err, node-stake <- web3t.exzo.Staking.stakeAmount item.address, item.address
     return on-finish err if err?
-    err, withdraw-amount <- web3t.velas.Staking.orderedWithdrawAmount item.address, staking-address
+    err, withdraw-amount <- web3t.exzo.Staking.orderedWithdrawAmount item.address, staking-address
     return on-finish err if err?
     item.withdraw-amount = withdraw-amount
     item.my-stake = amount
@@ -100,9 +100,9 @@ fill-pools = ({ store, web3t, on-progress, on-finish }, [item, ...rest]) ->
         on-progress [item, ...pools]
     fill-pools { store, web3t, on-progress: on-progress-local, on-finish: on-finish-local }, rest
 query-pools-web3t = (store, web3t, on-progress, on-finish) ->
-    err, pools-inactive <- web3t.velas.Staking.getPoolsInactive
+    err, pools-inactive <- web3t.exzo.Staking.getPoolsInactive
     return cb err if err?
-    err, pools <- web3t.velas.Staking.getPools
+    err, pools <- web3t.exzo.Staking.getPools
     return cb err if err?
     all-pools = pools ++ pools-inactive
     all-pools =

@@ -760,7 +760,7 @@ video = (store, web3t)->
         .pug.section
             .source.pug
                 iframe.pug(width='560' height='315' src='https://www.youtube.com/embed/USGLlp-zfhI' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
-                .pug.header Velas Explainer Video
+                .pug.header exzo Explainer Video
                 ul.pug.stat
                     li.pug(key="custom-views11")
                         span.pug 1.4K views
@@ -794,9 +794,9 @@ comments = (store, web3t)->
             img.pug.account(src="#{info.branding.logo}")
         span.pug.action
             ul.pug.stat
-                li.pug(key="velasnetworkag")
-                    span.user.pug Velas Network AG
-                li.pug(key="velasnetworkag-date")
+                li.pug(key="exzonetworkag")
+                    span.user.pug exzo Network AG
+                li.pug(key="exzonetworkag-date")
                     span.pug 1 week ago
             .pug.header There will be any comment on this video..
             ul.pug.rating
@@ -883,11 +883,11 @@ next = (store, web3t)->
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/2jdA5EwQV9M' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header How to setup New Velas Web Wallet Tutorial
+                    .pug.header How to setup New exzo Web Wallet Tutorial
                     ul.pug.stat
-                        li.pug(key="velas logo")
-                            span.pug Velas
-                        li.pug(key="velas views")
+                        li.pug(key="exzo logo")
+                            span.pug exzo
+                        li.pug(key="exzo views")
                             span.pug 122 views • 5 days ago
 similarvideo = (store, web3t)->
     lang = get-lang store
@@ -954,11 +954,11 @@ similarvideo = (store, web3t)->
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/USGLlp-zfhI' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header Velas Explainer Video
+                    .pug.header exzo Explainer Video
                     ul.pug.stat
-                        li.pug(key="velas-expl-video")
-                            span.pug Velas
-                        li.pug(key="velas-views")
+                        li.pug(key="exzo-expl-video")
+                            span.pug exzo
+                        li.pug(key="exzo-views")
                             span.pug 1.4K views • 8 days ago
         .pug.section
             .source.pug(on-click=goto-details)
@@ -966,11 +966,11 @@ similarvideo = (store, web3t)->
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/2jdA5EwQV9M' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header How to setup New Velas Web Wallet Tutorial
+                    .pug.header How to setup New exzo Web Wallet Tutorial
                     ul.pug.stat
-                        li.pug(key="velas-logo2")
-                            span.pug Velas
-                        li.pug(key="velas-ago2")
+                        li.pug(key="exzo-logo2")
+                            span.pug exzo
+                        li.pug(key="exzo-ago2")
                             span.pug 122 views • 5 days ago
         .pug.section
             .source.pug(on-click=goto-details)
@@ -978,11 +978,11 @@ similarvideo = (store, web3t)->
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/USGLlp-zfhI' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header Velas Explainer Video
+                    .pug.header exzo Explainer Video
                     ul.pug.stat
-                        li.pug(key="velas-logo4")
-                            span.pug Velas
-                        li.pug(key="velas-ago5")
+                        li.pug(key="exzo-logo4")
+                            span.pug exzo
+                        li.pug(key="exzo-ago5")
                             span.pug 1.4K views • 8 days ago
 videodetails = ({ store, web3t })->
     lang = get-lang store
@@ -1059,7 +1059,7 @@ videodetails = ({ store, web3t })->
                         span.pug Vortex
                 .description.search-field.pug
                     .pug.left
-                        input.pug(type='text' style=input-style value="velas" placeholder="velas")
+                        input.pug(type='text' style=input-style value="exzo" placeholder="exzo")
                         .pug.icon
                             icon \Search, 15
         .pug.wrapper

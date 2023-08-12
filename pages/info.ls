@@ -275,7 +275,7 @@ info = ({ store, web3t })->
 module.exports = info
 feel-reward = ({ store, web3t, epoch }, [pool, ...pools], cb)->
     return cb null, [] if not pool?
-    err, reward-number <- web3t.velas.BlockReward.epochPoolNativeReward(epoch, pool.mining-address)
+    err, reward-number <- web3t.exzo.BlockReward.epochPoolNativeReward(epoch, pool.mining-address)
     #console.log \epochPoolNativeReward,  epoch, pool.address, err, reward.to-fixed!
     return cb err if err?
     <- set-immediate
@@ -299,7 +299,7 @@ module.exports.init = ({ store, web3t }, cb)->
 module.exports.focus = ({ store, web3t}, cb)->
     err <- validators.focus { store, web3t }
     return cb err if err?
-    #err, epoch <- web3t.velas.Staking.stakingEpoch
+    #err, epoch <- web3t.exzo.Staking.stakingEpoch
     #return cb err if err?
     #epoch-reward = 20
     #err, data <- feel-rewards { store, web3t }, [epoch-reward]

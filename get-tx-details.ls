@@ -1,5 +1,5 @@
 require! {
-    \./velas/addresses.ls
+    \./exzo/addresses.ls
     \prelude-ls : { map, filter, obj-to-pairs, find }
     \./round-human.ls
     \./round-number.ls
@@ -27,7 +27,7 @@ module.exports = (store, web3t)->
             wallet-receiver = store.current.account.wallets |> find (-> it.coin.token is receiver-token)
             receiverGroup =
                 | receiver-token is \xzo_native => "Exzo Native"
-                | (wallet-receiver?network?group ? "").to-lower-case! is \velas => "Exzo EVM" 
+                | (wallet-receiver?network?group ? "").to-lower-case! is \exzo => "Exzo EVM" 
                 | _ => wallet-receiver?network?group
             homeFeePercent = store.current.send.homeFeePercent
             homeFee =

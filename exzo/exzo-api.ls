@@ -1,8 +1,8 @@
 require! {
-    \./velas-web3.ls
+    \./exzo-web3.ls
     \./addresses.ls
-    \./velas-solana-web3.ls
-    \./velas-staking.js : \NStaking
+    \./exzo-solana-web3.ls
+    \./exzo-staking.js : \NStaking
     \prelude-ls : {find}
 }
 abis =
@@ -20,7 +20,7 @@ abis =
     HomeERC677Bridge: require("../../web3t/contracts/HomeBridgeNativeToErc.json").abi 
     ForeignBridgeErcToErc: require("../../web3t/contracts/ForeignBridgeErcToErc.json").abi
 module.exports = (store)->
-    web3 = velas-web3 store
+    web3 = exzo-web3 store
     network = store.current.network
     staking-address = addresses[network].Staking if addresses[network]?Staking?
     validatorSet-address = addresses[network].ValidatorSet if addresses[network]?ValidatorSet?
@@ -34,7 +34,7 @@ module.exports = (store)->
     EvmToNativeBridgeAddress = addresses[network].EvmToNative if addresses[network]?EvmToNative?
     HomeERC677BridgeAddress = addresses[network].HomeERC677Bridge if addresses[network]?HomeERC677Bridge?
     ForeignBridgeErcToErcAddress = addresses[network].ForeignBridgeErcToErcAddress if addresses[network]?ForeignBridgeErcToErcAddress?
-    web3Solana = velas-solana-web3 store
+    web3Solana = exzo-solana-web3 store
     networks =
         mainnet: \https://rpc-main-1.exzo.network
         testnet: \https://rpc-test-1.exzo.network/rpc

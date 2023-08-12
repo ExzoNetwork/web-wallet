@@ -162,7 +162,7 @@ staking-accounts-content = (store, web3t)->
                 |> find -> it.coin.token is \xzo_native
         wallet?balance ? 0
     get-options = (cb)->
-        err, data <- web3t.velas.Staking.candidateMinStake
+        err, data <- web3t.exzo.Staking.candidateMinStake
         return cb err if err?
         min =
             | +store.staking-accounts.stake-amount-total >= 10000 => 1
@@ -216,7 +216,7 @@ staking-accounts-content = (store, web3t)->
         balanceRaw = if rent? then lamports `minus` rent else lamports
         highlight = item.highlight
         activeBalanceIsZero =  +active_stake is 0
-        max-epoch = web3t.velas.NativeStaking.max_epoch
+        max-epoch = web3t.exzo.NativeStaking.max_epoch
         is-activating = activeBalanceIsZero and validator?
         has-validator = (item.validator? and item.validator isnt '') and (activationEpoch? and deactivationEpoch?) and (activationEpoch isnt deactivationEpoch)
         $status =
@@ -244,7 +244,7 @@ staking-accounts-content = (store, web3t)->
             agree <- confirm store, lang.areYouSureToUndelegate + " #{undelegate-amount} XZO \nfrom #{item.validator} ?"
             return if agree is no 
             #
-            err, result <- as-callback web3t.velas.NativeStaking.undelegate(item.address)
+            err, result <- as-callback web3t.exzo.NativeStaking.undelegate(item.address)
             console.error "Undelegate error: " err if err?
             return alert store, err.toString! if err?
             <- notify store, lang.fundsUndelegated
@@ -270,7 +270,7 @@ staking-accounts-content = (store, web3t)->
             return if agree is no
             { balanceRaw, rent, address, account, pubkey } = item
             amount = lamports `plus` rent
-            err, result <- as-callback web3t.velas.NativeStaking.withdraw(address, amount)
+            err, result <- as-callback web3t.exzo.NativeStaking.withdraw(address, amount)
             err-message = get-error-message(err, result)
             return alert store, err-message if err-message?
             <- set-timeout _, 1000
@@ -366,7 +366,7 @@ staking-accounts-content = (store, web3t)->
         buffer.amount = amount
         create-staking-account.InProcess = yes
         store.staking.creating-staking-account = yes
-        min_stake = web3t.velas.NativeStaking.min_stake
+        min_stake = web3t.exzo.NativeStaking.min_stake
         main_balance = get-balance!
         tx-fee = 5000 `div` (10^9)
         rest = 0.1
@@ -384,7 +384,7 @@ staking-accounts-content = (store, web3t)->
             create-staking-account.InProcess = no
             return alert store, lang.balanceIsNotEnoughToSpend + " #{(amount)} XZO"
         amount = buffer.amount * 10^9
-        err, result <- as-callback web3t.velas.NativeStaking.createAccount(amount)
+        err, result <- as-callback web3t.exzo.NativeStaking.createAccount(amount)
         if err?
             create-staking-account.InProcess = no
             store.staking.creating-staking-account = no

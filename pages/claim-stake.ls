@@ -376,7 +376,7 @@ calc-reward-epoch = (store, web3t, check, [item, ...items], cb)->
     return cb null if not item?
     staking-address = store.staking.keystore.staking.address
     pool-address = store.staking.chosen-pool.address
-    err, reward-long <- web3t.velas.Staking.getRewardAmount([item.epoch], pool-address, staking-address)
+    err, reward-long <- web3t.exzo.Staking.getRewardAmount([item.epoch], pool-address, staking-address)
     return cb err if err?
     next-check = check - 1
     return cb null if next-check < 0
@@ -404,7 +404,7 @@ calc-reward = (store, web3t)->
     store.staking.reward-loading = yes
     mining-address =  store.staking.keystore.mining.address
     staking-address = store.staking.keystore.staking.address
-    err, epochs <- web3t.velas.BlockReward.epochsToClaimRewardFrom(store.staking.chosen-pool.address, staking-address)
+    err, epochs <- web3t.exzo.BlockReward.epochsToClaimRewardFrom(store.staking.chosen-pool.address, staking-address)
     return cb err if err?
     epochs = epochs.sort((a,b) -> a.compared-to b)
     store.staking.rewards =
@@ -456,8 +456,8 @@ module.exports = (store, web3t)->
         rest = epochs.length - max
         return alert lang.epochLength.replace("^", max).replace('^', rest) if rest > 0
         #staking-address = store.staking.keystore.staking.address
-        data = web3t.velas.Staking.claimReward.get-data(epochs, store.staking.chosen-pool.address)
-        to = web3t.velas.Staking.address
+        data = web3t.exzo.Staking.claimReward.get-data(epochs, store.staking.chosen-pool.address)
+        to = web3t.exzo.Staking.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
     bg=

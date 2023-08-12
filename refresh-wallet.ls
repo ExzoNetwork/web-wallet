@@ -5,12 +5,12 @@ require! {
     \./workflow.ls : { run, task }
     \./math.ls : { div, times }
     \prelude-ls : { find }
-    "./../web3t/providers/solana/index.cjs" : \velasWeb3
+    "./../web3t/providers/solana/index.cjs" : \exzoWeb3
     \./api.ls : { get-balance }
 }
 
 nativeSubscriptions = {}
-subscribe-to-velas-account = (store, web3t)->
+subscribe-to-exzo-account = (store, web3t)->
     wallet-native = store.current.account.wallets |> find (-> it.coin.token is \xzo_native)
     wallet-evm = store.current.account.wallets |> find (-> it.coin.token is \xzo_evm)
     save-key = "#{store.current.network}_#{wallet-native.publicKey}"
@@ -19,7 +19,7 @@ subscribe-to-velas-account = (store, web3t)->
     { rates } = store
 
     try
-        publicKey = new velasWeb3.PublicKey(wallet-native.publicKey)
+        publicKey = new exzoWeb3.PublicKey(wallet-native.publicKey)
         callback = (updatedAccount)->
             lamports = updatedAccount.lamportsStr || updatedAccount.lamports
             return if not lamports?
@@ -42,7 +42,7 @@ subscribe-to-velas-account = (store, web3t)->
                 if usd-rate then
                     wallet-evm2.balance-usd = wallet-evm2.balance `times` usd-rate
         commitment = 'finalized'
-        id = web3t.velas.NativeStaking.connection.onAccountChange(publicKey, callback, commitment)
+        id = web3t.exzo.NativeStaking.connection.onAccountChange(publicKey, callback, commitment)
         nativeSubscriptions["#{save-key}"] = id if id?
     catch err
         console.log "ws onAccountChange err: " err
@@ -57,7 +57,7 @@ refresh-wallet = (web3, store, cb)->
     task4 = task (cb)->
         get-market-coins-history store, cb 
     <- run [ task1, task3 ] .then
-    subscribe-to-velas-account(store, web3)
+    subscribe-to-exzo-account(store, web3)
     store.current.refreshing = no
     store.forceReload = no
     cb null

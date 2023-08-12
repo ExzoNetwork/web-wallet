@@ -42,7 +42,7 @@
     BN,
     bs58,
     assert,
-    velasWeb3,
+    exzoWeb3,
     icons,
     abis,
     out$ = (typeof exports != 'undefined' && exports) || this;
@@ -89,7 +89,7 @@
   BN = require('ethereumjs-util').BN;
   bs58 = require('bs58');
   assert = require('assert');
-  velasWeb3 = require('./velas/velas-web3.ls');
+  exzoWeb3 = require('./exzo/exzo-web3.ls');
   icons = require('./icons.ls');
   abis = {
     Staking: require('../web3t/contracts/StakingAuRa.json').abi,
@@ -521,15 +521,15 @@
       sendEscrow,
       up,
       isSelfSend,
-      usdc_to_usdc_velas_swap,
-      usdc_velas_to_usdc_swap,
-      busd_velas_to_busd_swap,
-      busd_to_busd_velas_swap,
+      usdc_to_usdc_exzo_swap,
+      usdc_exzo_to_usdc_swap,
+      busd_exzo_to_busd_swap,
+      busd_to_busd_exzo_swap,
       checkAllowedAmount,
       checkTxConfirmation,
       checkApprove,
-      eth_usdtUsdt_velasSwap,
-      usdt_velasEth_usdtSwap,
+      eth_usdtUsdt_exzoSwap,
+      usdt_exzoEth_usdtSwap,
       executeContractData,
       beforeSendAnyway,
       sendAnyway,
@@ -914,9 +914,9 @@
     isSelfSend = up(wallet.address) === up(store.current.send.to);
     /* DONE! */
     /*
-     * Swap from USDC to USDC VELAS
+     * Swap from USDC to USDC exzo
      */
-    usdc_to_usdc_velas_swap = function (token, chosenNetwork, cb) {
+    usdc_to_usdc_exzo_swap = function (token, chosenNetwork, cb) {
       var web3,
         ref$,
         FOREIGN_BRIDGE,
@@ -944,7 +944,7 @@
       if (!(token === 'usdc' && chosenNetwork.id === 'xzo_usdc')) {
         return cb(null);
       }
-      web3 = velasWeb3(store);
+      web3 = exzoWeb3(store);
       (ref$ = wallet.network),
         (FOREIGN_BRIDGE = ref$.FOREIGN_BRIDGE),
         (FOREIGN_BRIDGE_TOKEN = ref$.FOREIGN_BRIDGE_TOKEN);
@@ -1043,9 +1043,9 @@
     };
     /* DONE! */
     /*
-     * Swap from USDC VELAS to USDC
+     * Swap from USDC exzo to USDC
      */
-    usdc_velas_to_usdc_swap = function (token, chosenNetwork, cb) {
+    usdc_exzo_to_usdc_swap = function (token, chosenNetwork, cb) {
       var web3,
         ref$,
         HOME_BRIDGE,
@@ -1066,7 +1066,7 @@
       if (!(token === 'xzo_usdc' && chosenNetwork.id === 'usdc')) {
         return cb(null);
       }
-      web3 = velasWeb3(store);
+      web3 = exzoWeb3(store);
       (ref$ = wallet.network),
         (HOME_BRIDGE = ref$.HOME_BRIDGE),
         (HOME_BRIDGE_TOKEN = ref$.HOME_BRIDGE_TOKEN);
@@ -1123,7 +1123,7 @@
       return cb(null, data);
     };
     /* DONE! */
-    busd_velas_to_busd_swap = function (token, chosenNetwork, cb) {
+    busd_exzo_to_busd_swap = function (token, chosenNetwork, cb) {
       var web3,
         ref$,
         HOME_BRIDGE,
@@ -1143,7 +1143,7 @@
       if (!(token === 'xzo_busd' && chosenNetwork.id === 'busd')) {
         return cb(null);
       }
-      web3 = velasWeb3(store);
+      web3 = exzoWeb3(store);
       (ref$ = wallet.network),
         (HOME_BRIDGE = ref$.HOME_BRIDGE),
         (HOME_BRIDGE_TOKEN = ref$.HOME_BRIDGE_TOKEN);
@@ -1187,7 +1187,7 @@
       return cb(null, data);
     };
     /* DONE! */
-    busd_to_busd_velas_swap = function (token, chosenNetwork, cb) {
+    busd_to_busd_exzo_swap = function (token, chosenNetwork, cb) {
       var wallets,
         chosenNetworkWallet,
         ref$,
@@ -1451,9 +1451,9 @@
       ));
     };
     /*
-     * Swap from USDT ETHEREUM to USDT VELAS
+     * Swap from USDT ETHEREUM to USDT exzo
      */
-    eth_usdtUsdt_velasSwap = function (token, chosenNetwork, cb) {
+    eth_usdtUsdt_exzoSwap = function (token, chosenNetwork, cb) {
       var web3,
         ref$,
         FOREIGN_BRIDGE,
@@ -1476,7 +1476,7 @@
       if (!(token === 'usdt_erc20' && chosenNetwork.id === 'xzo_usdt')) {
         return cb(null);
       }
-      web3 = velasWeb3(store);
+      web3 = exzoWeb3(store);
       (ref$ = wallet.network),
         (FOREIGN_BRIDGE = ref$.FOREIGN_BRIDGE),
         (FOREIGN_BRIDGE_TOKEN = ref$.FOREIGN_BRIDGE_TOKEN);
@@ -1564,9 +1564,9 @@
       );
     };
     /*
-     * Swap from USDT VELAS to USDT ETHEREUM
+     * Swap from USDT exzo to USDT ETHEREUM
      */
-    usdt_velasEth_usdtSwap = function (token, chosenNetwork, cb) {
+    usdt_exzoEth_usdtSwap = function (token, chosenNetwork, cb) {
       var web3,
         ref$,
         HOME_BRIDGE,
@@ -1586,7 +1586,7 @@
       if (!(token === 'xzo_usdt' && chosenNetwork.id === 'usdt_erc20')) {
         return cb(null);
       }
-      web3 = velasWeb3(store);
+      web3 = exzoWeb3(store);
       (ref$ = wallet.network),
         (HOME_BRIDGE = ref$.HOME_BRIDGE),
         (HOME_BRIDGE_TOKEN = ref$.HOME_BRIDGE_TOKEN);
@@ -1663,23 +1663,23 @@
       func = (function () {
         switch (false) {
           case !(token === 'usdt_erc20' && chosenNetwork.id === 'xzo_usdt'):
-            /* Swap from USDT ETHEREUM to USDT VELAS  */
-            return eth_usdtUsdt_velasSwap;
+            /* Swap from USDT ETHEREUM to USDT exzo  */
+            return eth_usdtUsdt_exzoSwap;
           case !(token === 'xzo_usdt' && chosenNetwork.id === 'usdt_erc20'):
-            /* Swap from USDT VELAS to USDT ETHEREUM */
-            return usdt_velasEth_usdtSwap;
+            /* Swap from USDT exzo to USDT ETHEREUM */
+            return usdt_exzoEth_usdtSwap;
           case !(token === 'busd' && chosenNetwork.id === 'xzo_busd'):
-            /* Swap from BUSD to BUSD VELAS */
-            return busd_to_busd_velas_swap;
+            /* Swap from BUSD to BUSD exzo */
+            return busd_to_busd_exzo_swap;
           case !(token === 'xzo_busd' && chosenNetwork.id === 'busd'):
-            /* Swap from BUSD VELAS to BUSD */
-            return busd_velas_to_busd_swap;
+            /* Swap from BUSD exzo to BUSD */
+            return busd_exzo_to_busd_swap;
           case !(token === 'usdc' && chosenNetwork.id === 'xzo_usdc'):
-            /* Swap from USDC to USDC VELAS */
-            return usdc_to_usdc_velas_swap;
+            /* Swap from USDC to USDC exzo */
+            return usdc_to_usdc_exzo_swap;
           case !(token === 'xzo_usdc' && chosenNetwork.id === 'usdc'):
-            /* Swap from USDC VELAS to USDC */
-            return usdc_velas_to_usdc_swap;
+            /* Swap from USDC exzo to USDC */
+            return usdc_exzo_to_usdc_swap;
           default:
             return dummy;
         }
@@ -1732,7 +1732,7 @@
           return cb(err);
         }
         /* DONE */
-        /* Swap from VELAS EVM to HECO */
+        /* Swap from exzo EVM to HECO */
         if (token === 'xzo_evm' && chosenNetwork.id === 'xzo_huobi') {
           wallets = store.current.account.wallets;
           chosenNetworkWallet = find(function (it) {
@@ -1783,7 +1783,7 @@
           store.current.send.contractAddress = HECO_SWAP__HOME_BRIDGE;
         }
         /* DONE! */
-        /* Swap from HECO to VELAS EVM */
+        /* Swap from HECO to exzo EVM */
         if (token === 'xzo_huobi' && chosenNetwork.id === 'xzo_evm') {
           value = store.current.send.amountSend;
           value = times(value, Math.pow(10, 18));
@@ -1854,7 +1854,7 @@
           send.contractAddress = FOREIGN_BRIDGE_TOKEN;
         }
         /* DONE! */
-        /* Swap from VELAS EVM to HECO */
+        /* Swap from exzo EVM to HECO */
         if (token === 'xzo_evm' && chosenNetwork.id === 'bsc_xzo') {
           wallets = store.current.account.wallets;
           chosenNetworkWallet = find(function (it) {
@@ -1923,7 +1923,7 @@
           send.data = data;
           store.current.send.contractAddress = BSC_SWAP__HOME_BRIDGE;
         }
-        /* Swap from BSC VELAS to VELAS EVM */
+        /* Swap from BSC exzo to exzo EVM */
         if (token === 'bsc_xzo' && chosenNetwork.id === 'xzo_evm') {
           value = store.current.send.amountSend;
           value = times(value, Math.pow(10, 18));
@@ -1981,7 +1981,7 @@
           );
         }
         /* DONE! */
-        /* Swap from ETH to ETHEREUM (VELAS) */
+        /* Swap from ETH to ETHEREUM (exzo) */
         if (token === 'eth' && chosenNetwork.id === 'xzo_eth') {
           wallets = store.current.account.wallets;
           chosenNetworkWallet = find(function (it) {
@@ -2019,7 +2019,7 @@
           send.data = data;
         }
         /* DONE! */
-        /* Swap from ETHEREUM (VELAS) to ETH  */
+        /* Swap from ETHEREUM (exzo) to ETH  */
         if (token === 'xzo_eth' && chosenNetwork.id === 'eth') {
           value = store.current.send.amountSend;
           value = times(value, Math.pow(10, 18));
@@ -2129,12 +2129,12 @@
           HOME_BRIDGE = wallet.network.HOME_BRIDGE;
           receiver = store.current.send.to;
           network = wallet.network;
-          minPerTxRaw = web3t.velas.HomeBridgeNativeToErc.minPerTx();
+          minPerTxRaw = web3t.exzo.HomeBridgeNativeToErc.minPerTx();
           minPerTx = div(minPerTxRaw, Math.pow(10, network.decimals));
-          maxPerTxRaw = web3t.velas.HomeBridgeNativeToErc.maxAvailablePerTx();
+          maxPerTxRaw = web3t.exzo.HomeBridgeNativeToErc.maxAvailablePerTx();
           maxPerTx = div(maxPerTxRaw, Math.pow(10, network.decimals));
           data =
-            web3t.velas.HomeBridgeNativeToErc.relayTokens.getData(receiver);
+            web3t.exzo.HomeBridgeNativeToErc.relayTokens.getData(receiver);
           if (+send.amountSend < +minPerTx) {
             return cb('Min amount per transaction is ' + minPerTx + ' XZO');
           }
@@ -2166,9 +2166,9 @@
           }
           ethAddress = '0x' + hex;
           data =
-            web3t.velas.EvmToNativeBridge.transferToNative.getData(ethAddress);
+            web3t.exzo.EvmToNativeBridge.transferToNative.getData(ethAddress);
           store.current.send.contractAddress =
-            web3t.velas.EvmToNativeBridge.address;
+            web3t.exzo.EvmToNativeBridge.address;
         }
         send.data = data;
         return cb(null);

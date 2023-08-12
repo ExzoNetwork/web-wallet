@@ -15,7 +15,7 @@ require! {
     \./set-page-theme.ls
     \./mirror.ls
     \./plugin-loader.ls : { get-coins }
-    \./velas/velas-api.ls
+    \./exzo/exzo-api.ls
     \./send-funcs.ls
     \./pages.ls
     \./themes.ls
@@ -142,7 +142,7 @@ get-apis = (cweb3, store, cb)->
     cb null, res
 refresh-apis = (cweb3, store, cb)->
     store.coins |> map (.token) |> each (-> delete cweb3[it])
-    cweb3.velas = velas-api store
+    cweb3.exzo = exzo-api store
     #console.log \refresh-apis,
     err, coins <- get-coins store
     return cb err if err?
@@ -173,7 +173,7 @@ build-get-address = (store, coin)-> (cb)->
     cb null, address
 module.exports = (store, config)->
     cweb3 = {}
-    #velas-web3
+    #exzo-web3
     refresh-timer = config?refresh-timer
     use = build-use cweb3, store
     install = build-install cweb3, store
@@ -230,6 +230,6 @@ module.exports = (store, config)->
     set-preference config if typeof! config is \Object
     refresh-interface ->
     web3 = new Web3!
-    velas = velas-api store
-    cweb3 <<<< { velas, web3.utils, unlock, set-preference, get-supported-tokens, use, refresh, refresh-balances, lock, init, install, uninstall, install-by-name, naming, get-account-name, set-theme, set-lang, install-quick }
+    exzo = exzo-api store
+    cweb3 <<<< { exzo, web3.utils, unlock, set-preference, get-supported-tokens, use, refresh, refresh-balances, lock, init, install, uninstall, install-by-name, naming, get-account-name, set-theme, set-lang, install-quick }
     cweb3

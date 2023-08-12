@@ -911,7 +911,7 @@ trend = (store, web3t)->
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/2jdA5EwQV9M' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header How to setup New Velas Web Wallet Tutorial
+                    .pug.header How to setup New exzo Web Wallet Tutorial
                     ul.pug.stat
                         li.pug(key="122views" )
                             span.pug 122 views
@@ -919,14 +919,14 @@ trend = (store, web3t)->
                             span.pug 5 days ago
                     ul.pug.stat-text
                         li.pug(key="custom-text" )
-                            span.pug Velas blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
+                            span.pug exzo blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
         .pug.section
             .source.pug(on-click=goto-details)
                 span.pug.play
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/USGLlp-zfhI' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header Velas Explainer Video
+                    .pug.header exzo Explainer Video
                     ul.pug.stat
                         li.pug(key="views-stats" )
                             span.pug 1.4K views
@@ -934,7 +934,7 @@ trend = (store, web3t)->
                             span.pug 8 mounths ago
                     ul.pug.stat-text
                         li.pug(key="custom3" )
-                            span.pug Velas blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
+                            span.pug exzo blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
 subscr = (store, web3t)->
     lang = get-lang store
     { go-back } = history-funcs store, web3t
@@ -1019,7 +1019,7 @@ subscr = (store, web3t)->
                         span.pug
                             img.pug.account(src="#{info.branding.logo}")
                         span.pug
-                            .pug.header Velas Explainer Video
+                            .pug.header exzo Explainer Video
                             ul.pug.stat
                                 li.pug(key="2kviews" )
                                     span.pug 2K views
@@ -1034,7 +1034,7 @@ subscr = (store, web3t)->
                         span.pug
                             img.pug.account(src="#{info.branding.logo}")
                         span.pug
-                            .pug.header Velas Explainer Video
+                            .pug.header exzo Explainer Video
                             ul.pug.stat
                                 li.pug(key="50kviews" )
                                     span.pug 50K views
@@ -1049,7 +1049,7 @@ subscr = (store, web3t)->
                         span.pug
                             img.pug.account(src="#{info.branding.logo}")
                         span.pug
-                            .pug.header Velas Explainer Video
+                            .pug.header exzo Explainer Video
                             ul.pug.stat
                                 li.pug(key="lnew-custom2" )
                                     span.pug 2K views
@@ -1066,7 +1066,7 @@ subscr = (store, web3t)->
                         span.pug
                             img.pug.account(src="#{info.branding.logo}")
                         span.pug
-                            .pug.header Velas Explainer Video
+                            .pug.header exzo Explainer Video
                             ul.pug.stat
                                 li.pug(key="views-custom2" )
                                     span.pug 2K views
@@ -1081,7 +1081,7 @@ subscr = (store, web3t)->
                         span.pug
                             img.pug.account(src="#{info.branding.logo}")
                         span.pug
-                            .pug.header Velas Explainer Video
+                            .pug.header exzo Explainer Video
                             ul.pug.stat
                                 li.pug(key="views-custom4" )
                                     span.pug 50K views
@@ -1155,7 +1155,7 @@ history = (store, web3t)->
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/2jdA5EwQV9M' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header How to setup New Velas Web Wallet Tutorial
+                    .pug.header How to setup New exzo Web Wallet Tutorial
                     ul.pug.stat
                         li.pug(key="views5" )
                             span.pug 122 views
@@ -1163,14 +1163,14 @@ history = (store, web3t)->
                             span.pug 5 days ago
                     ul.pug.stat-text
                         li.pug(key="text-custom2" )
-                            span.pug Velas blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
+                            span.pug exzo blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
         .pug.section
             .source.pug(on-click=goto-details)
                 span.pug.play
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/USGLlp-zfhI' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header Velas Explainer Video
+                    .pug.header exzo Explainer Video
                     ul.pug.stat
                         li.pug(key="views-custom-6" )
                             span.pug 1.4K views
@@ -1178,7 +1178,7 @@ history = (store, web3t)->
                             span.pug 8 mounths ago
                     ul.pug.stat-text
                         li.pug(key="text-custom3" )
-                            span.pug Velas blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
+                            span.pug exzo blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
         h2.header.pug Yesterday
         .pug.section
             .source.pug(on-click=goto-details)
@@ -1186,7 +1186,7 @@ history = (store, web3t)->
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/2jdA5EwQV9M' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header How to setup New Velas Web Wallet Tutorial
+                    .pug.header How to setup New exzo Web Wallet Tutorial
                     ul.pug.stat
                         li.pug(key="views-custom7" )
                             span.pug 122 views
@@ -1194,14 +1194,14 @@ history = (store, web3t)->
                             span.pug 5 days ago
                     ul.pug.stat-text
                         li.pug(key="text-custom8" )
-                            span.pug Velas blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
+                            span.pug exzo blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
         .pug.section
             .source.pug(on-click=goto-details)
                 span.pug.play
                     icon \TriangleRight, 15
                 iframe.pug(on-click=goto-details width='560' height='315' src='https://www.youtube.com/embed/USGLlp-zfhI' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
                 span.pug.content-right
-                    .pug.header Velas Explainer Video
+                    .pug.header exzo Explainer Video
                     ul.pug.stat
                         li.pug(key="views-custom" )
                             span.pug 1.4K views
@@ -1209,7 +1209,7 @@ history = (store, web3t)->
                             span.pug 8 mounths ago
                     ul.pug.stat-text
                         li.pug(key="text-custom9" )
-                            span.pug Velas blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
+                            span.pug exzo blockchain uses AI-enhanced DPOS (AIDPOS) consensus for high volume transactions processing without sacrificing decentralization and security.
 video = (store, web3t)->
     .pug.panel-content
         p.results.pug This tab is under development
@@ -1330,7 +1330,7 @@ videostorage = ({ store, web3t })->
                         span.pug Vortex
                 .description.search-field.pug
                     .pug.left
-                        input.pug(type='text' style=input-style value="velas" placeholder="velas")
+                        input.pug(type='text' style=input-style value="exzo" placeholder="exzo")
                         .pug.icon
                             icon \Search, 15
         .pug.wrapper

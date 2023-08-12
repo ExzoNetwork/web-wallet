@@ -1118,7 +1118,7 @@ item = (store, web3t)->
                 .pug.content-right
                     .pug.header.question(on-click=activate-item4 class="#{active-item4}")
                         img.pug.star(src="#{icons.star}")
-                        |What kind of security features does Velas incorporate?
+                        |What kind of security features does exzo incorporate?
                     if active-item4 is \active
                         ul.pug.answer
                             li.pug(key="str4" )
@@ -1441,25 +1441,25 @@ item3 = (store, web3t)->
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
 item4 = (store, web3t)->
     lang = get-lang store
     { go-back } = history-funcs store, web3t
@@ -1527,25 +1527,25 @@ item4 = (store, web3t)->
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
         .pug.section
             .source.pug
                 .pug.content-right
                     .pug.header.question.placeholder
                         img.pug.star(src="#{icons.star}")
-                        |Does Velas have fees to send or receive?
+                        |Does exzo have fees to send or receive?
 faq = ({ store, web3t })->
     lang = get-lang store
     { go-back } = history-funcs store, web3t
@@ -1643,7 +1643,7 @@ faq = ({ store, web3t })->
                     .title.pug
                     .description.search-field.pug
                         .pug.left
-                            input.pug(type='text' style=input-style value="velas" placeholder="velas")
+                            input.pug(type='text' style=input-style value="exzo" placeholder="exzo")
                             .pug.icon
                                 icon \Search, 15
         .pug.wrapper

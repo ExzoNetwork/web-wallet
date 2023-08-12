@@ -43,7 +43,7 @@ module.exports = (store, web3t)->
         my-stake = store.staking.chosen-pool.my-stake `div` (10^18) 
         err, new-pool-address <- try-parse-address store.staking.add.new-address
         return alert store, err, cb if err?      
-        err, new-pool-staked <- web3t.velas.Staking.stakeAmount new-pool-address, staking-address
+        err, new-pool-staked <- web3t.exzo.Staking.stakeAmount new-pool-address, staking-address
         return cb err if err? 
         new-pool-stake-rounded = +(new-pool-staked.to-fixed! `div` (10^18))
         # check if pool FROM has stake at least 10k and move-amount minus From stake is more or eq 10k 
@@ -61,15 +61,15 @@ module.exports = (store, web3t)->
         err <- can-make-staking store, web3t
         return alert store, err, cb if err?
         stake = store.staking.add.move-stake
-        err, max <- web3t.velas.Staking.maxWithdrawAllowed(pool-address, staking-address)
+        err, max <- web3t.exzo.Staking.maxWithdrawAllowed(pool-address, staking-address)
         return alert store, err, cb if err?
         max-allowed = max.to-fixed! `div` (10^18)
         return alert store, "You cannot move from the pool which is a validator or going to become one. Please use Request Exit feature instead." if +max-allowed is 0  
         return alert store, "Stake must be lower or equal to max allowed #{max-allowed}", cb if +stake > +max-allowed
         return alert store, "Stake must be more then 0", cb if +stake is 0 
         amount = stake `times`(10^18)
-        data = web3t.velas.Staking.move-stake.get-data pool-address, new-pool-address, amount
-        to = web3t.velas.Staking.address
+        data = web3t.exzo.Staking.move-stake.get-data pool-address, new-pool-address, amount
+        to = web3t.exzo.Staking.address
         err <- web3t.xzo2.send-transaction { to, data, amount: 0 }
     change-stake = (it)->
         amount = it.target.value    
@@ -86,7 +86,7 @@ module.exports = (store, web3t)->
         return store.staking.error = "Address is empty" if address.length is 0    
         cb = console.log  
         err <- is-valid-address { address: store.staking.add.new-address, network: wallet.network } 
-        return store.staking.error = "Address is not valid" if err? and ("#{err}".index-of "Given address is not valid Velas address") > -1   
+        return store.staking.error = "Address is not valid" if err? and ("#{err}".index-of "Given address is not valid exzo address") > -1   
         store.staking.error = ''
     .pug.section
         .title.pug

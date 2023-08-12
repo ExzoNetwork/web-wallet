@@ -1,19 +1,19 @@
-//const velasSolanaWeb3 = require("../../web3t/providers/solana/index.cjs");
-const velasSolanaWeb3 = require("@velas/web3");
+//const exzoSolanaWeb3 = require("../../web3t/providers/solana/index.cjs");
+const exzoSolanaWeb3 = require("@exzo/web3");
 let PublicKey, Connection, StakeProgram, Authorized, Lockup, STAKE_INSTRUCTION_LAYOUTS, TransactionInstruction;
-PublicKey = velasSolanaWeb3.PublicKey;
-Connection = velasSolanaWeb3.Connection;
-StakeProgram = velasSolanaWeb3.StakeProgram;
-Authorized = velasSolanaWeb3.Authorized;
-Lockup = velasSolanaWeb3.Lockup;
-SystemProgram = velasSolanaWeb3.SystemProgram;
-Transaction = velasSolanaWeb3.Transaction;
-Account = velasSolanaWeb3.Account;
-STAKE_INSTRUCTION_LAYOUTS = velasSolanaWeb3.STAKE_INSTRUCTION_LAYOUTS;
-TransactionInstruction = velasSolanaWeb3.TransactionInstruction;
+PublicKey = exzoSolanaWeb3.PublicKey;
+Connection = exzoSolanaWeb3.Connection;
+StakeProgram = exzoSolanaWeb3.StakeProgram;
+Authorized = exzoSolanaWeb3.Authorized;
+Lockup = exzoSolanaWeb3.Lockup;
+SystemProgram = exzoSolanaWeb3.SystemProgram;
+Transaction = exzoSolanaWeb3.Transaction;
+Account = exzoSolanaWeb3.Account;
+STAKE_INSTRUCTION_LAYOUTS = exzoSolanaWeb3.STAKE_INSTRUCTION_LAYOUTS;
+TransactionInstruction = exzoSolanaWeb3.TransactionInstruction;
 const BN = require('bn.js');
 
-class VelasStaking {
+class exzoStaking {
 
     // validate options.authorization;
     constructor(options) {
@@ -613,4 +613,4 @@ function deepEq$(x, y, type){
     }
 }
 
-module.exports = VelasStaking;
+module.exports = exzoStaking;

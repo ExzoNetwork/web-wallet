@@ -312,12 +312,12 @@ item = (store, web3t)-> (vote)->
         store.current.vote-index = vote.index
     vote-for = ->
         return alert "You already voted for this" if vote.voted
-        err, pool <- web3t.velas.Staking.getStakerPools(store.staking.keystore.staking.address)
+        err, pool <- web3t.exzo.Staking.getStakerPools(store.staking.keystore.staking.address)
         return alert err if err?
         return alert "You should stake before you can vote" if pool.length < 1
-        data = web3t.velas.Development.vote.get-data +vote.index
+        data = web3t.exzo.Development.vote.get-data +vote.index
         return cb err if err?
-        to = web3t.velas.Development.address
+        to = web3t.exzo.Development.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
     update-progress = ->
@@ -361,9 +361,9 @@ content = (store, web3t)->
         cb = alert
         return cb "description should be at least 10 characters" if newp.description.length < 10
         return cb "name should be at least 3 characters" if newp.name.length < 3
-        data = web3t.velas.Development.add-proposal.get-data newp.description, newp.name
+        data = web3t.exzo.Development.add-proposal.get-data newp.description, newp.name
         return cb err if err?
-        to = web3t.velas.Development.address
+        to = web3t.exzo.Development.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 9600000, gas-price: 1000000 }
         newp.opened = no
@@ -396,7 +396,7 @@ content = (store, web3t)->
                         img.pug(src="#{icons.create}" width=18 height=18)
         .pug.notice
             span.pug.danger Important.
-            span.pug A requirement for voting is active participation in Velas staking.
+            span.pug A requirement for voting is active participation in exzo staking.
         if newp.update-progress
             .pug.create-new-proposal.main-content(style=border-style) Please make upgrade process here
         if newp.opened is yes
@@ -431,7 +431,7 @@ vote = ({ store, web3t })->
             content store, web3t
 module.exports = vote
 build-proposal-view = ({ web3t, store }, index, cb) ->
-    err, proposal <- web3t.velas.Development.getProposalByIndex index+1, store.staking.keystore.staking.address
+    err, proposal <- web3t.exzo.Development.getProposalByIndex index+1, store.staking.keystore.staking.address
     return cb err if err?
     cb null, proposal
 build-proposal-views = ({ web3t, store }, length, cb)->
@@ -456,7 +456,7 @@ module.exports.init = ({ web3t, store }, cb)->
     store.staking.keystore = to-keystore store, no
     if store?url-hash-params?vote
         store.current.vote-index = parse-int store?url-hash-params?vote
-    err, length <- web3t.velas.Development.get-proposals-count!
+    err, length <- web3t.exzo.Development.get-proposals-count!
     return cb err if err?
     err, proposals <- build-proposal-views { web3t, store }, +length
     return cb err if err?

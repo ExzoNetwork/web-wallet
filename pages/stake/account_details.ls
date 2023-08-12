@@ -11,7 +11,7 @@ require! {
     \../icon.ls
     \prelude-ls : { map, split, filter, find, foldl, sort-by, unique, head, each, findIndex }
     \../../math.ls : { div, times, plus, minus }
-    \../../velas/velas-node-template.ls
+    \../../exzo/exzo-node-template.ls
     \../../../web3t/providers/deps.js : { hdkey, bip39 }
     \md5
     \../../menu-funcs.ls
@@ -794,13 +794,13 @@ staking-content = (store, web3t)->
     wallet =
         store.current.account.wallets
             |> find -> it.coin.token is \xzo_native
-    velas-node-applied-template =
+    exzo-node-applied-template =
         pairs
-            |> velas-node-template
+            |> exzo-node-template
             |> split "\n"
-    velas-node-applied-template-line =
+    exzo-node-applied-template-line =
         pairs
-            |> velas-node-template
+            |> exzo-node-template
             |> btoa
             |> -> "echo '#{it}' | base64 --decode | sh"
     return null if not pairs.mining?
@@ -835,7 +835,7 @@ staking-content = (store, web3t)->
     get-options = (cb)->
         i-am-staker = i-stake-choosen-pool!
         return cb null if i-am-staker
-        err, data <- web3t.velas.Staking.candidateMinStake
+        err, data <- web3t.exzo.Staking.candidateMinStake
         return cb err if err?
         min =
             | +store.staking.stake-amount-total >= 10000 => 1
@@ -881,7 +881,7 @@ staking-content = (store, web3t)->
         agree <- confirm store, lang.areYouSureToWithdraw
         return if agree is no
         amount = account.lamports `plus` account.rent
-        err, result <- as-callback web3t.velas.NativeStaking.withdraw(address, amount)
+        err, result <- as-callback web3t.exzo.NativeStaking.withdraw(address, amount)
         err-message = get-error-message(err, result)
         return alert store, err-message if err-message?
         <- notify store, lang.fundsWithdrawn
@@ -896,7 +896,7 @@ staking-content = (store, web3t)->
         agree <- confirm store, lang.areYouSureToUndelegate
         return if agree is no
         #
-        err, result <- as-callback web3t.velas.NativeStaking.undelegate(store.staking.chosenAccount.address)
+        err, result <- as-callback web3t.exzo.NativeStaking.undelegate(store.staking.chosenAccount.address)
         console.error "Undelegate error: " err if err?
         err-message = get-error-message(err, result)
         return alert store, err-message if err-message?
@@ -921,7 +921,7 @@ staking-content = (store, web3t)->
             custodianPubkey: custodian
         }
         console.log({params})
-        err, result <- as-callback web3t.velas.NativeStaking.authorize(params)
+        err, result <- as-callback web3t.exzo.NativeStaking.authorize(params)
         store.staking.setting-new-staking-authority = no
         err-message = get-error-message(err, result)
         if err-message?
@@ -950,7 +950,7 @@ staking-content = (store, web3t)->
         if amount+"".trim!.length is 0
             store.staking.splitting-staking-account = no
             return
-        min_stake = web3t.velas.NativeStaking.min_stake
+        min_stake = web3t.exzo.NativeStaking.min_stake
         balance = balanceRaw `div` (10^9)
         if +buffer.amount > +balance
             store.staking.splitting-staking-account = no
@@ -962,11 +962,11 @@ staking-content = (store, web3t)->
         if +(min_stake) > +buffer.amount
             store.staking.splitting-staking-account = no
             return alert store, lang.minimalStakeMustBe + " #{min_stake} XZO"
-        err <- as-callback web3t.velas.NativeStaking.getStakingAccounts(store.staking.parsedProgramAccounts)
+        err <- as-callback web3t.exzo.NativeStaking.getStakingAccounts(store.staking.parsedProgramAccounts)
         return cb err if err?
         store.staking.splitting-staking-account = yes
         /* Get next account seed */
-        err, seed <- as-callback web3t.velas.NativeStaking.getNextSeed()
+        err, seed <- as-callback web3t.exzo.NativeStaking.getNextSeed()
         err-message = get-error-message(err, seed)
         if err-message?
             store.staking.splitting-staking-account = no
@@ -974,7 +974,7 @@ staking-content = (store, web3t)->
         amount = buffer.amount * 10^9
         /* Create new account */
         fromPubkey$ = store.staking.chosenAccount.address
-        err, splitStakePubkey <- as-callback web3t.velas.NativeStaking.createNewStakeAccountWithSeed()
+        err, splitStakePubkey <- as-callback web3t.exzo.NativeStaking.createNewStakeAccountWithSeed()
         if err?
             store.staking.splitting-staking-account = no
             return alert store, err.toString!
@@ -986,7 +986,7 @@ staking-content = (store, web3t)->
         /* Split account */
         stakeAccount = store.staking.chosenAccount.address
         $voter = store.staking.chosenAccount.voter
-        err, signature <- as-callback web3t.velas.NativeStaking.splitStakeAccount(stakeAccount, splitStakePubkey, amount)
+        err, signature <- as-callback web3t.exzo.NativeStaking.splitStakeAccount(stakeAccount, splitStakePubkey, amount)
         err-message = get-error-message(err, signature)
         if err-message?
             store.staking.splitting-staking-account = no
@@ -998,7 +998,7 @@ staking-content = (store, web3t)->
             return alert store, err, cb
         /* Update balance of stake account from which split was called */
         fromPubkey$ = store.staking.chosenAccount.address
-        err, accountInfo <- as-callback web3t.velas.NativeStaking.getAccountInfo(fromPubkey$)
+        err, accountInfo <- as-callback web3t.exzo.NativeStaking.getAccountInfo(fromPubkey$)
         if err?
             console.log "Split was confirmed"
             store.staking.splitting-staking-account = no
@@ -1035,7 +1035,7 @@ staking-content = (store, web3t)->
     usd-delegated_stake = round-number(delegated_stake `times` usd-rate, {decimals:2})
     $validator = if has-validator then validator else "---"
     activeBalanceIsZero =  +store.staking.chosenAccount.active_stake is 0
-    max-epoch = web3t.velas.NativeStaking.max_epoch
+    max-epoch = web3t.exzo.NativeStaking.max_epoch
     myStakeMaxPart = 
         | store.staking.myStakeMaxPart? =>
             myStakeMaxPartVLX = parse-float(store.staking.myStakeMaxPart) `div` (10^9)
@@ -1190,7 +1190,7 @@ staking-content = (store, web3t)->
                             margin-top: "10px"
                         .pug.notification(style=notification-style)
                             span.pug(style=tip-style) Only 25% of active stake can be activated per epoch.
-                            a.pug(href="https://support.velas.com/hc/en-150/articles/360021044820-Delegation-Warmup-and-Cooldown" target="_blank" rel="noopener noreferrer nofollow" style=link-style)
+                            a.pug(href="https://support.exzo.com/hc/en-150/articles/360021044820-Delegation-Warmup-and-Cooldown" target="_blank" rel="noopener noreferrer nofollow" style=link-style)
                                 span.pug(style=more-style) More...
             .pug.section
                 .title.pug
@@ -1284,14 +1284,14 @@ account-details.init = ({ store, web3t }, cb)!->
     store.staking.chosenAccount.rewards = []
     store.staking.rewards-index = 0
     stake-accounts = store.staking.parsedProgramAccounts
-    err, accountInfo <- as-callback web3t.velas.NativeStaking.getAccountInfo(store.staking.chosenAccount.pubkey)
+    err, accountInfo <- as-callback web3t.exzo.NativeStaking.getAccountInfo(store.staking.chosenAccount.pubkey)
     return alert store, err, cb2 if err?
     if !accountInfo.value? then
         return alert store, "Account not found", cb2
-    err, epochInfo <- as-callback web3t.velas.NativeStaking.getCurrentEpochInfo()
+    err, epochInfo <- as-callback web3t.exzo.NativeStaking.getCurrentEpochInfo()
     console.error err if err?
     store.staking.current-epoch = epochInfo.epoch
-    err, stakeActivation <- as-callback web3t.velas.NativeStaking.getStakeActivation(store.staking.chosenAccount.address)
+    err, stakeActivation <- as-callback web3t.exzo.NativeStaking.getStakeActivation(store.staking.chosenAccount.address)
     if not err? and stakeActivation?
         store.staking.chosenAccount.status = stakeActivation.state
         store.staking.chosenAccount.active_stake = stakeActivation.active
@@ -1299,8 +1299,8 @@ account-details.init = ({ store, web3t }, cb)!->
     return alert store, err, cb if err?
     wallet = store.current.account.wallets.find(-> it.coin.token is \xzo_native)
     return alert store, 'XZO Native wallet was not found', cb if not wallet?
-    web3t.velas.NativeStaking.setAccountPublicKey(wallet.publicKey)
-    web3t.velas.NativeStaking.setAccountSecretKey(wallet.secretKey)
+    web3t.exzo.NativeStaking.setAccountPublicKey(wallet.publicKey)
+    web3t.exzo.NativeStaking.setAccountSecretKey(wallet.secretKey)
     cb null
 stringify = (value) ->
     if value? then
@@ -1309,14 +1309,14 @@ stringify = (value) ->
         '..'
 fetchEpochRewards = (address, activationEpoch, cb)->    
     return cb null, [] if (not store.staking.chosenAccount.validator? or store.staking.chosenAccount.validator.toString!.length is 0)    
-    err, epochSchedule <- as-callback(web3t.velas.NativeStaking.getEpochSchedule!)
+    err, epochSchedule <- as-callback(web3t.exzo.NativeStaking.getEpochSchedule!)
     console.error err if err?
     {firstNormalEpoch, firstNormalSlot, leaderScheduleSlotOffset, slotsPerEpoch, warmup} = epochSchedule
-    err, slot <- as-callback(web3t.velas.NativeStaking.getSlot!)
+    err, slot <- as-callback(web3t.exzo.NativeStaking.getSlot!)
     console.error err if err?
-    err, firstAvailableBlock <- as-callback(web3t.velas.NativeStaking.getFirstAvailableBlock!)
+    err, firstAvailableBlock <- as-callback(web3t.exzo.NativeStaking.getFirstAvailableBlock!)
     console.error err if err?
-    err, epochInfo <- as-callback web3t.velas.NativeStaking.getCurrentEpochInfo()
+    err, epochInfo <- as-callback web3t.exzo.NativeStaking.getCurrentEpochInfo()
     console.error err if err?
     return cb null if err?
     { epoch, blockHeight, slotIndex, slotsInEpoch, transactionCount } = epochInfo
@@ -1334,7 +1334,7 @@ query-rewards-loop = (address, activationEpoch, firstNormalSlot, slotsPerEpoch, 
     err, firstSlotInEpoch <- get_first_slot_in_epoch(firstNormalSlot, slotsPerEpoch, slotsInEpoch, firstNormalEpoch, epoch)
     # Get first comfirmed block/slot in epoch
     limit = 1
-    err, result <- as-callback(web3t.velas.NativeStaking.getConfirmedBlocksWithLimit(firstSlotInEpoch, limit))
+    err, result <- as-callback(web3t.exzo.NativeStaking.getConfirmedBlocksWithLimit(firstSlotInEpoch, limit))
     first_confirmed_block_in_epoch = result?result?0    
     # Get first confirmed block    
     err, first_confirmed_block <- get_confirmed_block_with_encoding(first_confirmed_block_in_epoch)
@@ -1402,7 +1402,7 @@ get_first_slot_in_epoch = (firstNormalSlot, slotsPerEpoch, slotsInEpoch, firstNo
     #return (epoch - firstNormalEpoch) * slotsPerEpoch + firstNormalSlot
     limit = 1
     firstSlotInEpoch = (epoch - firstNormalEpoch) * slotsPerEpoch + firstNormalSlot
-    #err, result <- as-callback(web3t.velas.NativeStaking.getConfirmedBlocksWithLimit(firstSlotInEpoch, limit))
+    #err, result <- as-callback(web3t.exzo.NativeStaking.getConfirmedBlocksWithLimit(firstSlotInEpoch, limit))
     #return cb err if err? or not result?result
     #firstSlot = result?result?0
     #cb null, firstSlot
@@ -1410,12 +1410,12 @@ get_first_slot_in_epoch = (firstNormalSlot, slotsPerEpoch, slotsInEpoch, firstNo
 try-get-extra-slot = (default-response, new-slot, cb)->
     return cb null, default-response, if default-response?
     limit = 1
-    err, result <- as-callback(web3t.velas.NativeStaking.getConfirmedBlocksWithLimit(new-slot, limit))
+    err, result <- as-callback(web3t.exzo.NativeStaking.getConfirmedBlocksWithLimit(new-slot, limit))
     cb null, result?result?0
 #    
 get_confirmed_block_with_encoding = (slot, cb)->
     try
-        err, confirmedBlock <- as-callback(web3t.velas.NativeStaking.getConfirmedBlock(slot))
+        err, confirmedBlock <- as-callback(web3t.exzo.NativeStaking.getConfirmedBlock(slot))
         console.error err if err?
         return cb err if err?
         cb null, confirmedBlock

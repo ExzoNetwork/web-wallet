@@ -9,7 +9,7 @@ require! {
     \./icon.ls
     \prelude-ls : { map, split, filter, find, foldl }
     \../math.ls : { div, times, plus, minus }
-    \../velas/velas-node-template.ls
+    \../exzo/exzo-node-template.ls
     \../../web3t/providers/deps.js : { hdkey, bip39 }
     \md5
     \../menu-funcs.ls
@@ -896,11 +896,11 @@ staking-content = (store, web3t)->
         opacity: ".3"
     pairs = store.staking.keystore
     become-or-extend-validator = (stake, pairs, cb)->
-        err, miningAddress <- web3t.velas.ValidatorSet.miningByStakingAddress(pairs.staking.address)
+        err, miningAddress <- web3t.exzo.ValidatorSet.miningByStakingAddress(pairs.staking.address)
         return cb err if err?
         if miningAddress is \0x0000000000000000000000000000000000000000
-            return cb null, web3t.velas.Staking.add-pool.get-data(stake, pairs.mining.address)
-        return cb null, web3t.velas.Staking.stake.get-data(pairs.staking.address, stake)
+            return cb null, web3t.exzo.Staking.add-pool.get-data(stake, pairs.mining.address)
+        return cb null, web3t.exzo.Staking.stake.get-data(pairs.staking.address, stake)
     become-validator = ->
         console.log "[become-validator]"
         err <- can-make-staking store, web3t
@@ -909,10 +909,10 @@ staking-content = (store, web3t)->
         return alert err if err?
         stake = store.staking.add.add-validator-stake `times` (10^18)
         #console.log stake, pairs.mining.address
-        #data = web3t.velas.Staking.stake.get-data pairs.staking.address, stake
+        #data = web3t.exzo.Staking.stake.get-data pairs.staking.address, stake
         err, data <- become-or-extend-validator stake, pairs
         return alert "#{err}" if err?
-        to = web3t.velas.Staking.address
+        to = web3t.exzo.Staking.address
         #console.log \to, { to, data, amount }
         amount = store.staking.add.add-validator-stake
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
@@ -922,13 +922,13 @@ staking-content = (store, web3t)->
         <- staking.init { store, web3t }
     change-stake = ->
         store.staking.add.add-validator-stake = it.target.value
-    velas-node-applied-template =
+    exzo-node-applied-template =
         pairs
-            |> velas-node-template
+            |> exzo-node-template
             |> split "\n"
-    velas-node-applied-template-line =
+    exzo-node-applied-template-line =
         pairs
-            |> velas-node-template
+            |> exzo-node-template
             |> btoa
             |> -> "echo '#{it}' | base64 --decode | sh"
     return null if not pairs.mining?
@@ -945,7 +945,7 @@ staking-content = (store, web3t)->
     account-right-proxy  = update-current account-right
     change-account-index-proxy = update-current change-account-index
     build-template-line = ->
-        index = velas-node-applied-template.index-of(it)
+        index = exzo-node-applied-template.index-of(it)
         line-style =
             padding: "10px"
             width: \100%
@@ -973,7 +973,7 @@ staking-content = (store, web3t)->
                 |> find -> it.coin.token is \xzo2
         wallet.balance
     get-options = (cb)->
-        err, data <- web3t.velas.Staking.candidateMinStake
+        err, data <- web3t.exzo.Staking.candidateMinStake
         return cb err if err?
         min =
             | +(store.staking.add.add-validator-stake `plus` store.staking.stake-amount-total) >= 1000000 => 1
@@ -991,11 +991,11 @@ staking-content = (store, web3t)->
         #return alert err if err?
         store.staking.add.add-validator-stake = get-balance! `minus` 0.1
     vote-for-change = ->
-        err, can <- web3t.velas.ValidatorSet.emitInitiateChangeCallable
+        err, can <- web3t.exzo.ValidatorSet.emitInitiateChangeCallable
         return alert err if err?
         return alert lang.actionProhibited if can isnt yes
-        data = web3t.velas.ValidatorSet.emitInitiateChange.get-data!
-        to = web3t.velas.ValidatorSet.address
+        data = web3t.exzo.ValidatorSet.emitInitiateChange.get-data!
+        to = web3t.exzo.ValidatorSet.address
         amount = 0
         err <- web3t.xzo2.send-transaction { to, data, amount, gas: 4600000, gas-price: 1000000 }
         store.current.page = \staking
@@ -1048,18 +1048,18 @@ staking-content = (store, web3t)->
                                     section.pug.window
                                         section.pug.icons
                                             span.pug
-                                        CopyToClipboard.pug.copy(text="#{velas-node-applied-template.join('\n')}" on-copy=copied-inform(store) style=filter-icon)
+                                        CopyToClipboard.pug.copy(text="#{exzo-node-applied-template.join('\n')}" on-copy=copied-inform(store) style=filter-icon)
                                             copy store
-                                    velas-node-applied-template |> map build-template-line
+                                    exzo-node-applied-template |> map build-template-line
                             if active-string is \active
                                 .pug.code
                                     section.pug.window
                                         section.pug.icons
                                             span.pug
-                                        CopyToClipboard.pug.copy(text="#{velas-node-applied-template-line}" on-copy=copied-inform(store) style=filter-icon)
+                                        CopyToClipboard.pug.copy(text="#{exzo-node-applied-template-line}" on-copy=copied-inform(store) style=filter-icon)
                                             copy store
                                     .pug(style=line-style)
-                                        velas-node-applied-template-line
+                                        exzo-node-applied-template-line
                             if active-ssh is \active
                                 .pug.code
                                     section.pug.window
@@ -1224,16 +1224,16 @@ staking.init = ({ store, web3t, call-again }, cb)->
     store.staking.withdraw-amount = 0
     store.staking.stake-amount-total = 0
     staking-address = store.staking.keystore.staking.address
-    err, staking-epoch <- web3t.velas.Staking.stakingEpoch
+    err, staking-epoch <- web3t.exzo.Staking.stakingEpoch
     return cb err if err?
     store.staking.add.add-validator-stake = 0
     store.staking.epoch = staking-epoch.to-fixed!
-    err, amount <- web3t.velas.Staking.stakeAmount(staking-address, staking-address)
+    err, amount <- web3t.exzo.Staking.stakeAmount(staking-address, staking-address)
     store.staking.stake-amount-total = amount.to-fixed!
-    err, is-active <- web3t.velas.Staking.isPoolActive(staking-address)
+    err, is-active <- web3t.exzo.Staking.isPoolActive(staking-address)
     return cb err if err?
     store.staking.is-active-staker = is-active
-    err, delegators <- web3t.velas.Staking.poolDelegators(staking-address)
+    err, delegators <- web3t.exzo.Staking.poolDelegators(staking-address)
     return cb err if err?
     store.staking.delegators = delegators.length
     err <- exit-stake.init { store, web3t }

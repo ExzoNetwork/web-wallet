@@ -1,7 +1,7 @@
 import { Page } from '../common-test-exports';
 import { BaseScreen } from './base';
 
-type TokenInCopyModal = 'Velas Native' | 'Velas EVM' | 'Velas Legacy' | 'Bitcoin';
+type TokenInCopyModal = 'Exzo Native' | 'Exzo EVM' | 'Exzo Legacy' | 'Bitcoin';
 
 export class SettingsScreen extends BaseScreen {
   constructor(public page: Page) {

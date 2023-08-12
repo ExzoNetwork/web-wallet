@@ -230,7 +230,7 @@ manage-account = (store, web3t)->
             .pug.logo
                 img.pug(src="#{style.branding.logo}" style=logo-style)
             .pug.title(style=color)
-                span.pug Velas Wallet
+                span.pug Exzo Wallet
                 span.pug.bold.low #{store.version}
             .pug.description.pb-0(style=color)
                 span.pug #{lang.about-wallet}.

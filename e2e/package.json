@@ -1,7 +1,7 @@
 {
   "name": "wallet-tests",
   "version": "1.0.0",
-  "description": "Tests for Velas Wallet",
+  "description": "Tests for Exzo Wallet",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:swap && npm run test:staking && npm run test:stable",

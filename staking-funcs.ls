@@ -363,7 +363,7 @@ creation-account-subscribe = ({ store, web3t, signature, timeout, acc_type, acti
         wallet = store.current.account.wallets |> find -> it.coin.token is \vlx_native
         if not wallet?
             store.staking.creating-staking-account = no
-            return cb "Velas Native wallet not found!"
+            return cb "Exzo Native wallet not found!"
         err, info <- check-tx({network: wallet.network, tx: signature, start: Date.now()})
         if info?status is "pending" then
             store.staking.creating-staking-account = no

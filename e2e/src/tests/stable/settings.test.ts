@@ -21,7 +21,7 @@ test.describe.parallel('Settings', () => {
     await settings.copyPrivateKeyButton.click();
     await auth.passwordInput.fill('111222');
     await wallets.modals.confirmPrompt();
-    await settings.selectTokenInCopyModal('Velas Native');
+    await settings.selectTokenInCopyModal('Exzo Native');
     await page.waitForSelector('" Copied to Clipboard!"');
 
     const copiedKey = await page.evaluate(async () => await navigator.clipboard.readText());

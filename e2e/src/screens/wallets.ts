@@ -275,11 +275,11 @@ export class WalletsScreen extends BaseScreen {
     getDestinationNetworkForTokenName: async (swapToToken: Currency): Promise<string> => {
       switch (swapToToken) {
         case 'token-vlx2':
-          return 'Velas Legacy';
+          return 'Exzo Legacy';
         case 'token-vlx_native':
-          return 'Velas Native';
+          return 'Exzo Native';
         case 'token-vlx_evm':
-          return 'Velas EVM';
+          return 'Exzo EVM';
         case 'token-bsc_vlx':
           return 'Binance';
         case 'token-vlx_huobi':

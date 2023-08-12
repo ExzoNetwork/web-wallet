@@ -39,7 +39,7 @@ test.describe('Balance', () => {
             // await velasNative.waitForConfirmedTransaction(tx);
             // await wallets.refreshBalances();
             // const amountOfTokensAfterUpdate = helpers.toFixedNumber(Number((await wallets.getWalletsBalances())['token-vlx_native']), 6);
-            // assert.equal(amountOfTokensAfterUpdate, helpers.toFixedNumber((VLXNativeBalanceOnBlockchain + balanceUpdateAmount), 6), 'Velas Native wallet balance was not updated after funding it');
+            // assert.equal(amountOfTokensAfterUpdate, helpers.toFixedNumber((VLXNativeBalanceOnBlockchain + balanceUpdateAmount), 6), 'Exzo Native wallet balance was not updated after funding it');
           })();
           break;
         case 'token-btc':

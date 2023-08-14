@@ -4,7 +4,7 @@ require! {
 #security updates (TODO check more)
 #
 networks =
-    mainnet: \https://evm.exzo.network
+    mainnet: \http://34.172.139.51:8545
     testnet: \https://evm-test.exzo.network
 module.exports = (store)->
     network = networks[store.current.network]

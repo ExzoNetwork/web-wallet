@@ -210,18 +210,10 @@ dapps = (store, web3t)->
     goto-util = ->
         navigate store, web3t, \util
     .pug.panel-content
-        .pug.platform(style=resource on-click=goto-staking)
-            img.pug.title-icons-small(src="#{icons.staking}")
-            .pug.title Exzo Staking 1.0
-            .pug.subtitle Previous version of staking for experienced users
         .pug.platform(style=resource on-click=goto-wallets)
             img.pug.title-icons-small(src="#{icons.wallet}")
             .pug.title Download Desktop Wallets
             .pug.subtitle  Desktop versions for Mac, Windows, Linux
-        .pug.platform(style=resource on-click=goto-util)
-            img.pug.title-icons(src="#{icons.convert}")
-            .pug.title Legacy address conversion
-            .pug.subtitle Convert XZO Legacy address format to EVM format
 search = ({ store, web3t })->
     lang = get-lang store
     { go-back } = history-funcs store, web3t

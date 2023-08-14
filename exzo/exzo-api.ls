@@ -36,7 +36,7 @@ module.exports = (store)->
     ForeignBridgeErcToErcAddress = addresses[network].ForeignBridgeErcToErcAddress if addresses[network]?ForeignBridgeErcToErcAddress?
     web3Solana = exzo-solana-web3 store
     networks =
-        mainnet: \https://rpc-main-1.exzo.network
+        mainnet: \https://34.172.139.51:8545
         testnet: \https://rpc-test-1.exzo.network/rpc
         devnet: \https://api.devnet.velas.com
     api =

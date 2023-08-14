@@ -27,7 +27,7 @@ export type Currency =
 
 export type Balances = Record<Currency, string | null>;
 
-type CustomTokenNetwork = 'Velas' | 'Ethereum' | 'Heco' | 'BSC';
+type CustomTokenNetwork = 'Exzo' | 'Ethereum' | 'Heco' | 'BSC';
 type NetworkType = Exclude<Network, 'devnet'>;
 
 export class WalletsScreen extends BaseScreen {

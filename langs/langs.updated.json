@@ -1222,8 +1222,8 @@
         ],
         "velasSphere": [
             "velas sphere",
-            "сфера Velas",
-            "сфера Velas",
+            "сфера Exzo",
+            "сфера Exzo",
             "velas sphère",
             "velas esfera",
             "维拉斯范围",
@@ -1232,8 +1232,8 @@
         ],
         "velasBlockchain": [
             "velas blockchain",
-            "Velas блокчейн",
-            "Velas блокчейн",
+            "Exzo блокчейн",
+            "Exzo блокчейн",
             "velas blockchain",
             "velas blockchain",
             "维拉斯区块链",
@@ -1271,11 +1271,11 @@
             "ساعد سلسلة الكتل لتكون أكثر لامركزية من خلال إطلاق أداة مصادقة إضافية."
         ],
         "storageDapp": [
-            "Velas Storage Dapp",
-            "Velas Dapp Хранилище",
-            "Velas Dapp Сховище",
-            "Velas De Stockage Dapp",
-            "Dapp de  Almacenamiento de Velas",
+            "Exzo Storage Dapp",
+            "Exzo Dapp Хранилище",
+            "Exzo Dapp Сховище",
+            "Exzo De Stockage Dapp",
+            "Dapp de  Almacenamiento de Exzo",
             "维拉斯储存Dapp",
             "벨라 저장 Dapp",
             "تخزين تطبيق لامركزي VELAS"
@@ -1291,21 +1291,21 @@
             "تخزين الفيديو"
         ],
         "velasCpuStaking": [
-            "Velas CPU/GPU/STORAGE Staking Dapp",
-            "Velas ЦП/ГПУ/хранение кернеры ДАПП",
-            "Velas ЦП/ГПУ/зберігання кернери ДАПП",
-            "Velas CPU/GPU/STOCKAGE de Jalonnement Dapp",
-            "Velas CPU/GPU/ALMACENAMIENTO Staking Dapp",
+            "Exzo CPU/GPU/STORAGE Staking Dapp",
+            "Exzo ЦП/ГПУ/хранение кернеры ДАПП",
+            "Exzo ЦП/ГПУ/зберігання кернери ДАПП",
+            "Exzo CPU/GPU/STOCKAGE de Jalonnement Dapp",
+            "Exzo CPU/GPU/ALMACENAMIENTO Staking Dapp",
             "维拉斯 CPU/GPU/存质押Dapp",
             "벨라 CPU/GPU/저장소 감시 Dapp",
             "VELAS  وحدة المعالجة المركزية / وحدة معالجة الرسوميات / تخزين / رهن / تطبيق لامركزي"
         ],
         "velasCpu": [
-            "Velas CPU/GPU/STORAGE Dapp",
-            "Velas ЦП/ГПУ/ДАПП хранения ",
-            "Velas ЦП/ГПУ/ДАПП зберігання ",
-            "Velas CPU/GPU/STOCKAGE Dapp",
-            "Velas CPU/GPU/ALMACENAMIENTO Dapp",
+            "Exzo CPU/GPU/STORAGE Dapp",
+            "Exzo ЦП/ГПУ/ДАПП хранения ",
+            "Exzo ЦП/ГПУ/ДАПП зберігання ",
+            "Exzo CPU/GPU/STOCKAGE Dapp",
+            "Exzo CPU/GPU/ALMACENAMIENTO Dapp",
             "维拉斯CPU/GPU/存储Dapp",
             "벨라 CPU/GPU/관 Dapp",
             "VELAS  وحدة المعالجة المركزية / وحدة معالجة الرسوميات / تخزين /  تطبيق لامركزي"
@@ -1314,7 +1314,7 @@
             "Exzo Staking Dapp",
             "Exzo Staking Dapp",
             "Exzo Staking Dapp",
-            "Velas Jalonnement Dapp",
+            "Exzo Jalonnement Dapp",
             "Exzo Staking Dapp",
             "维拉斯质押Dapp",
             "벨라 걸고 Dapp",
@@ -1331,11 +1331,11 @@
             "مفوض"
         ],
         "velasMessenger": [
-            "Velas Messenger",
-            "Мессенджер Velas ",
-            "Мессенджер Velas ",
-            "Velas Messenger",
-            "Velas Messenger",
+            "Exzo Messenger",
+            "Мессенджер Exzo ",
+            "Мессенджер Exzo ",
+            "Exzo Messenger",
+            "Exzo Messenger",
             "维拉斯使者",
             "벨라 메신저",
             "ساعي VELAS"

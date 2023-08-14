@@ -457,7 +457,7 @@ token-migration = (store, web3t)->
                         textarea.pug(value="#{store.terms2}" style=style-textarea)
                         form.pug
                             input.pug(type='checkbox')
-                            span.pug I accept and agree to the Terms & Conditions relating to the Velas Token Swap.
+                            span.pug I accept and agree to the Terms & Conditions relating to the Exzo Token Swap.
                     .pug.content
                         button.pug(on-click=visible-migrate style=button-primary3-style)
                             span.pug

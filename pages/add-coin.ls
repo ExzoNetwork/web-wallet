@@ -322,9 +322,9 @@ module.exports = ({ store, web3t } )->
             |> filter filter-item store
             |> group-by (-> it[current-network].group)
     velas-group = 
-        | groups.Velas? => { groups.Velas } 
+        | groups.Exzo? => { groups.Exzo } 
         | _ => null   
-    delete groups.Velas    
+    delete groups.Exzo    
     create-group = ({ store, web3t }, item)--> 
         group-name =
             | item?0? => item.0

@@ -98,8 +98,8 @@ test.describe.parallel('Wallets screen', () => {
       await wallets.waitForWalletsDataLoaded();
     });
 
-    test('WAG on Velas', async ({ wallets }) => {
-      await wallets.addCustomToken(data.customTokens.velas.wag, 'Velas', 'testnet');
+    test('WAG on Exzo', async ({ wallets }) => {
+      await wallets.addCustomToken(data.customTokens.velas.wag, 'Exzo', 'testnet');
       const customTokenBalance = await wallets.getCustomTokenBalance('#token-wag_testnet_Velas__custom');
       assert.equal(customTokenBalance, '1');
     });

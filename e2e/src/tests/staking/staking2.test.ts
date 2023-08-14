@@ -76,9 +76,9 @@ test.describe('Staking 2', () => {
 
       // address
       await staking2.search.open.click();
-      await expect(staking2.search.getSearchResultItemWithText('Velas Validator Node')).not.toBeVisible();
+      await expect(staking2.search.getSearchResultItemWithText('Exzo Validator Node')).not.toBeVisible();
       await staking2.search.input.fill('DgmRwYK5tNLKeCSk6a4zpnwXSw3RdgMDTfAU1x6iqL3g');
-      await expect(staking2.search.getSearchResultItemWithText('Velas Validator Node')).toBeVisible();
+      await expect(staking2.search.getSearchResultItemWithText('Exzo Validator Node')).toBeVisible();
       await staking2.search.cancel.click();
 
       // name (case insensitive)

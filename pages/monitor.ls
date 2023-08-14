@@ -96,7 +96,7 @@ require! {
             color: #5ecc8a
 hidden-fields = <[ expected_rpc_address local_address remote_address key ]>
 #"key":"137d8e729f07865478d83ff2b25270cf113c99160aef0073077ab8567c3209903e6f38c9aa7baf0ae944f71b8c601ba6954b3f42558c8ed061ec301e80b8d696",
-#"name":"Velas #21",
+#"name":"Exzo #21",
 #"highest_block":525493,
 #"rpc_allowed":false,
 #"expected_rpc_address":"205.220.231.25:30575",

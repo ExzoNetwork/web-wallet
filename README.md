@@ -9,7 +9,7 @@ Run `npm run setup`
 
 OR follow next steps
 
-1. Install node v14.16.1
+1. Install node v14.16.1 (or v13.14.0 for Ubuntu 20.04+)
 ```
 sudo apt-get update
 sudo apt-get install curl make g++

@@ -45,15 +45,15 @@ module.exports =
         text2: "rgba(37, 37, 37, 0.65)"
         text4: \#0b0c27
         text3: \#fff
-        text-primary: \#9c41eb
+        text-primary: \#3ED5AF
         color3: \#cccccc
         bg-primary-light: "rgba(37, 37, 37, 0.65)"
-        stats: \#3b1771
+        stats: \#3ED5AF
         filterIcon: "brightness(2.5)"
         filterLogo: "brightness(1)"
         nothingIcon: "drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15)) hue-rotate(45deg)"
         th: "rgba(37, 37, 37, 0.60)"
-        tr-odd: "rgba(98, 52, 171, 0.4)"
+        tr-odd: "rgba(62, 213, 175, 0.4)"
         tr-even: "rgba(75, 39, 135, 0.4)"
         icon-filter: "none"
         placeholder: "rgba(37, 37, 37, 0.65)"
@@ -63,11 +63,11 @@ module.exports =
         color2: "rgba(37, 37, 37, 0.6)"
         color-td: \#b6efe1
         drag-bg: "rgba(37, 37, 37, 0.60)"
-        left-side: "transparent"
+        left-side: "rgba(37, 37, 37, 0.30)"
         filter: "none"
         confirm: "linear-gradient(90deg, rgb(247, 97, 139) 42%, rgb(42, 122, 255) 150%)"
         stakingBg: "rgba(37, 37, 37, 0.60)"
-        bgItem: "rgba(37, 37, 37, 0.40)"
+        bgItem: "rgba(37, 37, 37, 0.20)"
         borderItem: \#38383A
         bgSecond: "rgba(37, 37, 37, 0.30)"
         tooltipEpoch: \#6942b2
@@ -160,7 +160,7 @@ module.exports =
         primaryOpct: \#060a0c
         primary2: \#3cd5af
         primary2-spare: \#3cd5af
-        primary3: \#ffffff
+        primary3: "\#ffffff"
         primary3-spare: \#ffffff
         primary4: \#060a0c
         wallet: "transparent"
@@ -256,15 +256,15 @@ module.exports =
         text2: "rgba(37, 37, 37, 0.65)"
         text4: \#0b0c27
         text3: \#fff
-        text-primary: \#9c41eb
+        text-primary: \#3ED5AF
         color3: \#cccccc
         bg-primary-light: "rgba(37, 37, 37, 0.65)"
-        stats: \#3b1771
+        stats: \#3ED5AF
         filterIcon: "brightness(2.5)"
         filterLogo: "brightness(1)"
         nothingIcon: "drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15)) hue-rotate(45deg)"
         th: "rgba(37, 37, 37, 0.60)"
-        tr-odd: "rgba(98, 52, 171, 0.4)"
+        tr-odd: "rgba(62, 213, 175, 0.4)"
         tr-even: "rgba(75, 39, 135, 0.4)"
         icon-filter: "none"
         placeholder: "rgba(37, 37, 37, 0.65)"
@@ -288,63 +288,65 @@ module.exports =
         text-seed-btn: "#0b0c27"
         border-btn: "6px"
         background: \#292A2F
-        bgspare: \#292A2F
-        menu: \#292A2F
+        bgspare: "linear-gradient(100deg, #2C3030 80%, #2C3030 85%)"
+        menu: "linear-gradient(100deg, #2C3030 80%, #2C3030 85%)"
         background-image: "none"
         waves: "none"
         glitch: "none"
-        demo: \#31323a
-        input: \#37383c
-        input-light: \#37383c
-        dragarea: \##00000057
+        demo: \#4b2888
+        input: "rgba(37, 37, 37, 0.65)"
+        input-light: "rgba(37, 37, 37, 0.65)"
+        dragarea: \#231044d9
         primary1: "rgba(37, 37, 37, 0.65)"
         primary1-spare: "rgba(37, 37, 37, 0.65)"
-        primaryOpct: \#060a0c
+        primaryOpct: "rgb(106, 39, 161)"
         primary2: \#3cd5af
         primary2-spare: \#3cd5af
         primary3: \#ffffff
         primary3-spare: \#ffffff
-        primary4: \#060a0c
+        primary4: \#c35c5f
         wallet: "transparent"
-        input-bg: \#2e2f35
-        stats-style: \#2e2f35
-        wallet-light: \#060a0c
-        alert: \#060a0c
-        alert-spare: \#060a0c
-        header: \#2f3035
-        account-bg: \#2f3035
-        tooltip: \#060a0c
-        icon: \#276A9F
+        inner-wallet-container: "rgba(37, 37, 37, 0.4)"
+        input-bg: "rgb(255, 255, 255, 0.14)"
+        stats-style: "rgb(67, 32, 124)"
+        wallet-light: "rgb(76, 40, 136)"
+        alert: "rgb(76, 40, 136)"
+        alert-spare: "rgb(76, 40, 136)"
+        header: "rgba(37, 37, 37, 0.6)"
+        account-bg: "linear-gradient(100deg, #2C3030 80%, #2C3030 85%)"
+        tooltip: \#210b4a
+        icon: \white
         btn-icon: "grayscale(100%) brightness(40%) sepia(120%) hue-rotate(-140deg) saturate(790%) contrast(0.5)"
-        loader: \#276A9F
-        border: \#3e4048
-        border-color: "transparent"
-        bg-btn: "transparent"
-        border-light: \#3e4048
-        text: \#FFF
+        btn-icon2: "grayscale(100%) brightness(50%) sepia(120%) hue-rotate(-240deg) saturate(790%) contrast(0.5)"
+        loader: "rgb(60, 213, 175)"
+        border: "transparent"
+        border-color: "rgba(37, 37, 37, 0.40)"
+        bg-btn: "rgba(37, 37, 37, 0.60)"
+        border-light: "rgba(37, 37, 37, 0.80)"
+        text: \#fff
         text-invert: \#FFF
         text2: "rgba(37, 37, 37, 0.65)"
         text4: \#0b0c27
-        text3: \#060a0c
-        text-primary: \#FFF
-        color3: \#060a0c
-        bg-primary-light: \#383942
-        stats: \#1c1c21
-        filterIcon: "brightness(1)"
+        text3: \#fff
+        text-primary: \#3ED5AF
+        color3: \#cccccc
+        bg-primary-light: "rgba(37, 37, 37, 0.65)"
+        stats: \#3ED5AF
+        filterIcon: "brightness(2.5)"
         filterLogo: "brightness(1)"
         nothingIcon: "drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15)) hue-rotate(45deg)"
-        th: \#1c1c21
-        tr-odd: \#3b3c40
-        tr-even: \#292a2f
+        th: "rgba(37, 37, 37, 0.60)"
+        tr-odd: "rgba(62, 213, 175, 0.4)"
+        tr-even: "rgba(75, 39, 135, 0.4)"
         icon-filter: "none"
-        placeholder: \#25272d
-        placeholder-menu: \#25272d
-        filterBg: \#292a2f
-        color1: \#2e2f35
-        color2: \#4d4e58
+        placeholder: "rgba(37, 37, 37, 0.65)"
+        placeholder-menu: "rgba(37, 37, 37, 0.65)"
+        filterBg: "rgba(37, 37, 37, 0.6)"
+        color1: "rgba(37, 37, 37, 0.65)"
+        color2: "rgba(37, 37, 37, 0.6)"
         color-td: \#b6efe1
-        drag-bg: "rgba(47, 48, 53, 0.68)"
-        left-side: "transparent"
+        drag-bg: "rgba(37, 37, 37, 0.60)"
+        left-side: "rgba(37, 37, 37, 0.30)"
         filter: "none"
         confirm: "linear-gradient(90deg, rgb(247, 97, 139) 42%, rgb(42, 122, 255) 150%)"
         stakingBg: "rgba(37, 37, 37, 0.60)"

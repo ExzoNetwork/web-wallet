@@ -12,7 +12,7 @@ OR follow next steps
 1. Install node v14.16.1
 ```
 sudo apt-get update
-sudo apt-get install curl
+sudo apt-get install curl make g++
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.bashrc   
 nvm install v14.16

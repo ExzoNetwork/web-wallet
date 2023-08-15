@@ -16,7 +16,7 @@ test.describe.parallel('Wallets screen', () => {
       assert.isAbove(transactions.length, 10, 'Amount of transactions in the list is less than 10');
 
       const txDetails = await wallets.txHistory.txDetails.first().elementHandle();
-      await txDetails?.waitForSelector(`.address-holder a[href*="https://native.velas.com/tx/"]`);
+      await txDetails?.waitForSelector(`.address-holder a[href*="https://exzoscan.io/tx/"]`);
     });
   });
 

@@ -38,7 +38,7 @@ test.describe('Swap', () => {
       await wallets.txListAfterSendOrSwap.linkToTxExecuted.waitFor({ timeout: 30000 });
       const txSignatureLink = await wallets.txListAfterSendOrSwap.linkToTxExecuted.getAttribute('href');
       if (!txSignatureLink) throw new Error('No txSignatureLink');
-      const txSignature = txSignatureLink.replace('https://native.velas.com/tx/', '');
+      const txSignature = txSignatureLink.replace('https://exzoscan.io/tx/', '');
       transactionsInProgress.push(velasNative.waitForConfirmedTransaction(txSignature));
     });
 

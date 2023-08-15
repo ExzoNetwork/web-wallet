@@ -9,15 +9,23 @@ Run `npm run setup`
 
 OR follow next steps
 
-1. Install lsxc: `npm i lsxc -g`
-2. `git clone https://github.com/ExzoNetwork/web-wallet`
-3. `git clone https://github.com/ExzoNetwork/web3t`
-4. `cd web3t && npm i`
-5. Delete git cache and copy web3t to web-wallet:
+1. Install node v14.16.1
+```
+sudo apt-get update
+sudo apt-get install curl
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+source ~/.bashrc   
+nvm install v14.16
+```
+2. Install lsxc: `npm i lsxc -g`
+3. `git clone https://github.com/ExzoNetwork/web-wallet`
+4. `git clone https://github.com/ExzoNetwork/web3t`
+5. `cd web3t && npm i`
+6. Delete git cache and copy web3t to web-wallet:
    `cd .. && rm -rf web-wallet/.compiled-ssr/web3t/.git/objects/ && mkdir -p web-wallet/.compiled-ssr/ && cp -pr web3t/ web-wallet/.compiled-ssr/web3t/ && cd web-wallet`
-6. `npm i`
-7. Build and run wallet: `npm run wallet-start`
-8. Open `127.0.0.1:8080/main-index.html`
+7. `npm i`
+8. Build and run wallet: `npm run wallet-start`
+9. Open `127.0.0.1:8080/main-index.html`
 
 You can also specify network by adding it as parameter: `?network=testnet`.
 Do not open `localhost`, use `127.0.0.1`. Otherwise some wallet functions may work incorrectly.
@@ -29,15 +37,15 @@ Please refer to e2e/README.md
 
 1. mkdir wallet-area
 2. cd wallet-area
-1. git clone https://github.com/ExzoNetwork/web-wallet wallet
-2. git clone https://github.com/ExzoNetwork/web3t
-3. cd web3t
-4. npm i 
-5. cd ../wallet
+3. git clone https://github.com/ExzoNetwork/web-wallet wallet
+4. git clone https://github.com/ExzoNetwork/web3t
+5. cd web3t
 6. npm i 
-7. npm i lsxc -g
-7. npm run wallet-start
-8. open http://127.0.0.1:8080
+7. cd ../wallet
+8. npm i 
+9. npm i lsxc -g
+10. npm run wallet-start
+11. open http://127.0.0.1:8080
 
 Tested with `node --version` v11.10.1
 
@@ -64,9 +72,4 @@ Tested with `node --version` v11.10.1
 
 * XZO
 * BTC (+ All OMNI)
-* LTC
-* DASH
 * ETH (+ All ERC20)
-* ETC
-* USDT (+ USDT_ERC20)
-* and other less known

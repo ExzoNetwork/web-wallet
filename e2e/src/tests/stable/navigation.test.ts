@@ -58,6 +58,6 @@ test.describe.parallel('Navigation', () => {
     ]);
 
     await newPage.waitForLoadState();
-    assert.isTrue(newPage.url().includes('https://support.velas.com'));
+    assert.isTrue(newPage.url().includes('https://docs.exzo.com/'));
   });
 });

@@ -383,9 +383,6 @@ module.exports = (store, web3t)->
                     .menu-item.pug(on-click=goto-choose-staker style=icon-style class="#{staking-active}" id="menu-delegate")
                         span.arrow_box.pug #{lang.staking}
                         img.pug(src="#{icons.staking}"style=icon-color)
-                    .menu-item.pug(on-click=goto-search style=icon-style class="#{search}" id="menu-search")
-                        span.arrow_box.pug #{lang.dapps}
-                        img.pug(src="#{icons.search}" style=icon-color)
                     .menu-item.pug(on-click=goto-settings style=icon-style class="#{settings}" id="menu-settings")
                         span.arrow_box.pug #{lang.settings}
                         img.pug(src="#{icons.setting}" style=icon-color)

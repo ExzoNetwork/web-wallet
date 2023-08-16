@@ -38,6 +38,7 @@ require! {
     position: relative
     @import scheme
     $border-radius: var(--border-btn)
+    box-shadow: 0px 0.5px 0px 0px #808080 inset !important
     $label-padding: 3px
     $label-font: 13px
     width: calc(100% - 0px) !important
@@ -60,6 +61,9 @@ require! {
         height: 20px
     .content-body
         max-width: 450px !important
+        background: rgba(37, 37, 37, 0.6) !important
+        box-shadow: 0px 0.5px 0px 0px #808080 inset !important
+        border-radius: 16px !important
     >.title
         position: fixed
         position: -webkit-fixed
@@ -129,9 +133,12 @@ require! {
         @media(max-width:800px)
             margin-top: -5px
         a
-            color: #6f6fe2
+            color: #3ED5AF
         >form
             >table
+                box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(84, 84, 88, 0.65) inset
+                filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.10))
+                border-radius: 5px
                 background: transparent
                 border-radius: 0 0 var(--border-btn) var(--border-btn)
                 width: 100%
@@ -140,7 +147,7 @@ require! {
                     &.gray
                         color: #CCC
                     &.orange
-                        color: #cf952c
+                        color: #3ED5AF
                     &.green
                         color: #23b723
                     td
@@ -161,12 +168,18 @@ require! {
                     input
                         padding: 0 10px 0 45px
                         text-align: left
+                        box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(84, 84, 88, 0.65) inset
+                        border-radius: 5px
                 &.sender
                     .address-holder .inner-address-holder
                         text-align: left
                         padding-left: 45px
+                        box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(84, 84, 88, 0.65) inset
+                        border-radius: 5px
                 &.receiver input
                     text-align: left !important
+                        box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(84, 84, 88, 0.65) inset
+                        border-radius: 5px
                 .identicon
                     ~ span
                         background: var(--input)
@@ -254,10 +267,10 @@ require! {
                             font-size: 14px
                             line-height: 1.5
                             color: #fff
-                            background-color: #421f7c
+                            background-color: #3ED5AF
                             background-clip: padding-box
                             border-radius: 0
-                            border-color: #6b258e
+                            border-color: #3ED5AF
                             border-left: 0 solid
                             margin-left: -1px
                         &.small
@@ -370,7 +383,7 @@ require! {
                 height: 13px
                 position: relative
         .balance
-            color: #5E72E4
+            color: #3ED5AF
         .send-all
             background: transparent
             outline: none
@@ -430,10 +443,10 @@ require! {
                     box-sizing: border-box
                     transaction: all .5s
                     &.btn-primary
-                        background: #6CA7ED
+                        background: #2C2C2E
                         color: white
                     &:hover
-                        background: rgba(#6CA7ED, 0.2)
+                        background: rgba(#2C2C2E, 0.4)
                         opacity: .9
 form-group = (classes, title, style, content)->
     .pug.form-group(class="#{classes}")

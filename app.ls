@@ -61,6 +61,8 @@ require! {
     background: $primary
     background-color: var(--bgspare)
     scrollbar-width: none
+    background-repeat: no-repeat !important
+    background-size: cover !important
     height: 100vh
     position: relative
     color: white

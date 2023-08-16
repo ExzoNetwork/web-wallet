@@ -586,8 +586,8 @@ wallet-group = (store, web3t, wallets, wallets-groups, wallets-group)-->
                     |> map (-> it.1 )
                     |> filter (-> it.disabled isnt yes and it.referTo in installed-networks)
             locationWallet = if window.location.host is "wallet.testnet.velas.com" then 'wallet_testnet' else 'wallet_mainnet'
-            uri-prod = "https://buy.velas.com/?address=#{wallet.address}&crypto_currency=#{tokenDisplay}&env=#{locationWallet}"
-            uri-test = "https://fiat-payments.testnet.velas.com/?address=#{wallet.address}&crypto_currency=#{tokenDisplay}&env=#{locationWallet}"
+            uri-prod = "https://dex.exzo.network"
+            uri-test = "https://dex.exzo.network"
             uri_buy =
                 | store.current.network is \testnet => uri-test
                 | _ => uri-prod
@@ -628,6 +628,10 @@ wallet-group = (store, web3t, wallets, wallets-groups, wallets-group)-->
                         button { store, on-click=receive-click, text: \receive , icon: \get, type : \primary }
                         if (available-networks.length > 0) then
                             button { store, on-click=swap-click, text: \swap , icon: \swap, id: "wallet-swap", makeDisabled=send-swap-disabled, classes="wallet-swap" }
+                        if wallet?coin?token is "xzo_native"
+                            button { store, on-click=buy, text: \buy , icon: \buy  , id: "wallet-buy", classes="wallet-swap" }
+                        if wallet?coin?token is "xzo_evm"
+                            button { store, on-click=buy, text: \buy , icon: \buy  , id: "wallet-buy", classes="wallet-swap" }
                     .wallet-middle.pug(style=border)
                         address-holder { store, wallet, type: \bg }
                         if token not in <[ btc xzo xzo_native xzo2 eth xzo_evm ]>

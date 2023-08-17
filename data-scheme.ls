@@ -286,7 +286,7 @@ store =
         active: 's2'
         mobile: no
         show: no
-        support: 'https://docs.exzo.com//'
+        support: 'https://docs.exzo.network//'
     ask:
         text: ''
         enabled: no

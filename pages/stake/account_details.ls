@@ -1190,7 +1190,7 @@ staking-content = (store, web3t)->
                             margin-top: "10px"
                         .pug.notification(style=notification-style)
                             span.pug(style=tip-style) Only 25% of active stake can be activated per epoch.
-                            a.pug(href="https://docs.exzo.com/" target="_blank" rel="noopener noreferrer nofollow" style=link-style)
+                            a.pug(href="https://docs.exzo.network/" target="_blank" rel="noopener noreferrer nofollow" style=link-style)
                                 span.pug(style=more-style) More...
             .pug.section
                 .title.pug

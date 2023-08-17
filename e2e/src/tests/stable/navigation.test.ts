@@ -58,6 +58,6 @@ test.describe.parallel('Navigation', () => {
     ]);
 
     await newPage.waitForLoadState();
-    assert.isTrue(newPage.url().includes('https://docs.exzo.com/'));
+    assert.isTrue(newPage.url().includes('https://docs.exzo.network/'));
   });
 });

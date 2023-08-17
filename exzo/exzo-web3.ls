@@ -4,8 +4,8 @@ require! {
 #security updates (TODO check more)
 #
 networks =
-    mainnet: \http://34.172.139.51:8545
-    testnet: \http://35.239.10.9:8545
+    mainnet: \https://34.172.139.51:8545
+    testnet: \https://35.239.10.9:8545
 module.exports = (store)->
     network = networks[store.current.network]
     web3 = new Web3(new Web3.providers.HttpProvider(network))

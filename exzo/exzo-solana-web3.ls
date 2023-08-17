@@ -4,8 +4,8 @@ require! {
 #security updates (TODO check more)
 #
 networks =
-    mainnet: \http://34.172.139.51:8545
-    testnet: \http://35.239.10.9:8545
+    mainnet: \https://34.172.139.51:8545
+    testnet: \https://35.239.10.9:8545
     devnet:  \https://api.devnet.velas.com
 module.exports = (store)->
     network = networks[store.current.network]

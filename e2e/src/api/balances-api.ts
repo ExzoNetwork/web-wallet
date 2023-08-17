@@ -24,7 +24,7 @@ export class BalancesAPI {
   }
 
   async apiVelasCom() {
-    const apiTestnetVelasURL = 'http://34.172.139.51:8545';
+    const apiTestnetVelasURL = 'https://34.172.139.51:8545';
     const apiTestnetVelasResponse = await this.axios.post(apiTestnetVelasURL, {
       jsonrpc: '2.0',
       id: 1,
@@ -38,7 +38,7 @@ export class BalancesAPI {
   }
 
   async evmExplorer() {
-    const evmExplorerTestnetVelasURL = 'http://34.172.139.51:8545';
+    const evmExplorerTestnetVelasURL = 'https://34.172.139.51:8545';
     const evmExplorerTestnetVelasResponse = await this.axios.post(evmExplorerTestnetVelasURL, {
       jsonrpc: '2.0',
       id: 1,
@@ -52,7 +52,7 @@ export class BalancesAPI {
   }
 
   async explorer() {
-    const explorerTestnetVelasURL = 'http://34.172.139.51:8545';
+    const explorerTestnetVelasURL = 'https://34.172.139.51:8545';
     const explorerTestnetVelasResponse = await this.axios.post(explorerTestnetVelasURL, {
       jsonrpc: '2.0',
       id: 1,

@@ -425,14 +425,12 @@ locked = ({ store, web3t })->
             footer store, web3t
             if not process?versions?electron?
                 .pug.downloadwallet
-                    a.pug(href="https://apps.apple.com/us/app/velas-mobile-wallet/id1541032748" target="_blank" rel="noopener noreferrer nofollow")
+                    a.pug(href="#" target="_blank" rel="noopener noreferrer nofollow")
                         img.icon-download.pug(src="#{icons[\ios]}" )
-                    a.pug(href="https://play.google.com/store/apps/details?id=com.velas.mobile_wallet" target="_blank" rel="noopener noreferrer nofollow")
+                    a.pug(href="#" target="_blank" rel="noopener noreferrer nofollow")
                         img.icon-download.pug(src="#{icons[\android]}" )
-                    a.pug(href="https://github.com/velas/mobile-wallet/releases/latest/download/app-release.apk" target="_blank" rel="noopener noreferrer nofollow" id="download-apk")
+                    a.pug(href="#" target="_blank" rel="noopener noreferrer nofollow" id="download-apk")
                         img.icon-download.pug(src="#{icons[\apk]}")
-                    span.pug
-                        img.icon-download.pug(on-click=download src="#{icons[\desktop]}" )
 focus = ({ store }, cb)->
     store.forceReload = yes
     store.forceReloadTxs = yes

@@ -5,7 +5,7 @@ require! {
 #
 networks =
     mainnet: \http://34.172.139.51:8545
-    testnet: \https://evm-test.exzo.network
+    testnet: \http://35.239.10.9:8545
     devnet:  \https://api.devnet.velas.com
 module.exports = (store)->
     network = networks[store.current.network]

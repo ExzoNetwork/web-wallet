@@ -1,5 +1,5 @@
 export const axiosConfig = {
-  baseURL: 'https://evm-test.exzo.network',
+  baseURL: 'http://35.239.10.9:8545',
   maxRedirects: 0,
   timeout: 35000,
   validateStatus: (status: number): boolean => status < 400,
